@@ -135,7 +135,7 @@ $dir
 
 ## 示例：
 
-<img src="https://github.com/lzq-hopego/get-music-lizhanqi/img/test.jpg">
+<img src="https://github.com/lzq-hopego/get-music-lizhanqi/tree/main/img/test.jpg">
 
 ## 支持的音乐源列表
 
@@ -187,8 +187,8 @@ $dir
 
 
 
-![维护不易，欢迎扫描投币二维码](https://github.com/lzq-hopego/get-music-lizhanqi/img/wepay.jpg)
+![维护不易，欢迎扫描投币二维码](https://github.com/lzq-hopego/get-music-lizhanqi/tree/main/img/wepay.jpg)
 
 ## LICENSE
 
-[MIT License](https://github.com/lzq-hopego/get-music-lizhanqi/LICENSE)
+[MIT License](https://github.com/lzq-hopego/get-music-lizhanqi/tree/main/LICENSE)
