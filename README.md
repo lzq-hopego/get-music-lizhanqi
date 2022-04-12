@@ -135,7 +135,7 @@ $dir
 
 ## 示例：
 
-<a><img src="./img/test.jpg"></a>
+<img src="https://github.com/lzq-hopego/get-music-lizhanqi/img/test.jpg">
 
 ## 支持的音乐源列表
 
@@ -146,7 +146,7 @@ $dir
 | 网易云音乐 | netease | <https://music.163.com/>  | ✓    | -    | ✓    | -   | -   |  -   |  -    |
 | 咪咕音乐   | migu    | <http://www.migu.cn/>     | ✓    | -   |  -   |  -    |  -   | ✕    | ✕    |
 | 百度音乐   | baidu   | <http://music.baidu.com/> | ✓    | -    | ✓    | ✓    | ✓    | ✕    | ✕    |
-| 酷我音乐   | kuwo   | <http://www.kuwo.cn//> | ✓    | -    |  -  |  -   |  -   | ✕    | ✕    |
+| 酷我音乐   | kuwo   | <http://www.kuwo.cn/> | ✓    | -    |  -  |  -   |  -   | ✕    | ✕    |
 
 > `-`表示不一定支持，`✓`表示部分或完全支持，`✕`表示尚未支持
 
@@ -187,8 +187,8 @@ $dir
 
 
 
-![维护不易，欢迎扫描投币二维码](http://img.lizhanqi.xyz/wepay.jpg)
+![维护不易，欢迎扫描投币二维码](https://github.com/lzq-hopego/get-music-lizhanqi/img/wepay.jpg)
 
 ## LICENSE
 
-[MIT License](https://github.com/0xHJK/music-dl/blob/master/LICENSE)
+[MIT License](https://github.com/lzq-hopego/get-music-lizhanqi/LICENSE)
