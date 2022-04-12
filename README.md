@@ -190,7 +190,7 @@ $dir
 
 维护不易，欢迎扫描投币二维码
 
-![](https://github.com/0xHJK/music-dl/raw/master/static/wepay.jpg)
+![](http://img.lizhanqi.xyz/wepay.jpg)
 
 ## LICENSE
 
