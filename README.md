@@ -187,7 +187,7 @@ $dir
 
 
 
-![维护不易，欢迎扫描投币二维码](https://github.com/lzq-hopego/get-music-lizhanqi/tree/main/img/wepay.jpg)
+![维护不易，欢迎扫描投币二维码](wepay.jpg)
 
 ## LICENSE
 
