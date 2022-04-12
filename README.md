@@ -1,9 +1,6 @@
 # get-music-lizhanqi ：Listen to what you want
 多合一音乐下载，搜索，python，支持酷狗，网易，百度，酷我，咪咕和qq音乐平台的音乐下载，有些支持下载封面和歌词有些则不支持，requests和json占主要
 
-<p align='center'>
-  <a><img src='http://img.lizhanqi.xyz/head_img.jpg'></a>
-</p>
 <p align="center">
   <a><img src="https://img.shields.io/pypi/pyversions/pymusic-dl.svg"></a>
   <a><img src="https://img.shields.io/github/license/0xHJK/music-dl.svg"></a>
@@ -11,7 +8,7 @@
 
 **[get-music-lizhanqi](https://github.com/lzq-hopego/get-music-lizhanqi)** is a command line tool which helps you search and download music from multiple sources.
 
-Support for QQ music, Netease music, guwo music, Kugou music and Baidu music. See [supported sources](#支持的音乐源列表).
+Support for QQ music, Netease music, guwo music, Kugou music and Baidu music. 
 
 **Python3 Only. Python 3.5+ Recommended.**
 
@@ -188,9 +185,9 @@ $dir
 
 ## 用爱发电
 
-维护不易，欢迎扫描投币二维码
 
-![](http://img.lizhanqi.xyz/wepay.jpg)
+
+![维护不易，欢迎扫描投币二维码](http://img.lizhanqi.xyz/wepay.jpg)
 
 ## LICENSE
 
