@@ -36,12 +36,19 @@ QQ邮箱：3101978435@qq.com
 
 ## 安装
 
-使用pip安装（推荐，注意前面有一个`py`）：
+使用pip安装：
 
 ```bash
 $ pip install get-music-lizhanqi
 ```
 
+## 更新至最新版本
+
+使用pip更新（建议使用pip进行更新，因为最新版本一般会最先发布在pypi上，当然github也会同步）：
+
+```
+pip install --upgrade get-music-lizhanqi
+```
 
 
 
@@ -56,7 +63,7 @@ $ pip install get-music-lizhanqi
 | Windows  | Windows 10 x64 | 3.5.0      |
 | Ubuntu   | 16.04 x64      | 3.5.0      |
 
-## 使用方式
+## 使用方式（代码中**$**表示用户输入的东西，**～**表示程序返回的东西）
 
 直接在命令行敲:
 
