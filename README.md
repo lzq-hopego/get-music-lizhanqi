@@ -2,8 +2,7 @@
 多合一音乐下载，搜索，python，支持酷狗，网易，百度，酷我，咪咕和qq音乐平台的音乐下载，有些支持下载封面和歌词有些则不支持，requests和json占主要
 
 <p align="center">
-  <a><img src="https://img.shields.io/pypi/pyversions/pymusic-dl.svg"></a>
-  <a><img src="https://img.shields.io/github/license/0xHJK/music-dl.svg"></a>
+  <a><img src="https://img.shields.io/pypi/pyversions/get-music-lizhanqi"></a>
 </p>
 
 **[get-music-lizhanqi](https://github.com/lzq-hopego/get-music-lizhanqi)** is a command line tool which helps you search and download music from multiple sources.
@@ -40,16 +39,10 @@ QQ邮箱：3101978435@qq.com
 使用pip安装（推荐，注意前面有一个`py`）：
 
 ```bash
-$ pip3 install get-music-lizhanqi
+$ pip install get-music-lizhanqi
 ```
 
-手动安装（最新）：
 
-```bash
-$ git clone https://github.com/lzq-hopego/get-music-lizhanqi.git
-$ cd get-music-lizhanqi
-$ python3 setup.py install
-```
 
 
 在以下环境测试通过：
@@ -59,6 +52,7 @@ $ python3 setup.py install
 | macOS    | 10.14          | 3.7.0      |
 | macOS    | 10.13          | 3.7.0      |
 | Windows  | Windows 7 x64  | 3.5.0      |
+| Windows  | Windows 11 x64 | 3.7.0      |
 | Windows  | Windows 10 x64 | 3.5.0      |
 | Ubuntu   | 16.04 x64      | 3.5.0      |
 
@@ -135,7 +129,7 @@ $dir
 
 ## 示例：
 
-<img src="https://github.com/lzq-hopego/get-music-lizhanqi/tree/main/img/test.jpg">
+<img src="./test.jpg">
 
 ## 支持的音乐源列表
 
@@ -166,6 +160,7 @@ $dir
 ## 提Issues说明
 
 - **检查是否是最新的代码，检查是否是Python3.5+，检查依赖有没有安装完整**。
+- 目前未对手机端搞适配，由于手机端的环境是虚拟的，所以暂时无法使用，且不支持**from**和**import**第三方库导入
 - 说明使用的操作系统，例如Windows 10 x64
 - 说明Python版本，以及是否使用了pyenv等虚拟环境
 - 说明使用的命令参数、搜索关键字和出错的音乐源
@@ -177,17 +172,16 @@ $dir
 本项目受以下项目启发，参考了其中一部分思路，向这些开发者表示感谢。
 
 - <https://github.com/requests/requests>
+- <https://github.com/maicong/music>
 
 ## THE END
 - 本脚本仅支持学习使用，如有发现有任何商业用途，一经发现您将受到法律责任。
 - 本程序使用的接口全部来源于网络，切不可有任何商业用途，或我程序中有涉及你公司利益的，你可以联系我，我会及时删除源代码，并不再更新。
+- **禁止将本工具用于商业用途**，如产生法律纠纷与本人无关，如有侵权，请联系我删除。
 - 作者兼维护者邮箱（李先生）：3101978435@qq.com
 
 ## 用爱发电
-
-
-
-![维护不易，欢迎扫描投币二维码](wepay.jpg)
+- 维护不易，欢迎扫描投币二维码:<http://img.lizhanqi.xyz/wepay.jpg>
 
 ## LICENSE
 
