@@ -129,7 +129,7 @@ $dir
 
 ## 示例：
 
-<img src="./test.jpg">
+<img src="./test.jpg"><http://img.lizhanqi.xyz/test.jpg>
 
 ## 支持的音乐源列表
 
