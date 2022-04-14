@@ -11,7 +11,7 @@ import os
 
 def baidu(keywords):
 ##    pass
-##    keywords = "天路"
+##    keywords = "海底"
     path="音乐"
     headers = {
      'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36'
@@ -32,9 +32,16 @@ def baidu(keywords):
     tsids = re.findall(r'<a href="/song/(.*?)"', text, re.S)
     song_name=re.findall(r'<a href="/artist/.*?".*?>(.*?)</a>', text, re.S)
     sings=re.findall(r'<a href="/song/.*?".*?>(.*?)</a>', text, re.S)
-##    print(song_name)
-    for i in range(0,len(song_name)):
+##    print(len(song_name))
+    if len(song_name)==len(sings):
+        s=len(song_name)
+    if len(song_name)<len(sings):
+        s=len(song_name)
+    if len(song_name)>len(sings):
+        s=len(sings)
+    for i in range(0,s):
         print("序号：{} \t {}——{}".format(i+1,sings[i],song_name[i]))
+        
     try:
         try:
             a=input("请输入下载序号(不支持多个同时下载)：").split(",")
@@ -71,52 +78,30 @@ def baidu(keywords):
         pic_url=song_info['pic']
         weather=input("是否下载歌词(直接回车默认只下载歌曲)(yes/no)：")
         if weather in ['y',"Y",'yes','YES']:
-            pic,lrc=True,True
-        else:
-            pic,lrc=False,False
-        if pic==True or lrc==True:
             path=os.getcwd()+'\\音乐\\'+Song_name+"_"+singer_name
             try:
                 os.mkdir(path)
             except:
                 pass
-            gequ=requests.get(song_link)
-            with open(path+"/"+Song_name+"-"+singer_name+".mp3",'wb') as f:
-                    f.write(gequ.content)
-            try:
-                if lrc==True:
-                    geci=requests.get(lrc_link)
-                    with open(path+"/"+Song_name+"-"+singer_name+".lrc",'wb') as f:
-                        f.write(geci.content)
-                    print(11)
-                    geci=requests.get(lrc_link)
-                    
-                    haibao=requests.get(pic_url)
-                    
-                    with open(path+"/"+Song_name+"-"+singer_name+".jpg",'wb') as f:
-                        f.write(haibao.content)
-                    with open(path+"/"+Song_name+"-"+singer_name+".lrc",'wb') as f:
-                        f.write(geci.content)
-                elif pic==True:
-                    haibao=requests.get(pic)
-                    with open(path+"/"+Song_name+"-"+singer_name+".lrc",'wb') as f:
-                        f.write(geci.content)
-                else:
-                    
-                    geci=requests.get(lrc_link)
-                    
-                    haibao=requests.get(pic_url)
-                    
-                    with open(path+"/"+Song_name+"-"+singer_name+".jpg",'wb') as f:
-                        f.write(haibao.content)
-                    with open(path+"/"+Song_name+"-"+singer_name+".lrc",'wb') as f:
-                        f.write(geci.content)
-            except:
-                print("\n警告：当前歌曲未找到歌曲封面或歌词信息！")
-        else:
-            html=requests.get(song_link)
-            with open(path+"/"+Song_name+"-"+singer_name+".mp3",'wb') as f:
-                f.write(html.content)
+            if lrc_link:
+                geci=requests.get(lrc_link)
+                with open(path+"/"+Song_name+"-"+singer_name+".lrc",'wb') as f:
+                    f.write(geci.content)
+            else:
+                print("\n未找到当前歌曲的歌词")
+            if pic_url:
+                haibao=requests.get(pic_url)
+                with open(path+"\\"+Song_name+"-"+singer_name+".jpg",'wb') as f:
+                    f.write(haibao.content)
+            else:
+                print("\n为找当前歌曲的封面")
+            
+
+            
+        gequ=requests.get(song_link)
+        with open(path+"/"+Song_name+"-"+singer_name+".mp3",'wb') as f:
+                f.write(gequ.content)
+            
     print("\n歌曲已保存至{}".format(os.getcwd()+"\\"+path))
     print('\n≧∀≦\n感谢您对本程序的使用，祝您生活愉快！')
     sys.exit()
