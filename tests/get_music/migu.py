@@ -16,7 +16,7 @@ def migu(q):
             "searchSwitch": '{"song":1,"album":0,"singer":0,"tagSong":0,"mvSong":0,"songlist":0,"bestShow":1}',
         }
 
-    html=requests.get(url,headers=head,params=params)
+    html=requests.get(url,headers=head,params=params,timeout=1)
 
     res_data=json.loads(html.text)['songResultData']["result"]
     singers=[]
