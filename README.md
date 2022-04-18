@@ -56,12 +56,10 @@ pip install --upgrade get-music-lizhanqi
 
 | 系统名称 | 系统版本       | Python版本 |
 | -------- | -------------- | ---------- |
-| macOS    | 10.14          | 3.7.0      |
-| macOS    | 10.13          | 3.7.0      |
 | Windows  | Windows 7 x64  | 3.5.0      |
 | Windows  | Windows 11 x64 | 3.7.0      |
 | Windows  | Windows 10 x64 | 3.5.0      |
-| Ubuntu   | 16.04 x64      | 3.5.0      |
+
 
 ## 使用方式（代码中“$”表示用户输入的东西，“～”表示程序返回的东西）
 
