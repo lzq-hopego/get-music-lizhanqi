@@ -115,7 +115,7 @@ def main():
             print("作者邮箱：3101978435@qq.com")
             print('\n≧∀≦\n感谢您对本程序的使用，祝您生活愉快！')
         elif sys.argv[1] in ['version','-v','-V']:
-            print("当前版本为v0.0.22")
+            print("当前版本为v0.0.23")
         else:
             global q
             q=sys.argv[1]
