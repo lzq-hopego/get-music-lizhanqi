@@ -1,6 +1,6 @@
 import requests,json,sys
 
-##q="爱人错过"
+##q="天路"
 def migu(q):
     url="http://pd.musicapp.migu.cn/MIGUM2.0/v1.0/content/search_all.do"
     head={"referer": "http://music.migu.cn/",
@@ -33,16 +33,16 @@ def migu(q):
     ##        print(rate_list)
         for i in rate_list:
             if "androidUrl" in list(i.keys()):
-                ftp=i['androidUrl'].strip("ftp://").strip("218.200.160.122:21/")
+                ftp=i['androidUrl'].replace("ftp://218.200.160.122:21/",Songurl)
                 break
             if 'url' in list(i.keys()):
-                ftp=i['url'].strip("url://").strip("218.200.160.122:21/")
+                ftp=i['url'].replace("ftp://218.200.160.122:21/",Songurl)
                 break
     ##        try:
     ##            ftp=rate_list[0]['androidUrl'].strip("ftp://").strip("218.200.160.122:21/")
     ##        except:
     ##            ftp=rate_list[1]['url'].strip("ftp://").strip("218.200.160.122:21/")
-        song_url.append(Songurl+ftp)
+        song_url.append(ftp)
 
     for i in range(0,len(singers)-1):
         print("序号：{} \t{}——{}".format(i+1,song_name[i],singers[i]))
@@ -53,10 +53,12 @@ def migu(q):
         sys.exit()
 
     print("由于歌曲品质过高，所以会占用很长的下载时间，请保持网络畅通，谢谢")
+
+    songurl=song_url[a]
     rep=requests.get(song_url[a])
     geshi=song_url[a].split(".")[-1]
 
-    with open("./音乐/"+song_name[a]+"-"+singers[a]+"."+geshi,'wb')as f:
+    with open("音乐/"+song_name[a]+"-"+singers[a]+"."+geshi,'wb')as f:
         f.write(rep.content)
 
     print("\n\n"+singers[a]+'唱的'+song_name[a]+'下载完成啦！')
