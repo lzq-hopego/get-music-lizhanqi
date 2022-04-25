@@ -53,13 +53,15 @@ pip install --upgrade get-music-lizhanqi
 
 
 在以下环境测试通过：
+- 说明：不仅限测试环境，关于macos，由于作者还是个学生暂时无法提供macos的测试，不过只要python3.x版本能用，那么脚本也能使用
 
 | 系统名称 | 系统版本       | Python版本 |
 | -------- | -------------- | ---------- |
-| Windows  | Windows 7 x64  | 3.5.0      |
+| Windows  | Windows 7 x64  | 3.7.0      |
 | Windows  | Windows 10 x64 | 3.7.0      |
-| Windows  | Windows 11 x64 | 3.5.0      |
+| Windows  | Windows 11 x64 | 3.7.0      |
 | Centos   | Centos 7.9 x64 | 3.7.0      |
+| Ubuntu   | Ubuntu 22.4 x64 | 3.7.0     |
 
 
 ## 使用方式（代码中“$”表示用户输入的东西，“～”表示程序返回的东西）
@@ -117,14 +119,9 @@ Hillsong Young & Free唱的Wake (Studio Version)下载完成啦！
 ```
 C:\Users\xxx\Desktop>
 ```
-那么这首歌保存的位置就是"C:\Users\xxx\Desktop\音乐"
-因为上面的这个命令实在桌面执行的所以程序会在桌面创建一个“音乐”文件夹，并将下载到的音乐文件放在该文件夹中
-如果在其他目录下执行也一样会创建“音乐”文件夹，所以在当前目录
-```
-$cd 音乐
-$dir
-```
-就能看到这个脚本给您下载的音乐文件啦
+那么这首歌保存的位置就是"C:\Users\xxx\Desktop"
+下载到的歌曲将保存在当前目录下
+
 - 在linux平台上尽量使用root用户进行pip安装，然后用root用启动该程序，由于作者知识浅薄尚不能够对linux平台进行全平台适配，敬请理解！
 - 六个搜索引擎任你挑`qq netease kugou baidu kuwo migu`，每个数量限制为5，保存目录为当前目录的音乐文件夹。
 - 指定序号时可以使用`1 1,2(中间的逗号要用英文逗号哦，并且有的不支持，不支持这样会有提示)`的形式。
