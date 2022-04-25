@@ -55,13 +55,13 @@ pip install --upgrade get-music-lizhanqi
 在以下环境测试通过：
 - 说明：不仅限测试环境，关于macos，由于作者还是个学生暂时无法提供macos的测试，不过只要python3.x版本能用，那么脚本也能使用
 
-| 系统名称 | 系统版本       | Python版本  | | 测试样片                              |
-| -------- | -------------- | ---------- | | ------------------------------------- |
-| Windows  | Windows 7 x64  | 3.7.0      | | http://img.lizhanqi.xyz/win7.jpg      |
-| Windows  | Windows 10 x64 | 3.7.0      | | http://img.lizhanqi.xyz/win10.jpg     |
-| Windows  | Windows 11 x64 | 3.7.0      | | http://img.lizhanqi.xyz/win11.jpg     |
-| Centos   | Centos 7.9 x64 | 3.7.0      | | http://img.lizhanqi.xyz/centos.jpg    |
-| Ubuntu   | Ubuntu 22.4 x64 | 3.7.0     | | http://img.lizhanqi.xyz/ubuntu.jpg    |
+| 系统名称 | 系统版本       | Python版本  | 测试样片                              |
+| -------- | -------------- | ---------- |  ------------------------------------- |
+| Windows  | Windows 7 x64  | 3.7.0      | http://img.lizhanqi.xyz/win7.jpg      |
+| Windows  | Windows 10 x64 | 3.7.0     | http://img.lizhanqi.xyz/win10.jpg     |
+| Windows  | Windows 11 x64 | 3.7.0     | http://img.lizhanqi.xyz/win11.jpg     |
+| Centos   | Centos 7.9 x64 | 3.7.0           | http://img.lizhanqi.xyz/centos.jpg    |
+| Ubuntu   | Ubuntu 22.4 x64 | 3.7.0       | http://img.lizhanqi.xyz/ubuntu.jpg    |
 
 
 ## 使用方式（代码中“$”表示用户输入的东西，“～”表示程序返回的东西）
