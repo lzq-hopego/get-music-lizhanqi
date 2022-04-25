@@ -181,7 +181,7 @@ $dir
 本项目受以下项目启发，参考了其中一部分思路，向这些开发者表示感谢。
 
 - <https://github.com/requests/requests>
-- <https://github.com/maicong/music>
+- <https://github.com/tqdm/tqdm>
 
 ## THE END
 - 本脚本仅支持学习使用，如有发现有任何商业用途，一经发现您将受到法律责任。
