@@ -1,4 +1,6 @@
 import requests,json,sys
+from get_music import download
+
 
 ##q="天路"
 def migu(q):
@@ -30,7 +32,6 @@ def migu(q):
         song_name.append(i['name'])
         rate_list=sorted(i["rateFormats"],key=lambda x:int(x["size"]),reverse=True)
         Songurl='https://freetyst.nf.migu.cn/'
-    ##        print(rate_list)
         for i in rate_list:
             if "androidUrl" in list(i.keys()):
                 ftp=i['androidUrl'].replace("ftp://218.200.160.122:21/",Songurl)
@@ -38,10 +39,6 @@ def migu(q):
             if 'url' in list(i.keys()):
                 ftp=i['url'].replace("ftp://218.200.160.122:21/",Songurl)
                 break
-    ##        try:
-    ##            ftp=rate_list[0]['androidUrl'].strip("ftp://").strip("218.200.160.122:21/")
-    ##        except:
-    ##            ftp=rate_list[1]['url'].strip("ftp://").strip("218.200.160.122:21/")
         song_url.append(ftp)
 
     for i in range(0,len(singers)-1):
@@ -52,15 +49,16 @@ def migu(q):
         print('\n\n\n——您未做出选择！程序即将自动退出！！！')
         sys.exit()
 
-    print("由于歌曲品质过高，所以会占用很长的下载时间，请保持网络畅通，谢谢")
-
     songurl=song_url[a]
-    rep=requests.get(song_url[a])
+    ##    rep=requests.get(song_url[a])
     geshi=song_url[a].split(".")[-1]
-
-    with open("音乐/"+song_name[a]+"-"+singers[a]+"."+geshi,'wb')as f:
-        f.write(rep.content)
+    if geshi=="flac":
+            print("由于歌曲品质过高，所以会占用很长的下载时间，请保持网络畅通，谢谢")
+    fname=song_name[a]+"-"+singers[a]+"."+geshi
+    download.download(songurl,fname)
+    ##    with open("音乐/"+song_name[a]+"-"+singers[a]+"."+geshi,'wb')as f:
+    ##        f.write(rep.content)
 
     print("\n\n"+singers[a]+'唱的'+song_name[a]+'下载完成啦！')
-    print("\n\n已保存至当前目录的音乐文件夹下")
-    print('\n≧∀≦\n感谢您对本程序的使用，祝您生活愉快！')
+    print("已保存至当前目录下")
+    print('\n≧∀≦\感谢您对本程序的使用，祝您生活愉快！')

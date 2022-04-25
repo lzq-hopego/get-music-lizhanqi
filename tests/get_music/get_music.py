@@ -1,12 +1,13 @@
 import requests,urllib.parse,json,sys,time,os
+from get_music import download
 
 ##检测当前目录下是否存在“音乐”文件夹
-a=os.path.exists('音乐')
-b=os.getcwd()
-if a==False:
-    os.mkdir(b+'//音乐')
-else:
-    pass
+##a=os.path.exists('音乐')
+##b=os.getcwd()
+##if a==False:
+##    os.mkdir(b+'//音乐')
+##else:
+##    pass
 
 
 
@@ -45,10 +46,11 @@ def zhuti(Songname=False):
                     print('\n\n\n——很抱歉，我们在接口为'+api[fs]+'的渠道中没有找到'+song+'这首歌。\n\n\n')
                     sys.exit()
             if fs==5:
+                
                 migu(song)
+                
                 sys.exit()
             if fs==6:
-##                print(fs)
                 baidu(song)
                 sys.exit()
         else:
@@ -77,7 +79,9 @@ def kuwo(song):
     print('正在接收数据中……\n过程可能会有点慢，请耐心等待勿关闭程序')
     return kuwo.kuwo(song)
 def migu(song):
+    
     from get_music import migu
+    
     migu.migu(song)
 def baidu(song):
     from get_music import baidu
@@ -94,28 +98,32 @@ def xiazai(name,singer,song_url):
     song_list=songs.split(",")
     for i in song_list:
         i=int(i)-1
-        rep=requests.get(song_url[i])
-        with open("./音乐/"+name[i]+"-"+singer[i]+'.mp3','wb') as f:
-            f.write(rep.content)
-            print("\n\n"+singer[i]+'唱的'+name[i]+'下载完成啦！')
-            print("\n\n已保存至当前目录的音乐文件夹下")
-    print('\n≧∀≦\n感谢您对本程序的使用，祝您生活愉快！')
+        fname=name[i]+"-"+singer[i]+".mp3"
+        url=song_url[i]
+        download.download(url,fname)
+        print("\n\n"+singer[i]+'唱的'+name[i]+'下载完成啦！')
+        print("已保存至当前目录下")
+    print('\n≧∀≦\t感谢您对本程序的使用，祝您生活愉快！')
 
 def main():
     try:
         if len(sys.argv[:])==1:
             zhuti()
             sys.exit()
-        if sys.argv[1] in ['help','--help','-help']:
-            print("本程序直接在命令行运行“get-music”即可开启程序的下载入口")
-            print("支持快捷下载get-music [songname],例如：get-music 爱人错过")
-            print("本程序暂不支持 ‘import get_music’ 呢")
-            print("本程序支持六个音乐平台，后续会持续更新和维护")
-            print("本程序仅用作学习用途，如发现有商业化请联系作者")
-            print("作者邮箱：3101978435@qq.com")
-            print('\n≧∀≦\n感谢您对本程序的使用，祝您生活愉快！')
-        elif sys.argv[1] in ['version','-v','-V']:
-            print("当前版本为v0.0.23")
+        if sys.argv[1][0]=="-":
+            if sys.argv[1] in ['-h','-help']:
+                print("本程序直接在命令行运行“get-music”即可开启程序的下载入口")
+                print("支持快捷下载get-music [songname],例如：get-music 爱人错过")
+                print("本程序暂不支持 ‘import get_music’ 呢")
+                print("本程序支持六个音乐平台，后续会持续更新和维护")
+                print("本程序仅用作学习用途，禁止将本脚本用于商业用途，如产生法律纠纷与本人无关，如有侵权，请联系我删除。")
+                print("作者邮箱：3101978435@qq.com")
+                print('\n≧∀≦\t感谢您对本程序的使用，祝您生活愉快！')
+            elif sys.argv[1] in ['-version','-v','-V']:
+                print("当前版本为v0.0.26")
+            else:
+                txt='-help\t查看帮助文档\n-version\t查看当前版本\n关于该脚本的使用：\n 1.在dos命令行（或其他系统的命令行）的随意目录下，敲击“get-music”进入该脚本的启动页面\n 2.一般的第一个步骤会提醒你要下载什么歌曲，这是至于要输入歌曲的就行了\n 3.这个步骤程序会让你选择一个搜索歌曲的接口（平台），直接输入接口的序号即可，关于接口（平台）说明，只有咪咕音乐的部分歌曲支持flac格式的，并且在酷狗等音乐接口（平台）可能会下载到试听的部分（这说明该音乐只有vip才能下载，本脚本暂不支持下载vip歌曲和携带vip账号）——如果用酷狗那就直接输入“1”并按下回车\n 4.这个时候程序就该返回数据了，会有19条（不出意外的情况下，当然也跟接口（平台）的返回的数据有关），同样的输入序号即可下载，可以直接输入“1”进行下载\n 5.1在百度音乐接口（平台）会出现让你确定yes或no的提示，这个提示表示是否下载歌词和封面，目前六个接口中仅有百度接口支持，如何不想下载直接回车（或者输入no）\n 5.2执行下载中会有进度条提示，文件越大音质越好\n关于本程序：\n禁止将本脚本用于商业用途，如产生法律纠纷与本人无关，如有侵权，请联系我删除。\n作者兼维护者邮箱：3101978435@qq.com'
+                print(txt)
         else:
             global q
             q=sys.argv[1]
@@ -125,3 +133,4 @@ def main():
     except:
         pass
 
+##zhuti()
