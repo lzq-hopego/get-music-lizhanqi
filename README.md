@@ -53,7 +53,11 @@ pip install --upgrade get-music-lizhanqi
 
 
 在以下环境测试通过：
-- 说明：不仅限测试环境，关于macos，由于作者还是个学生暂时无法提供macos的测试，不过只要python3.x版本能用，那么脚本也能使用
+- 说明：不仅限测试环境，关于macos，由于作者还是个学生暂时无法提供macos的测试，不过只要python3.7版本能用，那么脚本也能使用
+- 如果您想在手机端或者3.7以下2.9以上版本使用该脚本，那么请下载0.0.28版本
+```
+pip install get-music-lizhanqi    ##专门为移动端和python低版本的发行版
+```
 
 | 系统名称 | 系统版本       | Python版本  | 测试样片                              |
 | -------- | -------------- | ---------- |  ------------------------------------- |
@@ -63,6 +67,7 @@ pip install --upgrade get-music-lizhanqi
 | Centos   | Centos 7.9 x64 | 3.7.0           | http://img.lizhanqi.xyz/centos.jpg    |
 | Ubuntu   | Ubuntu 22.4 x64 | 3.7.0       | http://img.lizhanqi.xyz/ubuntu.jpg    |
 | Kali     | Kali 20.4 x64  |  3.7.0    |   http://img.lizhanqi.xyz/kali.jpg      |
+| Android  | Android 10 x64 | 3.6.6(qpython) | http://img.lizhanqi.xyz/phone.jpg  |
 
 
 ## 使用方式（代码中“$”表示用户输入的东西，“～”表示程序返回的东西）
