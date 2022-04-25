@@ -9,7 +9,7 @@
 
 Support for QQ music, Netease music, guwo music, Kugou music and Baidu music. 
 
-**Python3 Only. Python 3.5+ Recommended.**
+**Python3 Only. Python 3.7+ Recommended.**
 
 
 **[get-music-lizhanqi](https://github.com/lzq-hopego/get-music-lizhanqi)
