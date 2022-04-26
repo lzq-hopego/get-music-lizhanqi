@@ -26,7 +26,7 @@ QQ邮箱：3101978435@qq.com
 > 注意: 部分音乐源在一些国家和地区不可用。
 
 ## 功能
-
+- 支持get-music -r 一次下载多个歌曲，具体使用方法get-music -help中会有，pypi地址：<https://pypi.org/project/get-music-lizhanqi/>
 - 部分歌曲支持无损音乐
 - 优先搜索高品质音乐（无损 -> 320K -> 128K）
 -支持一次下载多个版本的歌曲
