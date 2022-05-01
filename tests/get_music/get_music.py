@@ -21,7 +21,7 @@ def zhuti(Songname=False):
         if fs in api.keys():
             if fs==1:
                 try:
-                    song_name,singer_name,song_url=netease(song)
+                    song_name,singer_name,song_url=kugou(song)
                 except:
                     print("\n`*>﹏<*′\t很抱歉呢，我们无法在此接口找到您想听的歌曲，请核实一下是不是名字错了呀。")
                     sys.exit()
@@ -34,13 +34,13 @@ def zhuti(Songname=False):
                 
             if fs==3:
                 try:
-                    song_name,singer_name,song_url=netease(song)
+                    song_name,singer_name,song_url=qq(song)
                 except:
                     print("\n`*>﹏<*′\t很抱歉呢，我们无法在此接口找到您想听的歌曲，请核实一下是不是名字错了呀。")
                     sys.exit()
             if fs==4:
                 try:
-                    song_name,singer_name,song_url=netease(song)
+                    song_name,singer_name,song_url=kuwo(song)
                 except:
                     print("\n`*>﹏<*′\t很抱歉呢，我们无法在此接口找到您想听的歌曲，请核实一下是不是名字错了呀。")
                     sys.exit()
@@ -89,7 +89,7 @@ def xiazai(name,singer,song_url):
         print("\n`*>﹏<*′\t很抱歉呢，我们无法在此接口找到您想听的歌曲，请核实一下是不是名字错了呀。")
         sys.exit()
     else:
-        for i in range(0,len(name)-1):
+        for i in range(0,len(name)):
             print("序号{}\t\t{}————{}".format(i+1,name[i],singer[i]))
         songs=input('请选择您要下载哪一首歌，直接输入序号就行\n如需下载多个请用逗号分割即可，例如1,2\n如果不需要下载多个，请直接输入序号就行：')
         if songs=='':
@@ -100,7 +100,7 @@ def xiazai(name,singer,song_url):
             i=int(i)-1
             fname=name[i]+"-"+singer[i]+".mp3"
             url=song_url[i]
-            download.download(url,fname)
+            download.download(url,fname,ouput=True)
             print("\n\n"+singer[i]+'唱的'+name[i]+'下载完成啦！')
             print("已保存至当前目录下")
         print('\n≧∀≦\t感谢您对本程序的使用，祝您生活愉快！')
@@ -124,7 +124,7 @@ def main():
             if sys.argv[1] in ['-h','-help']:
                 main_help()
             elif sys.argv[1] in ['-version','-v','-V']:
-                print("当前版本为v0.0.31")
+                print("\n当前版本为v0.0.47")
             elif sys.argv[1] in ['-read','-r','-R']:
                 from get_music import downloads
                 downloads.downloads()

@@ -6,6 +6,7 @@ import time
 import hashlib
 import sys
 import os
+from get_music import download
 ##pic=True
 ##lrc=True
 
@@ -19,15 +20,15 @@ def baidu(keywords):
     params = (
     ('word', keywords),
     )
-    # 参数timeout=5 防止访问超时
-    response = requests.get('https://music.taihe.com/search', headers=headers,params=params)
+
+    response = requests.get('https://music.taihe.com/search', headers=headers,params=params,timeout=1)
     # 歌曲页码数
     ##page_NUM = re.findall(r'<li class="number">(.*?)</li>', response.text, re.S)
     ##print(page_NUM)
 
     # 演示获取第一页歌曲tsid
     url_fenye = f'https://music.taihe.com/search?word={keywords}&pageNo=1'
-    response = requests.get(url=url_fenye, headers=headers)
+    response = requests.get(url=url_fenye, headers=headers,timeout=1)
     text=response.text
     tsids = re.findall(r'<a href="/song/(.*?)"', text, re.S)
     song_name=re.findall(r'<a href="/artist/.*?".*?>(.*?)</a>', text, re.S)
@@ -84,26 +85,28 @@ def baidu(keywords):
             except:
                 pass
             if lrc_link:
-                geci=requests.get(lrc_link)
-                with open(path+"/"+Song_name+"-"+singer_name+".lrc",'wb') as f:
-                    f.write(geci.content)
+                download.download(lrc_link,Song_name+"-"+singer_name+".lrc")
+##                geci=requests.get(lrc_link)
+##                with open(path+"/"+Song_name+"-"+singer_name+".lrc",'wb') as f:
+##                    f.write(geci.content)
             else:
                 print("\n未找到当前歌曲的歌词")
             if pic_url:
-                haibao=requests.get(pic_url)
-                with open(path+"\\"+Song_name+"-"+singer_name+".jpg",'wb') as f:
-                    f.write(haibao.content)
+                download.download(pic_url,Song_name+"-"+singer_name+".jpg")
+##                haibao=requests.get(pic_url)
+##                with open(path+"\\"+Song_name+"-"+singer_name+".jpg",'wb') as f:
+##                    f.write(haibao.content)
             else:
                 print("\n为找当前歌曲的封面")
             
 
+        download.download(song_link,Song_name+"-"+singer_name+".mp3",ouput=True)
+##        gequ=requests.get(song_link)
+##        with open(path+"/"+Song_name+"-"+singer_name+".mp3",'wb') as f:
+##                f.write(gequ.content)
             
-        gequ=requests.get(song_link)
-        with open(path+"/"+Song_name+"-"+singer_name+".mp3",'wb') as f:
-                f.write(gequ.content)
-            
-    print("\n歌曲已保存至{}".format(os.getcwd()+"\\"+path))
-    print('\n≧∀≦\n感谢您对本程序的使用，祝您生活愉快！')
+    print("\n歌曲已保存至当前目录下")
+    print('\n≧∀≦\t感谢您对本程序的使用，祝您生活愉快！')
     sys.exit()
 ##    print(singer_name)
 ##    print(Song_name)

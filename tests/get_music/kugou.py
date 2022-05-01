@@ -37,7 +37,8 @@ def get_songs_urls(ls):
 
 def kugou(keyword):
     if keyword:
-        url="http://mobilecdngz.kugou.com/api/v3/search/song?tag=1&tagtype=%E5%85%A8%E9%83%A8&area_code=1&plat=0&sver=5&api_ver=1&showtype=14&version=8969&keyword="+keyword
+        
+        url="http://mobilecdngz.kugou.com/api/v3/search/song?tag=1&tagtype=%E5%85%A8%E9%83%A8&area_code=1&plat=0&sver=5&api_ver=1&showtype=20&version=8969&keyword="+keyword
         d=get_songs(url)
         songs_url=get_songs_url(d)
         song_list=get_songs_urls(songs_url)

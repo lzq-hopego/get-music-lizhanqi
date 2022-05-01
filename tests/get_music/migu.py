@@ -41,7 +41,7 @@ def migu(q):
                 break
         song_url.append(ftp)
 
-    for i in range(0,len(singers)-1):
+    for i in range(0,len(singers)):
         print("序号：{} \t{}——{}".format(i+1,song_name[i],singers[i]))
     try:
         a=int(input("请输入您需要下载的歌曲序号(不支持多个同时下载):"))-1
@@ -55,7 +55,7 @@ def migu(q):
     if geshi=="flac":
             print("由于歌曲品质过高，所以会占用很长的下载时间，请保持网络畅通，谢谢")
     fname=song_name[a]+"-"+singers[a]+"."+geshi
-    download.download(songurl,fname)
+    download.download(songurl,fname,ouput=True)
     ##    with open("音乐/"+song_name[a]+"-"+singers[a]+"."+geshi,'wb')as f:
     ##        f.write(rep.content)
 

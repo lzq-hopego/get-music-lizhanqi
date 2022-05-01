@@ -9,7 +9,7 @@ def qq(name):
     'referer':'https://y.qq.com/'
     }
 
-    url = 'https://c.y.qq.com/soso/fcgi-bin/client_search_cp?p=1&n=10&w={}'
+    url = 'https://c.y.qq.com/soso/fcgi-bin/client_search_cp?p=1&n=20&w={}'
     resp = requests.get(url.format(name), headers=headers)
 
     json_str = resp.text

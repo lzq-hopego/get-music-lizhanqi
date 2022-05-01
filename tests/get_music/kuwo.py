@@ -11,7 +11,7 @@ import json
 
 def kuwo(musicName):
     encodName=quote(musicName)
-    url='https://www.kuwo.cn/api/www/search/searchMusicBykeyWord?key={}&pn=1&rn=30&httpsStatus=1'.format(encodName)
+    url='https://www.kuwo.cn/api/www/search/searchMusicBykeyWord?key={}&pn=1&rn=20&httpsStatus=1'.format(encodName)
     referer='https://www.kuwo.cn/search/list?key={}'.format(encodName)
     # 请求头
     headers = {

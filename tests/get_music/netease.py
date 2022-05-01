@@ -8,7 +8,7 @@ def netease(songname,page=1):
     data={'s':songname,
         'type':1,
         'offset':page*10-10,
-        'limit':10}
+        'limit':20}
 
     url='http://music.163.com/api/cloudsearch/pc'
 

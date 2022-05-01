@@ -52,6 +52,7 @@ def downloads():
                     fname=song_name[i]+"-"+singers[i]+".mp3"
                     url=song_url[i]
                     download.download(url,fname)
+                    print(singers[i]+"唱的"+song_name[i]+"下载完成！\n\n")
     except FileNotFoundError:
         print("您未创建“get_music.txt”文件")
     except:
