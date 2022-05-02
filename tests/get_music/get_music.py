@@ -101,6 +101,12 @@ def xiazai(name,singer,song_url):
             print("已保存至当前目录下")
         print('\n≧∀≦\t感谢您对本程序的使用，祝您生活愉快！')
 def main_help():
+    try:
+        from get_music import ver
+        ver.ver()
+    except:
+        print("获取最新版本失败！")
+    print()
     print("本程序直接在命令行运行“get-music”即可开启程序的下载入口")
     print("支持快捷下载get-music [songname],例如：get-music 爱人错过")
     print("本程序暂不支持 ‘import get_music’ 呢")
@@ -120,7 +126,7 @@ def main():
             if sys.argv[1] in ['-h','-help']:
                 main_help()
             elif sys.argv[1] in ['-version','-v','-V']:
-                print("\n当前版本为v0.0.51")
+                print("\n当前版本为v0.0.52")
             elif sys.argv[1] in ['-read','-r','-R']:
                 from get_music import downloads
                 downloads.downloads()
