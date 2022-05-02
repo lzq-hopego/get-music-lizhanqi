@@ -1,5 +1,7 @@
-import requests,time
-from get_music import printf
+import requests,time,sys
+
+
+
 
 def download(url, filepath='./必须加上扩展名',ouput=False):
     if ouput==True:
@@ -21,9 +23,9 @@ def download(url, filepath='./必须加上扩展名',ouput=False):
                     size += len(data)
                     s=float(size / content_size * 100)
                     if s==100:
-                        printf.printSkyBlue('\r' + '[下载进度]:%s%.2f%%' % ('=' * int(size * 50 / content_size)+">", s))
+                        sys.stdout.write('\r' + '[下载进度]:%s%.2f%%' % ('=' * int(size * 50 / content_size)+">", s))
                     else:
-                        printf.printSkyBlue('\r' + '[下载进度]:%s%.2f%%' % ('=' * int(size * 50 / content_size), s))
+                        sys.stdout.write('\r' + '[下载进度]:%s%.2f%%' % ('=' * int(size * 50 / content_size), s))
         end = time.time()  # 下载结束时间
         print('完成！用时: %.2f秒' % (end - start))  # 输出下载用时时间
     except Exception:

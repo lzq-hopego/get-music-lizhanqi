@@ -120,7 +120,7 @@ def main():
             if sys.argv[1] in ['-h','-help']:
                 main_help()
             elif sys.argv[1] in ['-version','-v','-V']:
-                print("\n当前版本为v0.0.48")
+                print("\n当前版本为v0.0.51")
             elif sys.argv[1] in ['-read','-r','-R']:
                 from get_music import downloads
                 downloads.downloads()
