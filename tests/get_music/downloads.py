@@ -1,6 +1,6 @@
 from get_music import download
 from get_music import kuwo
-from get_music import kugou
+from get_music import getkugou as kugou
 from get_music import netease
 from get_music import qq
 

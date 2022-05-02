@@ -1,24 +1,32 @@
-import requests
-from tqdm import tqdm
+import requests,time
+from get_music import printf
 
-
-def download(url: str, fname: str,ouput=False):
+def download(url, filepath='./必须加上扩展名',ouput=False):
     if ouput==True:
         print()
-    # 用流stream的方式获取url的数据
-    resp = requests.get(url, stream=True)
-    # 拿到文件的长度，并把total初始化为0
-    total = int(resp.headers.get('content-length', 0))
-    # 打开当前目录的fname文件(名字你来传入)
-    # 初始化tqdm，传入总数，文件名等数据，接着就是写入，更新等操作了
-    with open(fname, 'wb') as file, tqdm(
-        colour='magenta',
-        desc=fname,
-        total=total,
-        unit='iB',
-        unit_scale=True,
-        unit_divisor=1024,
-    ) as bar:
-        for data in resp.iter_content(chunk_size=1024):
-            size = file.write(data)
-            bar.update(size)
+    start = time.time()  # 下载开始时间
+    response = requests.get(url, stream=True,timeout=1)  # stream=True必须写上
+    size = 0  # 初始化已下载大小
+    chunk_size = 1024  # 每次下载的数据大小
+    content_size = int(response.headers['content-length'])  # 下载文件总大小
+    try:
+        if response.status_code == 200:  # 判断是否响应成功
+            name=filepath.split('-')[-1].split('.')[0]+"唱的"+filepath.split('-')[0]
+            print('开始下载'+name+','+'[文件格式]:'+filepath.split('.')[-1]+',[文件大小]:{size:.2f} MB,'.format(
+                size=content_size / chunk_size / 1024))  # 开始下载，显示下载文件大小
+            # filepath = '下载/222.mp4'  #注：必须加上扩展名
+            with open(filepath, 'wb') as file:  # 显示进度条
+                for data in response.iter_content(chunk_size=chunk_size):
+                    file.write(data)
+                    size += len(data)
+                    s=float(size / content_size * 100)
+                    if s==100:
+                        printf.printSkyBlue('\r' + '[下载进度]:%s%.2f%%' % ('=' * int(size * 50 / content_size)+">", s))
+                    else:
+                        printf.printSkyBlue('\r' + '[下载进度]:%s%.2f%%' % ('=' * int(size * 50 / content_size), s))
+        end = time.time()  # 下载结束时间
+        print('完成！用时: %.2f秒' % (end - start))  # 输出下载用时时间
+    except Exception:
+        pass
+
+

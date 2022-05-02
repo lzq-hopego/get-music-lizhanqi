@@ -20,11 +20,8 @@ def zhuti(Songname=False):
         
         if fs in api.keys():
             if fs==1:
-                try:
-                    song_name,singer_name,song_url=kugou(song)
-                except:
-                    print("\n`*>﹏<*′\t很抱歉呢，我们无法在此接口找到您想听的歌曲，请核实一下是不是名字错了呀。")
-                    sys.exit()
+                kugou(song)
+                
             if fs==2:
                 try:
                     song_name,singer_name,song_url=netease(song)
@@ -61,8 +58,7 @@ def zhuti(Songname=False):
 
 def kugou(song):
     from get_music import kugou
-    print('正在接收数据中……\n过程可能会有点慢，请耐心等待勿关闭程序')
-    return kugou.kugou(song)
+    kugou.kugou(song)
 def netease(song):
     from get_music import netease
     print('正在接收数据中……\n过程可能会有点慢，请耐心等待勿关闭程序')
@@ -93,7 +89,7 @@ def xiazai(name,singer,song_url):
             print("序号{}\t\t{}————{}".format(i+1,name[i],singer[i]))
         songs=input('请选择您要下载哪一首歌，直接输入序号就行\n如需下载多个请用逗号分割即可，例如1,2\n如果不需要下载多个，请直接输入序号就行：')
         if songs=='':
-            print('\n\n\n——您未做出选择！程序将在2秒后自动退出！！！')
+            print('\n\n\n——您未做出选择！程序即将自动退出！！！')
             sys.exit()
         song_list=songs.split(",")
         for i in song_list:
@@ -124,7 +120,7 @@ def main():
             if sys.argv[1] in ['-h','-help']:
                 main_help()
             elif sys.argv[1] in ['-version','-v','-V']:
-                print("\n当前版本为v0.0.47")
+                print("\n当前版本为v0.0.48")
             elif sys.argv[1] in ['-read','-r','-R']:
                 from get_music import downloads
                 downloads.downloads()
