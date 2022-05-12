@@ -1,36 +1,29 @@
 import requests,json
 from get_music import download
 
-
-
-class netease:
+class oneting:
     def __init__(self):
-        self.url='http://music.163.com/api/cloudsearch/pc'
-        self.headers={'referer':'http://music.163.com/',
-        'proxy':"false",
-        'user-agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1'}
-        self.data={'s':'',
-        'type':1,
-        'offset':1,
-        'limit':20}
-    def search(self,songname,page=0):
-        self.data['offset']=self.page=page
-        self.data['s']=self.songname=songname
-        req=requests.post(self.url,headers=self.headers,data=self.data,timeout=1)
-        d=json.loads(req.text)
-        song_url=['http://music.163.com/song/media/outer/url?id=','.mp3']
-        songs=d["result"]['songs']
+        self.headers={'user-agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
+                   'referer':'https://h5.1ting.com/'}
+    def search(self,songname,page=1):
+        self.songname=songname
+        self.page=page
+        url='https://so.1ting.com/song/json?q={}&page={}&size=20'.format(self.songname,self.page)
+        req=requests.get(url,headers=self.headers)
+        d=req.json()
         self.song_name=[]
-        self.song_id=[]
-        self.songer_name=[]
-        for i in songs:
-                self.song_id.append(str(i['id']).join(song_url))
-                self.song_name.append(i["name"])
-                self.songer_name.append(i['ar'][0]["name"])
+        self.singer_name=[]
+        self.song_url=[]
+
+        songurl='https://h5.1ting.com/file?url='
+        for i in d['results']:
+            self.song_name.append(i['song_name'])
+            self.singer_name.append(i['singer_name'])
+            self.song_url.append(songurl+i['song_filepath'].replace('.wma','.mp3'))
     def prints(self):
         name=self.song_name
-        singer=self.songer_name
-        song_url=self.song_id
+        singer=self.singer_name
+        song_url=self.song_url
         for i in range(0,len(name)):
             print("序号{}\t\t{}————{}".format(i+1,name[i],singer[i]))
         songs=input('请选择您要下载哪一首歌，直接输入序号就行\n如需下载多个请用逗号分割即可，例如1,2\n输入0可以继续搜索下一页\n如果不需要下载多个，请直接输入序号就行：')
@@ -46,7 +39,7 @@ class netease:
             try:
                 i=int(i)-1
             except ValueError:
-                print("您输入的序号有问题，请用英文逗号分割谢谢！")
+                print("您输入的序号有问题，请用数字且用英文逗号分割谢谢！")
                 return
             try:
                 fname=name[i]+"-"+singer[i]+".mp3"
@@ -58,7 +51,12 @@ class netease:
                 print("您输入的序号不在程序给出的序号范围！")
                 return
         print('\n≧∀≦\t感谢您对本程序的使用，祝您生活愉快！')
-##a=netease()
-##a.search("11")
+##a=oneting()
+##a.search("爱人错过")
 ##a.prints()
-##input()
+##headers={'user-agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
+##                   'referer':'https://h5.1ting.com/'}
+##url='https://so.1ting.com/song/json?q=11&page=1&size=20'
+##
+##html=requests.get(url,headers=headers)
+##print(html.text

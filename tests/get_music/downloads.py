@@ -1,10 +1,23 @@
 from get_music import download
+from get_music import kugou
 from get_music import kuwo
-from get_music import getkugou as kugou
-from get_music import netease
 from get_music import qq
+from get_music import netease
+from get_music import oneting
+from get_music import baidu
+from get_music import fivesing
+from get_music import migu
 
 def downloads():
+    d={1:kugou.kugou(),
+       2:netease.netease(),
+       3:qq.qq(),
+       4:kuwo.kuwo(),
+       5:migu.migu(),
+       6:baidu.baidu(),
+       7:oneting.oneting(),
+       8:fivesing.fivesing('yc'),
+       9:fivesing.fivesing('fc')}
     try:
         fo=open("get_music.txt",'r',encoding='utf-8')
         txt=fo.read().split("\n")
@@ -16,79 +29,101 @@ def downloads():
         print("正在搜索歌曲信息，注意该模式下我们不会返回任何数据进行交互") 
         for i in ls:
             try:
+                
                 songname,way=i[0],i[-1]
                 songnum=int(i[1])
-                if way=='kw':
-                    print("正在搜索："+songname)
-                    song_name,singers,song_url=kuwo.kuwo(songname)
-                    print("搜索完成，开始下载...")
-                    for i in range(0,songnum):
-                        fname=song_name[i]+"-"+singers[i]+".mp3"
-                        url=song_url[i]
-                        download.download(url,fname)
+                if songnum>20:
+                    print("第二列的序号出错啦")
+                    sys.exit()
                 if way=='kg':
-                    print("正在搜索："+songname)
-                    song_name,singers,song_url=kugou.kugou(songname)
-                    print("搜索完成，开始下载...")
-                    for i in range(0,songnum):
-                        fname=song_name[i]+"-"+singers[i]+".mp3"
-                        url=song_url[i]
-                        download.download(url,fname)
-                if way=='qq':
-                    print("正在搜索："+songname)
-                    song_name,singers,song_url=qq.qq(songname)
-                    print("搜索完成，开始下载...")
-                    for i in range(0,songnum):
-                        fname=song_name[i]+"-"+singers[i]+".mp3"
-                        url=song_url[i]
+                    api=d[1]
+                    api.search(i[0])
+                    songname=api.songname
+                    singername=api.singername
+                    songid=api.songs_url
+                    
+                    for i in range(songnum):
+                        fname=songname[i]+"-"+singername[i]+".mp3"            
+                        url=api.get_music_url(songid[i])
                         download.download(url,fname)
                 if way=='wy':
-                    print("正在搜索："+songname)
-                    song_name,singers,song_url=netease.netease(songname)
-                    print("搜索完成，开始下载...")
-                    for i in range(0,songnum):
-                        fname=song_name[i]+"-"+singers[i]+".mp3"
-                        url=song_url[i]
-                        download.download(url,fname)
-            except ValueError:
-                songnum=i[1]
-                if way=='kw':
-                    print("正在搜索："+songname)
-                    song_name,singers,song_url=kuwo.kuwo(songname)
-                    print("搜索完成，开始下载...")
-                    for i,j in enumerate(singers):
-                        if songnum in j:
-                            fname=song_name[i]+"-"+singers[i]+".mp3"
-                            url=song_url[i]
-                            download.download(url,fname)
-                if way=='kg':
-                    print("正在搜索："+songname)
-                    song_name,singers,song_url=kugou.kugou(songname)
-                    print("搜索完成，开始下载...")
-                    for i,j in enumerate(singers):
-                        if songnum in j:
-                            fname=song_name[i]+"-"+singers[i]+".mp3"
-                            url=song_url[i]
-                            download.download(url,fname)
+                    api=d[2]
+                    api.search(i[0])
+                    songname=api.song_name
+                    singername=api.songer_name
+                    songid=api.song_id
+                    for i in range(songnum):
+                            fname=songname[i]+"-"+singername[i]+".mp3"  
+                            download.download(songid[i],fname)
                 if way=='qq':
-                    print("正在搜索："+songname)
-                    song_name,singers,song_url=qq.qq(songname)
-                    print("搜索完成，开始下载...")
-                    for i,j in enumerate(singers):
-                        if songnum in j:
-                            fname=song_name[i]+"-"+singers[i]+".mp3"
-                            url=song_url[i]
-                            download.download(url,fname)
-                if way=='wy':
-                    print("正在搜索："+songname)
-                    song_name,singers,song_url=netease.netease(songname)
-                    print("搜索完成，开始下载...")
-                    for i,j in enumerate(singers):
-                        if songnum in j:
-                            fname=song_name[i]+"-"+singers[i]+".mp3"
-                            url=song_url[i]
-                            download.download(url,fname)
-
+                    api=d[3]
+                    api.search(i[0])
+                    songname=api.song_name
+                    singername=api.singer_name
+                    songid=api.song_url
+                    for i in range(songnum):
+                        fname=songname[i]+"-"+singername[i]+".mp3"            
+                        url=api.get_music_url(songid[i])
+                        download.download(url,fname)
+                if way=='kw':
+                    api=d[4]
+                    api.search(i[0])
+                    songname=api.musicNames
+                    singername=api.singer
+                    songid=api.song_url
+                    for i in range(songnum):
+                        fname=songname[i]+"-"+singername[i]+".mp3"         
+                        url=api.get_music_url(songid[i])
+                        download.download(url,fname)
+                if way=='migu':
+                    api=d[5]
+                    api.search(i[0])
+                    songname=api.song_name
+                    singername=api.singers
+                    songid=api.song_url
+                    for i in range(songnum):
+                            fname=songname[i]+"-"+singername[i]+"."+songid[i].split(".")[-1]
+                            download.download(songid[i],fname)
+                if way=='bd':
+                    api=d[6]
+                    api.search(i[0])
+                    songname=api.sings
+                    singername=api.song_name
+                    songid=api.tsids
+                    for i in range(songnum):
+                        fname=songname[i]+"-"+singername[i]+".mp3"         
+                        url=api.get_music_url(songid[i])
+                        download.download(url,fname)
+                if way=='1ting':
+                    api=d[7]
+                    api.search(i[0])
+                    songname=api.song_name
+                    singername=api.singer_name
+                    songid=api.song_url
+                    for i in range(songnum):
+                        fname=songname[i]+"-"+singername[i]+".mp3"            
+                        download.download(songid[i],fname)
+                if way=='yc':
+                    api=d[8]
+                    api.search(i[0])
+                    songname=api.song_name
+                    singername=api.singer_name
+                    songid=api.song_id
+                    for i in range(songnum):
+                        fname=songname[i]+"-"+singername[i]+".mp3"         
+                        url=api.get_music_url(songid[i])
+                        download.download(url,fname)
+                if way=='fc':
+                    api=d[9]
+                    api.search(i[0])
+                    songname=api.song_name
+                    singername=api.singer_name
+                    songid=api.song_id
+                    for i in range(songnum):
+                        fname=songname[i]+"-"+singername[i]+".mp3"         
+                        url=api.get_music_url(songid[i])
+                        download.download(url,fname)
+                
             except:
                 print("歌曲名称获取失败")
                 break
