@@ -1,5 +1,5 @@
 # get-music-lizhanqi ：Listen to what you want
-多合一音乐下载，搜索，python，支持酷狗，网易，百度，酷我，咪咕和qq音乐平台的音乐下载，有些支持下载封面和歌词有些则不支持，requests和json占主要
+多合一音乐下载，搜索，python，支持酷狗，网易，百度，一听，5sing原创及翻唱,酷我，咪咕和qq音乐平台的音乐下载，有些支持下载封面和歌词有些则不支持，requests和json占主要
 
 <p align="center">
   <a><img src="https://img.shields.io/pypi/pyversions/get-music-lizhanqi"></a>
@@ -144,7 +144,7 @@ C:\Users\xxx\Desktop>
 ```
 
 - 在linux平台上尽量使用root用户进行pip安装，然后用root用启动该程序，由于作者知识浅薄尚不能够对linux平台进行全平台适配，敬请理解！
-- 六个搜索引擎任你挑`qq netease kugou baidu kuwo migu`，每个数量限制为5，保存目录为当前目录的音乐文件夹。
+- 九个搜索引擎任你挑`qq netease kugou baidu kuwo migu，1ting，5singfc，5singyc`，每个数量限制为10，保存目录为当前目录的音乐文件夹。
 - 指定序号时可以使用`1 1,2(中间的逗号要用英文逗号哦，并且有的不支持，不支持这样会有提示)`的形式。
 - 默认对搜索结果排序和去重，排序顺序按照歌手和歌名排序，当两者都相同时保留最大的文件。
 - 无损音乐歌曲数量较少，如果没有无损会默认下载320K或128K。
