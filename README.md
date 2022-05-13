@@ -47,7 +47,7 @@ $ pip install get-music-lizhanqi
 使用pip更新（建议使用pip进行更新，因为最新版本一般会最先发布在pypi上，当然github也会同步）：
 
 ```
-pip install --upgrade get-music-lizhanqi
+$ pip install --upgrade get-music-lizhanqi
 ```
 
 
@@ -56,7 +56,7 @@ pip install --upgrade get-music-lizhanqi
 - 说明：不仅限测试环境，关于macos，由于作者还是个学生暂时无法提供macos的测试，不过只要python3.7版本能用，那么脚本也能使用
 - 如果您想在手机端或者3.7以下2.9以上版本使用该脚本，那么请下载0.0.44版本,如果下面的教程看不懂的话，可以点开下面的链接，链接里的就是各个操作系统测试时的截图
 ```
-pip install get-music-lizhanqi==0.0.44    ##专门为移动端和python低版本的发行版
+pip install get-music-lizhanqi==0.0.44    ##专门为移动端和qpython低版本的发行版
 ```
 
 | 系统名称 | 系统版本       | Python版本  | 测试样片                              |
@@ -174,6 +174,7 @@ C:\Users\xxx\Desktop>
 
 
 ## 更新记录
+- 2022-05-13 完成v0.0.56版,全面支持下载歌词和封面，get-music -l 既下载歌曲又下载歌词,get-music -p 既下载歌曲又下载封面，get-music -lp既下载歌曲又同时下载歌词和封面
 - 2022-05-12 完成v0.0.55版，全新架构了一下程序，使用面向对象编程，并新增一听接口，5sing原唱，5sing翻唱，支持翻页操作输入0即可实现翻页，全部接口都同时支持多个同时下载，不支持断点续传（注意网络环境哦），同时get-music -r的接口支持kg,kw,qq,wy,migu,bd,1ting,fc,yc,不再支持qpython
 - 2022-05-10 完成v0.0.54版，修复qpython中无法下载的问题，这个bug居然是file关键字的问题（qpython的关键字，至于是不是python3.6的那就不得而知喽），我把它拿来当变量了，sorry
 - 2022-05-04 完成v0.0.53版，完善批量下载机制和操作手册，更新MD文档
@@ -209,7 +210,6 @@ C:\Users\xxx\Desktop>
 本项目受以下项目启发，参考了其中一部分思路，向这些开发者表示感谢。
 
 - <https://github.com/requests/requests>
-- <https://github.com/tqdm/tqdm>
 
 ## THE END
 - 本脚本仅支持学习使用，如有发现有任何商业用途，一经发现您将受到法律责任。
