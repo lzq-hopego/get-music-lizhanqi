@@ -88,7 +88,7 @@ def main():
                 if sys.argv[1] in ['-h','-help']:
                     main_help()
                 elif sys.argv[1] in ['-version','-v','-V']:
-                    print("\n当前版本为v0.0.56\n")
+                    print("\n当前版本为v0.0.57\n")
                     try:
                         from get_music import ver
                         ver.ver()
