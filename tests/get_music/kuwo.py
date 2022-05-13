@@ -1,15 +1,17 @@
 import requests,json
 from get_music import download
-
+##import download
 
 class kuwo:
-    def __init__(self):
+    def __init__(self,p=False,l=False):
         self.headers = {
                 "Cookie": "_ga=GA1.2.2021007609.1602479334; Hm_lvt_cdb524f42f0ce19b169a8071123a4797=1602479334,1602673632; _gid=GA1.2.168402150.1602673633; Hm_lpvt_cdb524f42f0ce19b169a8071123a4797=1602673824; kw_token=5LER5W4ZD1C",
                 "csrf": "5LER5W4ZD1C",
                 "Referer": "{}",
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36",
             }
+        self.l=l
+        self.p=p
     def search(self,songname,page=1):
         self.page=page
         self.songname=songname
@@ -22,6 +24,7 @@ class kuwo:
         self.musicNames=list()   # 歌曲名称的列表
         self.singer=[]
         self.song_url=[]   # 存储歌曲下载链接的列表
+        self.pic=[]
 ##        return misicInfo
         for i in range(len(misicInfo)):
 ##            songurl=get_url(misicInfo[i]['rid'])
@@ -30,6 +33,7 @@ class kuwo:
             self.singer.append(misicInfo[i]['artist'])
             self.musicNames.append(misicInfo[i]['name'].replace("|",'').replace('&nbsp;','').replace('cover:',''))
             self.song_url.append(misicInfo[i]['rid'])
+            self.pic.append(misicInfo[i]['pic'])
     def prints(self):
         name=self.musicNames
         singer=self.singer
@@ -55,6 +59,10 @@ class kuwo:
                 fname=name[i]+"-"+singer[i]+".mp3"
                 url=song_url[i]
                 songurl=self.get_music_url(url)
+                if self.l==True:
+                    self.get_music_lrc(num=i)
+                if self.p==True:
+                    self.get_music_pic(num=i)
 ##                print(fname,songurl)
                
                 if songurl==None:
@@ -74,14 +82,37 @@ class kuwo:
         headers2={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36"}
         response2=requests.get(url=url2,headers=headers2)
         dict3=json.loads(response2.text)
+        self.d=dict3
         try:
             url=dict3['data']['url']
         except:
             return ''
         return url
-
-
-##a=kuwo()
+    def get_music_pic(self,num):
+        try:
+            url=self.pic[num]
+            name=self.musicNames[num]+"-"+self.singer[num]+'-'+"封面.jpg"
+            req=requests.get(url,timeout=1)
+            with open(name,'wb') as f:
+                f.write(req.content)
+            print("\n歌曲封面下载完成，文件名称为:"+name)
+        except:
+            print("未找到该歌曲的封面！")
+    def get_music_lrc(self,num):
+        try:
+            url='http://m.kuwo.cn/newh5/singles/songinfoandlrc?musicId='+str(self.song_url[num])
+            html=requests.get(url,timeout=1)
+            text=html.json()['data']['lrclist']
+            s=''
+            for i in text:
+                s+='['+i['time']+']'+'    '+i['lineLyric']+'\n'
+            name=self.musicNames[num]+"-"+self.singer[num]+'-'+".歌词.txt"
+            with open(name,'w') as f:
+                f.write(s)
+            print("\n\n歌词已下载完成,文件名称为:"+name+"\n")
+        except:
+            print("未找到该歌曲的歌词！")
+##a=kuwo(p=True,l=True)
 ##a.search('11')
 ##a.prints()
 ##input()

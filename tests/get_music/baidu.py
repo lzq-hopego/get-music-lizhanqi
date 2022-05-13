@@ -7,14 +7,17 @@ import hashlib
 import sys
 import os
 from get_music import download
+##import download
 ##pic=True
 ##lrc=True
 
 class baidu:
-    def __init__(self):
+    def __init__(self,p=False,l=False):
         self.headers = {
              'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36'
             }
+        self.l=l
+        self.p=p
     def search(self,songname,page=1):
         self.songname=songname
         self.page=page
@@ -54,7 +57,10 @@ class baidu:
                 fname=name[i]+"-"+singer[i]+".mp3"
                 url=song_url[i]
                 songurl=self.get_music_url(url)
-##                print(songurl)
+                if self.l==True:
+                    self.get_music_lrc(num=i)
+                if self.p==True:
+                    self.get_music_pic(num=i)
                 download.download(songurl,fname,ouput=True)
                 print(singer[i]+'唱的'+name[i]+'下载完成啦！')
                 print("已保存至当前目录下")
@@ -77,11 +83,26 @@ class baidu:
          'data']
 ##        singer_name = song_info['artist'][0]['name']  # 歌手名
 ##        Song_name = song_info['title']  # 歌名
+        self.lrc=song_info['lyric']
+        self.pic=song_info['pic']
         return song_info['path']  # 音频地址
-##        lrc_link = song_info['lyric']  # 歌词地址
+    def get_music_lrc(self,num):
+        try:
+            name=self.sings[num]+"-"+self.song_name[num]+'-'+"歌词.lrc"
+            download.download(self.lrc,name)
+            print("\n\n歌词已下载完成,文件名称为:"+name+"\n")
+        except:
+            print("未找到该歌曲的歌词！")
+    def get_music_pic(self,num):
+        try:
+            name=self.sings[num]+"-"+self.song_name[num]+'-'+"封面.jpg"
+            download.download(self.pic,name)
+            print("\n歌曲封面下载完成，文件名称为:"+name)
+        except:
+            print("未找到该歌曲的封面！")
 
 
-##a=baidu()
+##a=baidu(p=True)
 ##a.search('11')
 ##a.prints()
 

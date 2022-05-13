@@ -7,13 +7,13 @@ def download(url, filepath='./必须加上扩展名',ouput=False):
     if ouput==True:
         print()
     start = time.time()  # 下载开始时间
-    response = requests.get(url, stream=True,timeout=1)  # stream=True必须写上
+    response = requests.get(url, stream=True,timeout=3)  # stream=True必须写上
     size = 0  # 初始化已下载大小
     chunk_size = 1024  # 每次下载的数据大小
     content_size = int(response.headers['content-length'])  # 下载文件总大小
     try:
         if response.status_code == 200:  # 判断是否响应成功
-            name=filepath.split('-')[-1].split('.')[0]+"唱的"+filepath.split('-')[0]
+            name=filepath
             print('开始下载'+name+','+'[文件格式]:'+filepath.split('.')[-1]+',[文件大小]:{size:.2f} MB,'.format(
                 size=content_size / chunk_size / 1024))  # 开始下载，显示下载文件大小
             # filepath = '下载/222.mp4'  #注：必须加上扩展名
