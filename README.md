@@ -159,14 +159,14 @@ C:\Users\xxx\Desktop>
 
 | 音乐源     | 缩写    | 网址                      | 有效 | 无损 | 320K | 封面 | 歌词 | 歌单 | 单曲 |
 | ---------- | ------- | ------------------------- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
-| QQ音乐     | qq      | <https://y.qq.com/>       | ✓     | -    | -    | ✓     | ✓    | ✕    | ✓    |
-| 酷狗音乐   | kugou   | <http://www.kugou.com/>   | ✓     | -    | -    | ✓     | ✓    | -    | ✓    |
-| 网易云音乐 | netease | <https://music.163.com/>  | ✓    | -    | ✓    | ✓    | ✓    |  -   |  ✓    |
-| 咪咕音乐   | migu    | <http://www.migu.cn/>     | ✓    | -   |  -   |  ✓     |  ✓    | ✕    | ✓    |
+| QQ音乐     | qq      | <https://y.qq.com/>       | ✓    | -    | -    | ✓     | ✓    | ✕    | ✓    |
+| 酷狗音乐   | kugou   | <http://www.kugou.com/>   | ✓    | -    | -    | ✓     | ✓    | -    | ✓    |
+| 网易云音乐 | netease | <https://music.163.com/>  | ✓    | -    | ✓    | ✓     | ✓    |  -   |  ✓    |
+| 咪咕音乐   | migu    | <http://www.migu.cn/>     | ✓    |  ✓   |  -   |  ✓    |  ✓    | ✕    | ✓    |
 | 百度音乐   | baidu   | <http://music.baidu.com/> | ✓    | -    | ✓    | ✓    | ✓    | ✕    | ✓    |
-| 酷我音乐   | kuwo   | <http://www.kuwo.cn/> | ✓    | -    |  -  |  -   |  ✓    | ✓     | ✓    |
-| 1听   | 1ting   | <https://www.1ting.com/> | ✓    | -    |  -  |  -   |  ✓    |  ✕    | ✓    |
-| 5sing   | 5sing   | <http://5sing.kugou.com/> | ✓    | -    |  -  |  -   |  ✓    | ✓     | ✓    |
+| 酷我音乐   | kuwo   | <http://www.kuwo.cn/>      | ✓    | -    |  -   |  ✓   |  ✓    | ✓     | ✓    |
+| 1听   | 1ting   | <https://www.1ting.com/>       | ✓    | -    |  -   |  ✓   |  ✕    |  ✕    | ✓    |
+| 5sing   | 5sing   | <http://5sing.kugou.com/>    | ✓    | -    |  -   |  ✓   |  ✓    | ✕     | ✓    |
 
 > `-`表示不一定支持，`✓`表示部分或完全支持，`✕`表示尚未支持
 
