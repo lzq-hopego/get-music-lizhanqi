@@ -59,16 +59,16 @@ $ pip install --upgrade get-music-lizhanqi
 pip install get-music-lizhanqi==0.0.44    ##专门为移动端和qpython低版本的发行版
 ```
 
-| 系统名称 | 系统版本       | Python版本  | 测试样片                              |
-| -------- | -------------- | ---------- |  ------------------------------------- |
-| Windows  | Windows 7 x64  | 3.7.0      | http://img.lizhanqi.xyz/win7.jpg      |
-| Windows  | Windows 10 x64 | 3.7.0     | http://img.lizhanqi.xyz/win10.jpg     |
-| Windows  | Windows 11 x64 | 3.7.0     | http://img.lizhanqi.xyz/win11.jpg     |
-| Centos   | Centos 7.9 x64 | 3.7.0           | http://img.lizhanqi.xyz/centos.jpg    |
-| Ubuntu   | Ubuntu 22.4 x64 | 3.7.0       | http://img.lizhanqi.xyz/ubuntu.jpg    |
-| Kali     | Kali 20.4 x64  |  3.7.0    |   http://img.lizhanqi.xyz/kali.jpg      |
-| Android  | Android 10 x64 | 3.6.6(qpython) | http://img.lizhanqi.xyz/phone.jpg  |
-| Deepin  | Deepin 20 x64 | 3.7.0 | http://img.lizhanqi.xyz/deepin.jpg  |
+| 系统名称 | 系统版本       | Python版本  | 测试样片                              | 是否支持gui下载（get-music -t）|
+| -------- | -------------- | ---------- |  ------------------------------------- | ---------------------------------- |
+| Windows  | Windows 7 x64  | 3.7.0      | http://img.lizhanqi.xyz/win7.jpg      |  支持  |
+| Windows  | Windows 10 x64 | 3.7.0     | http://img.lizhanqi.xyz/win10.jpg     | 支持  |
+| Windows  | Windows 11 x64 | 3.7.0     | http://img.lizhanqi.xyz/win11.jpg     | 支持  |
+| Centos   | Centos 7.9 x64 | 3.7.0           | http://img.lizhanqi.xyz/centos.jpg    | 不支持  |
+| Ubuntu   | Ubuntu 22.4 x64 | 3.7.0       | http://img.lizhanqi.xyz/ubuntu.jpg    |  未知  |
+| Kali     | Kali 20.4 x64  |  3.7.0    |   http://img.lizhanqi.xyz/kali.jpg      | 未知  |
+| Android  | Android 10 x64 | 3.6.6(qpython) | http://img.lizhanqi.xyz/phone.jpg  | 不支持 |
+| Deepin  | Deepin 20 x64 | 3.7.0 | http://img.lizhanqi.xyz/deepin.jpg  | 支持  |
 
 
 ## 使用方式（代码中“$”表示用户输入的东西，“～”表示程序返回的东西）
@@ -176,6 +176,7 @@ C:\Users\xxx\Desktop>
 
 
 ## 更新记录
+- 2022-05-20 完成v0.0.58版，支持get-music -t 唤醒gui窗口进行下载，目前在win10上已经可以正常使用，但是没有为该gui添加下载进度条，使用的是python自带的tkinter框架
 - 2022-05-13 22：55 完成v0.0.57版本，修复因python编码问题引起的报错导致get-music -r无反应等问题
 - 2022-05-13 完成v0.0.56版,全面支持下载歌词和封面，get-music -l 既下载歌曲又下载歌词,get-music -p 既下载歌曲又下载封面，get-music -lp既下载歌曲又同时下载歌词和封面
 - 2022-05-12 完成v0.0.55版，全新架构了一下程序，使用面向对象编程，并新增一听接口，5sing原唱，5sing翻唱，支持翻页操作输入0即可实现翻页，全部接口都同时支持多个同时下载，不支持断点续传（注意网络环境哦），同时get-music -r的接口支持kg,kw,qq,wy,migu,bd,1ting,fc,yc,不再支持qpython
