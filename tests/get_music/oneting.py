@@ -1,6 +1,6 @@
 import requests,json
 from get_music import download
-##import download
+# import download
 
 class oneting:
     def __init__(self,p=False,l=False):
@@ -27,6 +27,7 @@ class oneting:
             self.pic.append("https:"+i['album_cover'])
             self.singer_name.append(i['singer_name'])
             self.song_url.append(songurl+i['song_filepath'].replace('.wma','.mp3'))
+        return self.song_name,self.singer_name,self.song_url
     def prints(self):
         name=self.song_name
         singer=self.singer_name

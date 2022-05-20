@@ -7,7 +7,7 @@ import hashlib
 import sys
 import os
 from get_music import download
-##import download
+# import download
 ##pic=True
 ##lrc=True
 
@@ -31,6 +31,7 @@ class baidu:
         self.tsids = re.findall(r'<a href="/song/(.*?)"', text, re.S)
         self.song_name=re.findall(r'<a href="/artist/.*?".*?>(.*?)</a>', text, re.S)
         self.sings=re.findall(r'<a href="/song/.*?".*?>(.*?)</a>', text, re.S)
+        return self.song_name,self.sings,self.tsids
 
     def prints(self):
         name=self.sings

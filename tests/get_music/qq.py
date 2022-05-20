@@ -1,6 +1,7 @@
 import requests # 请求
 import json
 from get_music import download
+# import download
 
 class qq:
     def __init__(self,p=False,l=False):
@@ -31,6 +32,7 @@ class qq:
             self.song_url.append(music["songmid"])  #歌曲的songmid
             self.song_name.append(music["songname"])  #歌曲名称
             self.singer_name.append(music["singer"][0]["name_hilight"])  #歌手名称
+        return self.song_name,self.singer_name,self.song_url
     def prints(self):
         name=self.song_name
         singer=self.singer_name

@@ -1,6 +1,6 @@
 import requests,re
 from get_music import download
-##import download
+# import download
 
 class fivesing:
     def __init__(self,songtype,p=False,l=False):
@@ -28,6 +28,7 @@ class fivesing:
             self.song_id.append(i['songId'])
             self.singer_name.append(i['nickName'])
             self.song_name.append(re.findall('<em class="keyword">(.*?)</em>',i['songName'])[0])
+        return self.song_name,self.singer_name,self.song_id
     def prints(self):
         name=self.song_name
         singer=self.singer_name

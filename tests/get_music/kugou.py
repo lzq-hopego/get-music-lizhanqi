@@ -1,6 +1,6 @@
 import requests,json
 from get_music import download
-##import download
+# import download
 
 class kugou:
     def __init__(self,p=False,l=False):
@@ -28,7 +28,7 @@ class kugou:
             l.append(i["hash"])
             l.append(i["album_id"])
             self.songs_url.append(l)
-
+        return self.songname,self.singername,self.songs_url
     def prints(self):
         name=self.songname
         singer=self.singername

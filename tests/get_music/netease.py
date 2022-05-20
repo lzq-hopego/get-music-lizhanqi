@@ -1,6 +1,6 @@
 import requests,json
 from get_music import download
-##import download
+# import download
 
 
 class netease:
@@ -35,6 +35,7 @@ class netease:
                 self.songer_name.append(i['ar'][0]["name"])
                 self.id.append(i['id'])
                 self.pic.append(i['al']['picUrl'])
+        return self.song_name,self.songer_name,self.song_id
     def prints(self):
         name=self.song_name
         singer=self.songer_name

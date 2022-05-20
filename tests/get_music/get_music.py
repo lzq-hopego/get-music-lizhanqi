@@ -45,6 +45,7 @@ def main_help():
     txt='''
     -help\t查看帮助文档\n
     -version\t查看当前版本\n
+    -t\t打开gui窗口下载,使用的框架是python自带的tkinter\n
     -r\t(注意该功能可能会不稳定，但是不会给您的计算机照成危害)在
     创建名为get_music.txt的文件，文件内容的格式为"歌曲名 下载序号 下载渠
     道"歌曲名的地方也可以是歌手，下载序号其实是下载几首歌3的话就会下载3
@@ -88,7 +89,7 @@ def main():
                 if sys.argv[1] in ['-h','-help']:
                     main_help()
                 elif sys.argv[1] in ['-version','-v','-V']:
-                    print("\n当前版本为v0.0.57\n")
+                    print("\n当前版本为v0.0.58\n")
                     try:
                         from get_music import ver
                         ver.ver()
@@ -104,6 +105,11 @@ def main():
                     zhuti(p=True)
                 elif sys.argv[1] in ['-lp','-pl']:
                     zhuti(l=True,p=True)
+                elif sys.argv[1] in ['-t','-T']:
+                    try:
+                        from get_music import gui
+                    except:
+                        print('您的设备暂不支持该命令！')
                 else:
                     main_help()
             elif sys.argv[1]=="help":

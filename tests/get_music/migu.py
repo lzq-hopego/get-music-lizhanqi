@@ -1,6 +1,6 @@
 import requests,json,sys
 from get_music import download
-##import download
+# import download
 
 
 
@@ -46,6 +46,7 @@ class migu:
                     ftp=i['url'].replace("ftp://218.200.160.122:21/",Songurl)
                     break
             self.song_url.append(ftp)
+        return self.song_name,self.singers,self.song_url
     def prints(self):
         name=self.song_name
         singer=self.singers

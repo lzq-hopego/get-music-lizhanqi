@@ -1,6 +1,6 @@
 import requests,json
 from get_music import download
-##import download
+# import download
 
 class kuwo:
     def __init__(self,p=False,l=False):
@@ -34,6 +34,7 @@ class kuwo:
             self.musicNames.append(misicInfo[i]['name'].replace("|",'').replace('&nbsp;','').replace('cover:',''))
             self.song_url.append(misicInfo[i]['rid'])
             self.pic.append(misicInfo[i]['pic'])
+        return self.musicNames,self.singer,self.song_url
     def prints(self):
         name=self.musicNames
         singer=self.singer
