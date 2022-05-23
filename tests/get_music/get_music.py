@@ -32,14 +32,17 @@ def zhuti(songname='',p=False,l=False):
         api=d[fs]
     except:
         print("您输入的内容有些不合程序请检查后重试")
+        return
     try:
         api.search(songname)
     except:
-        print("无法返回数据或接口失效，可联系维护者，邮箱：3101978435@qq.com")
+        print("无法返回数据或接口失效,或者您的网络未连接，如果还未解决可联系维护者邮箱：3101978435@qq.com")
+        return
     try:
         api.prints()
     except:
         print("出现未知错误,有可能是您一直在下载导致的强制断开连接，或接口无返回值，请及时联系维护者3101978435@qq.com")
+        return
 
 def main_help():    
     txt='''
@@ -89,12 +92,9 @@ def main():
                 if sys.argv[1] in ['-h','-help']:
                     main_help()
                 elif sys.argv[1] in ['-version','-v','-V']:
-                    print("\n当前版本为v0.0.58\n")
-                    try:
-                        from get_music import ver
-                        ver.ver()
-                    except:
-                        print("获取最新版本信息失败！")
+                    from get_music import ver
+                    ver.ver()
+                    
                 elif sys.argv[1] in ['-read','-r','-R']:
                     pass
                     from get_music import downloads

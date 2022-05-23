@@ -20,11 +20,11 @@ def downloads():
        9:fivesing.fivesing('fc')}
     try:
         try:
-            fo=open("get_music.txt",'r')
+            fo=open("get_music.txt",'r',encoding='utf-8')
             txt=fo.read().split("\n")
             fo.close()
-        except UnicodeEncodeError:
-            fo=open("get_music.txt",'r',encoding='utf-8')
+        except:
+            fo=open("get_music.txt",'r')
             txt=fo.read().split("\n")
             fo.close()
         ls=[]
