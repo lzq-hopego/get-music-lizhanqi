@@ -24,13 +24,45 @@ page=1
 def selectPath():
     path_ = askdirectory()
     path.set(path_)
- 
+##帮助文档
 def help_info():
     tkinter.messagebox._show('v0.0.1帮助', 'get-music的gui界面介绍：\n输入下载的歌曲名.单曲搜索结果选中某行后再进行下载,重新搜索记得清空列表\n支持：\n歌手搜索\n歌词搜索，模糊搜索')
- 
+##清除text的内容
 def cleartxt():
     text.delete(0,END)
- 
+##回车触发的事件
+def enter(self):
+    if entry.get()=='':
+        tkinter.messagebox._show('警告信息','请输入搜索字段！')
+        return
+    global song_name
+    global singer_name
+    global song_url
+    text.delete(0,END)
+    song = entry.get()  #获得歌曲名
+    d={1:kugou.kugou(),
+       2:netease.netease(),
+       3:qq.qq(),
+       4:kuwo.kuwo(),
+       5:migu.migu(),
+       6:baidu.baidu(),
+       7:oneting.oneting(),
+       8:fivesing.fivesing('yc'),
+       9:fivesing.fivesing('fc')}
+    global api
+    api=d[comboExample.current()+1]
+    try:
+        song_name,singer_name,song_url=api.search(song)
+    except:
+        tkinter.messagebox._show('警告信息',"无法返回数据或接口失效,或者您的网络未连接，如果还未解决可联系维护者邮箱：3101978435@qq.com")
+        return
+    for i in range(len(song_name)):
+        text.insert(END, ">>>" +song_name[i]+"-"+singer_name[i] )
+        text.see(END)
+        text.update()
+    global page
+    page=1
+##单击搜索的事件
 def show():
     if entry.get()=='':
         tkinter.messagebox._show('警告信息','请输入搜索字段！')
@@ -51,14 +83,18 @@ def show():
        9:fivesing.fivesing('fc')}
     global api
     api=d[comboExample.current()+1]
-    song_name,singer_name,song_url=api.search(song)
- 
+    try:
+        song_name,singer_name,song_url=api.search(song)
+    except:
+        tkinter.messagebox._show('警告信息',"无法返回数据或接口失效,或者您的网络未连接，如果还未解决可联系维护者邮箱：3101978435@qq.com")
+        return
     for i in range(len(song_name)):
         text.insert(END, ">>>" +song_name[i]+"-"+singer_name[i] )
         text.see(END)
         text.update()
     global page
     page=1
+##单击下一页的事件
 def nexit():
     if entry.get()=='':
         tkinter.messagebox._show('警告信息','请输入搜索字段！')
@@ -81,12 +117,16 @@ def nexit():
     global page
     page=page+1
     api=d[comboExample.current()+1]
-    song_name,singer_name,song_url=api.search(song,page)
- 
+    try:
+        song_name,singer_name,song_url=api.search(song,page)
+    except:
+        tkinter.messagebox._show('警告信息',"无法返回数据或接口失效,或者您的网络未连接，如果还未解决可联系维护者邮箱：3101978435@qq.com")
+        return 
     for i in range(len(song_name)):
         text.insert(END, ">>>" +song_name[i]+"-"+singer_name[i] )
         text.see(END)
         text.update()
+##单击上一页的事件
 def updata():
     if entry.get()=='':
         tkinter.messagebox._show('警告信息','请输入搜索字段！')
@@ -113,54 +153,63 @@ def updata():
         return 
     page=page-1
     api=d[comboExample.current()+1]
-    song_name,singer_name,song_url=api.search(song,page)
- 
+    try:
+        song_name,singer_name,song_url=api.search(song,page)
+    except:
+        tkinter.messagebox._show('警告信息',"无法返回数据或接口失效,或者您的网络未连接，如果还未解决可联系维护者邮箱：3101978435@qq.com")
+        return 
     for i in range(len(song_name)):
         text.insert(END, ">>>" +song_name[i]+"-"+singer_name[i] )
         text.see(END)
         text.update()
-
+##为程序更加人性化的小变量
 cishu=1
+##one是一次返回数据的接口，由于接口多且复杂所以有很多接口不是一次性返回的数据需要二次解密
 one=[1,4,6]
+##单击下载的事件
 def download():
-    if entry_path.get() =='':
-        tkinter.messagebox._show('警告信息',"您未选择路径！")
-    
-    else:
-        if comboExample.current() in one:
-            # 一次就可以返回数据的接口
-            path=entry_path.get()
-            try:
-                song_index=text.curselection()[0]
-            except IndexError:
-                tkinter.messagebox._show('警告信息',"您未选择歌曲！")
-                return 
-            song=song_url[song_index]
-            fname=song_name[song_index]+'-'+singer_name[song_index]+"."+song.split('.')[-1]
-            response = requests.get(song,timeout=3)
-            with open(path+"/"+fname,'wb') as f:
-                f.write(response.content)
-            tkinter.messagebox._show('警告信息',fname+"下载完成啦！")
+    try:
+        if entry_path.get() =='':
+            tkinter.messagebox._show('警告信息',"您未选择路径！")
+        
         else:
-            # 需要另外解析音乐下载地址的接口
-            path=entry_path.get()
-            try:
-                song_index=text.curselection()[0]
-            except IndexError:
-                tkinter.messagebox._show('警告信息',"您未选择歌曲！")
-                return 
-            song=api.get_music_url(song_url[song_index])
-            fname=song_name[song_index]+'-'+singer_name[song_index]+"."+song.split('.')[-1]
-            response = requests.get(song,timeout=3)
-            with open(path+"/"+fname,'wb') as f:
-                f.write(response.content)
-            tkinter.messagebox._show('警告信息',fname+"下载完成啦！")
-
+            if comboExample.current() in one:
+                # 一次就可以返回数据的接口
+                path=entry_path.get()
+                try:
+                    song_index=text.curselection()[0]
+                except IndexError:
+                    tkinter.messagebox._show('警告信息',"您未选择歌曲！")
+                    return 
+                song=song_url[song_index]
+                fname=song_name[song_index]+'-'+singer_name[song_index]+"."+song.split('.')[-1]
+                response = requests.get(song,timeout=3)
+                with open(path+"/"+fname,'wb') as f:
+                    f.write(response.content)
+                tkinter.messagebox._show('警告信息',fname+"下载完成啦！")
+            else:
+                # 需要另外解析音乐下载地址的接口
+                path=entry_path.get()
+                try:
+                    song_index=text.curselection()[0]
+                except IndexError:
+                    tkinter.messagebox._show('警告信息',"您未选择歌曲！")
+                    return 
+                song=api.get_music_url(song_url[song_index])
+                fname=song_name[song_index]+'-'+singer_name[song_index]+"."+song.split('.')[-1]
+                response = requests.get(song,timeout=3)
+                with open(path+"/"+fname,'wb') as f:
+                    f.write(response.content)
+                tkinter.messagebox._show('警告信息',fname+"下载完成啦！")
+    except:
+        tkinter.messagebox._show('警告信息',"无法返回数据或接口失效,或者您的网络未连接,当然也有因为因为路径的问题导致的无法下载，如果还未解决可联系维护者邮箱：3101978435@qq.com")
+        return
 
 
 
 
 root = Tk()
+##调整窗口的透明度
 root.attributes('-alpha', 0.9)
 path = StringVar()
 
@@ -194,7 +243,8 @@ Button(root, text="搜索", relief = 'ridge',font=("Consolas", 15), command=show
  
 entry = Entry(root, font=('Consolas', 15))
 entry.grid(row=0, column=1)
- 
+##绑定在输入框的回车事件
+entry.bind("<Return>", enter)
  
 Label(root, text="文件存放路径", font=('Consolas', 15)).grid(row=2, column=0)
 #存放路径的输入栏
@@ -207,12 +257,14 @@ text = Listbox(root,selectmode = BROWSE,font=("Consolas", 15), width=45, height=
 text.grid(row=3, columnspan=2)
 
 
-Button(root, text="下一页",font=("Consolas", 15),command=nexit).grid(row=4, column=1)
-Button(root, text="上一页",font=("Consolas", 15),command=updata).grid(row=4, column=1,sticky=W)
 Button(root, text="清空列表", relief = 'ridge',font=("Consolas", 15), command=cleartxt).grid(row=3, column=2,sticky=S)
  
 #下载和退出按钮
+
+Button(root, text="下一页",font=("Consolas", 15),command=nexit).grid(row=4, column=1)
+Button(root, text="上一页",font=("Consolas", 15),command=updata).grid(row=4, column=1,sticky=W)
 btn_down=Button(root, text="开始下载",relief = 'ridge',font=("Consolas", 15), command=download).grid(row=4, column=0, sticky=W)
+
 Button(root, text="退出", relief = 'ridge',font=("Consolas", 15), command=root.destroy).grid(row=4, column=1, sticky=E)
 Button(root, text="帮助", relief = 'ridge',font=("Consolas", 15), command=help_info).grid(row=4, column=2, sticky=E)
 root.mainloop()

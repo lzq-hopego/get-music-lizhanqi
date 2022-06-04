@@ -41,14 +41,21 @@ class kuwo:
         song_url=self.song_url
         for i in range(0,len(name)):
             print("序号{}\t\t{}————{}".format(i+1,name[i],singer[i]))
-        songs=input('请选择您要下载哪一首歌，直接输入序号就行\n如需下载多个请用逗号分割即可，例如1,2\n输入0可以继续搜索下一页\n如果不需要下载多个，请直接输入序号就行：')
+        songs=input('请选择您要下载哪一首歌，直接输入序号就行\n如需下载多个请用逗号分割即可，例如1,2\n输入0可以继续搜索下一页\n输入-1可以继续搜索上一页\n如果不需要下载多个，请直接输入序号就行：')
         if songs=='':
             print('\n\n\n——您未做出选择！程序即将自动退出！！！')
             return
         elif songs=='0':
             self.search(self.songname,page=self.page+1)
             self.prints()
-            return 
+            return
+        elif songs=='-1':
+            if self.page-1==0:
+                print("\n已经是第一页啦！")
+                return 
+            self.search(self.songname,page=self.page-1)
+            self.prints()
+            return
         song_list=songs.split(",")
         for i in song_list:
             try:
@@ -113,6 +120,7 @@ class kuwo:
             print("\n\n歌词已下载完成,文件名称为:"+name+"\n")
         except:
             print("未找到该歌曲的歌词！")
+##测试代码
 ##a=kuwo(p=True,l=True)
 ##a.search('11')
 ##a.prints()
