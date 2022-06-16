@@ -59,79 +59,72 @@ $ pip install --upgrade get-music-lizhanqi
 pip install get-music-lizhanqi==0.0.44    ##专门为移动端和qpython低版本的发行版
 ```
 
-| 系统名称 | 系统版本       | Python版本  | 测试样片                              | 是否支持gui下载（get-music -t）|
-| -------- | -------------- | ---------- |  ------------------------------------- | ---------------------------------- |
-| Windows  | Windows 7 x64  | 3.7.0      | http://img.lizhanqi.xyz/win7.jpg      |  支持  |
-| Windows  | Windows 10 x64 | 3.7.0     | http://img.lizhanqi.xyz/win10.jpg     | 支持  |
-| Windows  | Windows 11 x64 | 3.7.0     | http://img.lizhanqi.xyz/win11.jpg     | 支持  |
-| Centos   | Centos 7.9 x64 | 3.7.0           | http://img.lizhanqi.xyz/centos.jpg    | 不支持  |
-| Ubuntu   | Ubuntu 22.4 x64 | 3.7.0       | http://img.lizhanqi.xyz/ubuntu.jpg    |  未知  |
-| Kali     | Kali 20.4 x64  |  3.7.0    |   http://img.lizhanqi.xyz/kali.jpg      | 未知  |
-| Android  | Android 10 x64 | 3.6.6(qpython) | http://img.lizhanqi.xyz/phone.jpg  | 不支持 |
-| Deepin  | Deepin 20 x64 | 3.7.0 | http://img.lizhanqi.xyz/deepin.jpg  | 支持  |
+| 系统名称 | 系统版本       | Python版本  | 测试样片                              |
+| -------- | -------------- | ---------- |  ------------------------------------- |
+| Windows  | Windows 7 x64  | 3.7.0      | http://img.lizhanqi.xyz/win7.jpg      |
+| Windows  | Windows 10 x64 | 3.7.0     | http://img.lizhanqi.xyz/win10.jpg     |
+| Windows  | Windows 11 x64 | 3.7.0     | http://img.lizhanqi.xyz/win11.jpg     |
+| Centos   | Centos 7.9 x64 | 3.7.0           | http://img.lizhanqi.xyz/centos.jpg    |
+| Ubuntu   | Ubuntu 22.4 x64 | 3.7.0       | http://img.lizhanqi.xyz/ubuntu.jpg    |
+| Kali     | Kali 20.4 x64  |  3.7.0    |   http://img.lizhanqi.xyz/kali.jpg      |
+| Android  | Android 10 x64 | 3.6.6(qpython) | http://img.lizhanqi.xyz/phone.jpg  |
+| Deepin  | Deepin 20 x64 | 3.7.0 | http://img.lizhanqi.xyz/deepin.jpg  |
 
 
-## 使用方式（代码中“$”表示用户输入的东西，“～”表示程序返回的东西）
+## 使用方式
 
 直接在命令行敲:
 
 ```
 $ get-music
-～请输入您想听的歌曲，我来帮您下载：
 ```
-输入歌曲名“wake”
-```
-$wake
-```
-```
-～请选择下载渠道
-1，酷狗音乐     2，网易云音乐   3，QQ音乐       4，酷我音乐
-5,咪咕音乐      6,百度音乐(千千静听)    7,一听  8,5sing原唱
-9,5sing翻唱
-输入下载渠道的序号就可以，想在酷狗端口下载就输入“1”就可以，依次类推
-请输入下载序号:
-```
-输入下载渠道的序号，这里选择的是酷狗，也就是渠道1
-```
-$请输入下载序号:1
-```
-这时就会开始抓取歌曲的信息并返回(在这里我仅展示5条，实际有几条要根据返回的数据来定)，到了这里脚本就会提醒你要下载哪一个
-```
-～
-序号1           Wake (Studio Version)————Hillsong Young & Free
-序号2           Wake (Live)————Hillsong Young & Free
-序号3           Wake (2013 We Are Young & Free)————Hillsong Young & Free
-序号4           Wake (DJ版)————潇洒先生、马帅帅、M爷
-序号5           Wake————Simply Worship
-··········
-请选择您要下载哪一首歌，直接输入序号就行
-如需下载多个请用逗号分割即可，例如1,2
-如果不需要下载多个，请直接输入序号就行:
-```
-这里我们选择下载第一个也就是序号为1的“Hillsong Young & Free”唱的“Wake (Studio Version)”
-```
-$如果不需要下载多个，请直接输入序号就行:1
-```
-然后等几秒（具体要看你的网速，不支持断点续传）就会出现以下提示：
-```
-～
-Hillsong Young & Free唱的Wake (Studio Version)下载完成啦！
+之后步骤按照程序提示进行下一步即可。
 
 
-已保存至当前目录的音乐文件夹下
-
-≧∀≦
-感谢您对本程序的使用，祝您生活愉快！
+如果你是一个特别喜欢自定义的人，你可以这样做：
 ```
-这时这首歌已经成功的被你get到你的电脑中啦，具体要看你执行名的路径，如果是：
+>>>import get_music
+>>>dir(get_music)
+['__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__', '__package__', '__path__', '__spec__', 'baidu', 'download', 'fivesing', 'kugou', 'kuwo', 'migu', 'netease', 'oneting', 'qq']
 ```
-C:\Users\xxx\Desktop>
+会返回以上内容，这时就得到了可用的模块是'baidu', 'download', 'fivesing', 'kugou', 'kuwo', 'migu', 'netease', 'oneting', 'qq',共九个可供调用的模块,下面我会介绍，每个模块的使用方法：
+
+一、'download'模块
+
+说明：此模块为下载时展示进度条的模块，是自己封装的，因为tqdm没有适配python3.6（总是安装失败）所以我直接自己写了一个，免得安装时出幺蛾子
+
+get_music.download.download(url,filename)  #第一个参数是下载链接，第二个参数是保存为什么东西（需要加文件扩展名）
 ```
-那么这首歌保存的位置就是"C:\Users\xxx\Desktop"
-下载到的歌曲将保存在当前目录下
+>>>get_music.download.download('https://webfs.ali.kugou.com/202206161239/72f11276df52e9182ace289d71092e83/KGTX/CLTX001/a2b996fc632a8f47a133ab6dc170c3d2.mp3','wake.mp3')
+```
+
+二、'netease','migu','oneting'属于一次性即可返回音乐的下载链接，不需要二次解析
+
+```
+>>>netease=get_music.netease.netease().search(songname)    #search(songname)中的songname是你要搜索的歌曲名字，然后程序会返回三个列表，第一个列表是歌曲名字，第二个列表是歌手，第三个列表是下载链接
+>>>migu=get_music.netease.migu().search(songname)
+>>>oneting=get_music.netease.oneting().search(songname)
+```
+
+三、剩下的模块均需要二次数据解析
+
+拿kugou举例，其余接口返回数据的方式都与kugou一致
+```
+>>>kugou=get_music.kugou.kugou()
+>>>song_name,song_singers,song_id=kugou.search(songname)    #songname同样是歌名,search()会返回三个列表，歌曲名，歌手，歌曲id，分别赋值给前面的三个变量
+>>>url=kugou.get_music_url(songid)   #songid,就是上一行代码的song_id里面的数据，通过get_music_url()可以获得真实的歌曲下载地址
+```
+
+四、fivesing，这个模块比较特殊，因为它封装了"原唱"和"翻唱"
+
+其余的搜索、解析真实下载地址的流程就和kugou的一致
+```
+>>>原唱=get_music.fivesing.fivesing('ys')
+>>>翻唱=get_music.fivesing.fivesing('fc')
+```
 
 
-## get-music -r的使用
+## get-music -r
 
 
 如果想要正确的使用-r命令，就必须创建一个名为get_music.txt的文档，里面的内容可以是以下内容，用空格分隔的三个参数，每一行为一组，切不可多写，第一个是歌曲名，第二个是需要下载几首歌（或者指定一个歌手），第三个参数就是下载的平台，由于技术原因作者写的代码很烂，所以暂时只能在kg（酷狗），kw（酷我），qq（qq音乐），wy（网易云），bd(百度),migu(咪咕)，1ting（一听），yc（5sing原唱），fc（5sing翻唱）四个接口中进行批量下载歌曲的操作
@@ -143,6 +136,12 @@ C:\Users\xxx\Desktop>
 11 队长 kw
 ```
 
+## get-music -t
+
+打开使用python的tkinter框架编写的可视化窗口程序，不用写一行代码即可下载到你喜欢的音乐。
+
+
+## 说明
 - 在linux平台上尽量使用root用户进行pip安装，然后用root用启动该程序，由于作者知识浅薄尚不能够对linux平台进行全平台适配，敬请理解！
 - 九个搜索引擎任你挑`qq netease kugou baidu kuwo migu，1ting，5singfc，5singyc`，每个数量限制为10，保存目录为当前目录的音乐文件夹。
 - 指定序号时可以使用`1 1,2(中间的逗号要用英文逗号哦，并且有的不支持，不支持这样会有提示)`的形式。
@@ -176,8 +175,10 @@ C:\Users\xxx\Desktop>
 
 
 ## 更新记录
-- 2022-06-04 完成v0.0.62版，增加命令行翻上一页的功能，优化整体性能
-- 2022-05-23 完成v0.0.60版，修复get-music -r得不到想要的信息，原因是编码问题，目前已解决，经多个平台测试稳定可使用
+- 2022-06-11 完成v0.0.64版，修复酷狗音乐下载部分音乐时的错误
+- 2022-06-11 完成v0.0.63版，开发权限开放！支持您在代码中调用该模块import get_music具体可以用多少个接口主要看dir(get_music)有什么，比如有kugou，那么可以这样用kugou=get_music.kugou()创建名为kugou的对象，然后dir(kugou)可以查看对象能进行的操作，kugou.search(songname),这是搜索，需要传递一个songname也就是歌曲名字，会返回三个列表类型的数据，包括歌曲名，歌手名，及歌曲在该平台的id号（url），如果是id号的话需要配合kugou.get_music_url(id)用这个方法会解析到真实的歌曲下载地址
+- 2022-06-02 完成v0.0.62版，命令行支持向上翻页键入-1查看前一页的歌曲
+- 2022-05-20 完成v0.0.59版，让您使用时更加稳定
 - 2022-05-20 完成v0.0.58版，支持get-music -t 唤醒gui窗口进行下载，目前在win10上已经可以正常使用，但是没有为该gui添加下载进度条，使用的是python自带的tkinter框架
 - 2022-05-13 22：55 完成v0.0.57版本，修复因python编码问题引起的报错导致get-music -r无反应等问题
 - 2022-05-13 完成v0.0.56版,全面支持下载歌词和封面，get-music -l 既下载歌曲又下载歌词,get-music -p 既下载歌曲又下载封面，get-music -lp既下载歌曲又同时下载歌词和封面
