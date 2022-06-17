@@ -136,14 +136,47 @@ get_music.download.download(url,filename)  #第一个参数是下载链接，第
 11 队长 kw
 ```
 
+## get-music -l
+
+下载歌曲和歌词，具体搜索歌曲的流程和get-music一致，不同的是最后多保存了个歌词
+```
+$get-music -l
+```
+
+## get-music -p
+
+下载歌曲和封面，具体搜索歌曲的流程和get-music一致，不同的是最后多保存了个封面
+```
+$get-music -p
+```
+
+## get-music -lp
+
+下载歌曲、封面和歌词，具体搜索歌曲的流程和get-music一致，不同的是最后多保存了封面和歌词
+```
+$get-music -lp  #get-music -pl也是一样，为了防止敲错，这两个都可用
+```
+## get-music -v
+
+查看当前版本，并校验当前版本与pypi上的版本判断是否是最新版本，如果不是最新版本则会提示你让你更新
+```
+$get-music -v
+```
+
 ## get-music -t
 
 打开使用python的tkinter框架编写的可视化窗口程序，不用写一行代码即可下载到你喜欢的音乐。
 
+## get-music -help
+
+你的所有疑惑将在帮助中解答，当然没有本文档那么详细，建议直接阅览本md文档即可
+```
+$get-music -help
+```
 
 ## 说明
-- 在linux平台上尽量使用root用户进行pip安装，然后用root用启动该程序，由于作者知识浅薄尚不能够对linux平台进行全平台适配，敬请理解！
-- 九个搜索引擎任你挑`qq netease kugou baidu kuwo migu，1ting，5singfc，5singyc`，每个数量限制为10，保存目录为当前目录的音乐文件夹。
+- 在linux平台上尽量使用root用户进行pip安装，然后用root用户启动该程序，由于作者知识浅薄尚不能够对linux平台进行全平台适配，敬请理解！
+- 九个搜索引擎任你挑`qq netease kugou baidu kuwo migu，1ting，5singfc，5singyc`，每个数量限制为10，保存目录为当前目录。
 - 指定序号时可以使用`1 1,2(中间的逗号要用英文逗号哦，并且有的不支持，不支持这样会有提示)`的形式。
 - 默认对搜索结果排序和去重，排序顺序按照歌手和歌名排序，当两者都相同时保留最大的文件。
 - 无损音乐歌曲数量较少，如果没有无损会默认下载320K或128K。
@@ -151,8 +184,8 @@ get_music.download.download(url,filename)  #第一个参数是下载链接，第
 
 
 ## 示例：
-- 如果想批量下载，请写一个get_music.txt的文件，具体可以参考我上传的get_music.txt文件的格式或者get-music -help看帮助，get-music -r 会根据get_music.txt里的内容进行批量下载
-<img src="./test.jpg"><http://img.lizhanqi.xyz/test.jpg>
+- 
+<http://img.lizhanqi.xyz/test.jpg>
 
 ## 支持的音乐源列表
 
@@ -203,7 +236,6 @@ get_music.download.download(url,filename)  #第一个参数是下载链接，第
 
 ## 提Issues说明
 
-- **目前可以确定的是0.0.3x版本会适配python3.7及以上，0.0.4x会适配python2.9以上的，请按需下载谢谢**
 - **检查是否是最新的代码，检查是否是Python3.5+，检查依赖有没有安装完整**。
 - 手机端或无法执行get-music的用户可以直接**from get_music import get_music** 然后再调用**get_music.zhuti()**即可实现下载
 - 说明使用的操作系统，例如Windows 10 x64
