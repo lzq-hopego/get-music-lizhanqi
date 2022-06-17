@@ -237,7 +237,7 @@ $get-music -help
 ## 提Issues说明
 
 - **检查是否是最新的代码，检查是否是Python3.5+，检查依赖有没有安装完整**。
-- 手机端或无法执行get-music的用户可以直接**from get_music import get_music** 然后再调用**get_music.zhuti()**即可实现下载
+- 手机端或无法执行get-music的用户可以直接**from get_music import get_music** 然后再调用**get_music.zhuti()** 即可实现下载
 - 说明使用的操作系统，例如Windows 10 x64
 - 说明Python版本，以及是否使用了pyenv等虚拟环境
 - 说明使用的命令参数、搜索关键字和出错的音乐源
