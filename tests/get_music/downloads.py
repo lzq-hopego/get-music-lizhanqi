@@ -7,6 +7,7 @@ from get_music import oneting
 from get_music import baidu
 from get_music import fivesing
 from get_music import migu
+##from get_music import *
 
 def downloads():
     d={1:kugou.kugou(),

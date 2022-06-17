@@ -1,4 +1,4 @@
-import requests,json
+import requests,json,sys
 from get_music import download
 # import download
 
@@ -65,7 +65,6 @@ class kugou:
                     self.get_music_lrc(num=i)
                 if self.p==True:
                     self.get_music_pic(num=i)
-##                print(song_url)
                 download.download(song_url,fname,ouput=True)
                 print(singer[i]+'唱的'+name[i]+'下载完成啦！')
                 print("已保存至当前目录下")
@@ -75,29 +74,56 @@ class kugou:
         print('\n≧∀≦\t感谢您对本程序的使用，祝您生活愉快！')
 
     def get_music_url(self,ls):
-        url="https://www.kugou.com/yy/index.php?r=play/getdata&hash="+ls[0]+"&album_id="+str(ls[1]) 
-        d=json.loads(requests.get(url,headers=self.headers,timeout=1).text)
-        self.d=d
-        return d["data"]["play_url"]
+        try:
+            url='http://m.kugou.com/app/i/getSongInfo.php?cmd=playInfo&hash='+ls[0]
+            d=requests.get(url,headers=self.headers).json()
+            self.d=d
+            return d['backup_url'][0]
+        except:
+            url="https://www.kugou.com/yy/index.php?r=play/getdata&hash="+ls[0]+"&album_id="+str(ls[1]) 
+            d=json.loads(requests.get(url,headers=self.headers,timeout=1).text)
+            self.d=d
+            if d["data"]["play_url"]=='':
+                return '未能成功获取音乐下载地址'
+                sys.exit()
+            else:
+                return d["data"]["play_url"]
     def get_music_lrc(self,num):
         try:
-            text=self.d['data']['lyrics']
+            url='http://m.kugou.com/app/i/krc.php?cmd=100&timelength=999999&hash='+self.songs_url[num][0]
             name=self.songname[num]+'-'+self.singername[num]+'-'+'歌词.txt'
+            html=requests.get(url)
+            txt=html.text
             with open(name,'w',encoding='utf-8') as f:
-                f.write(text)
+                f.write(txt)
             print("\n\n歌词已下载完成,文件名称为:"+name+"\n")
         except:
-            print("未找到该歌曲的歌词！")
+            try:
+                text=self.d['data']['lyrics']
+                name=self.songname[num]+'-'+self.singername[num]+'-'+'歌词.txt'
+                with open(name,'w',encoding='utf-8') as f:
+                    f.write(text)
+                print("\n\n歌词已下载完成,文件名称为:"+name+"\n")
+            except:
+                print("未找到该歌曲的歌词！")
+        
+            
     def get_music_pic(self,num):
         try:
-            img=self.d['data']['img']
+            img=self.d['album_img'].replace('{size}','150')
             name=self.songname[num]+'-'+self.singername[num]+'-'+'封面.jpg'
             download.download(img,name)
             print("\n歌曲封面下载完成，文件名称为:"+name)
         except:
-            print("未找到该歌曲的封面！")
+            try:
+                img=self.d['data']['img']
+                name=self.songname[num]+'-'+self.singername[num]+'-'+'封面.jpg'
+                download.download(img,name)
+                print("\n歌曲封面下载完成，文件名称为:"+name)
+            except:
+                print("未找到该歌曲的封面！")
 ##测试代码
 ##a=kugou(l=True,p=True)
-##a.search('11')
+##a.search('love story')
 ##a.prints()
 ##input()
