@@ -102,8 +102,8 @@ get_music.download.download(url,filename)  #第一个参数是下载链接，第
 
 ```
 >>>netease=get_music.netease.netease().search(songname)    #search(songname)中的songname是你要搜索的歌曲名字，然后程序会返回三个列表，第一个列表是歌曲名字，第二个列表是歌手，第三个列表是下载链接
->>>migu=get_music.netease.migu().search(songname)
->>>oneting=get_music.netease.oneting().search(songname)
+>>>migu=get_music.migu.migu().search(songname)
+>>>oneting=get_music.oneting.oneting().search(songname)
 ```
 
 三、剩下的模块均需要二次数据解析
