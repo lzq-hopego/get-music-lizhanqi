@@ -100,6 +100,8 @@ class migu:
             html=requests.get(url,headers=headers)
             txt=html.json()['lyric']
             name=self.song_name[num]+"-"+self.singers[num]+'-'+"歌词.txt"
+            name=name.replace(':','_').replace('?','_').replace('|','_').replace('"','_').replace('<','_').replace('>','_')
+
             with open(name,'w') as f:
                 f.write(txt)
             print("\n\n歌词已下载完成,文件名称为:"+name+"\n")

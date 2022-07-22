@@ -1,6 +1,6 @@
 import requests,re
 def ver():
-    version='0.0.64'
+    version='0.0.66'
     print("当前版本:"+"v"+version)
     url='https://pypi.org/project/get-music-lizhanqi/#history'
     try:

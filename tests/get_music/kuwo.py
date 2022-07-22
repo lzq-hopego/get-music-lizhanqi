@@ -115,6 +115,7 @@ class kuwo:
             for i in text:
                 s+='['+i['time']+']'+'    '+i['lineLyric']+'\n'
             name=self.musicNames[num]+"-"+self.singer[num]+'-'+".歌词.txt"
+            name=name.replace(':','_').replace('?','_').replace('|','_').replace('"','_').replace('<','_').replace('>','_')
             with open(name,'w') as f:
                 f.write(s)
             print("\n\n歌词已下载完成,文件名称为:"+name+"\n")

@@ -93,7 +93,9 @@ class kugou:
             url='http://m.kugou.com/app/i/krc.php?cmd=100&timelength=999999&hash='+self.songs_url[num][0]
             name=self.songname[num]+'-'+self.singername[num]+'-'+'歌词.txt'
             html=requests.get(url)
+            html.encoding='utf-8'
             txt=html.text
+            name=name.replace(':','_').replace('?','_').replace('|','_').replace('"','_').replace('<','_').replace('>','_')
             with open(name,'w',encoding='utf-8') as f:
                 f.write(txt)
             print("\n\n歌词已下载完成,文件名称为:"+name+"\n")
@@ -101,6 +103,7 @@ class kugou:
             try:
                 text=self.d['data']['lyrics']
                 name=self.songname[num]+'-'+self.singername[num]+'-'+'歌词.txt'
+                
                 with open(name,'w',encoding='utf-8') as f:
                     f.write(text)
                 print("\n\n歌词已下载完成,文件名称为:"+name+"\n")

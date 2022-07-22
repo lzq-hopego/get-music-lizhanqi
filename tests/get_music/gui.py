@@ -3,7 +3,7 @@ from tkinter import *
 from tkinter import ttk
 import tkinter.messagebox
 from tkinter.filedialog import askdirectory
-import requests
+import requests,time
 from get_music import kugou
 from get_music import netease
 from get_music import kuwo
@@ -26,7 +26,7 @@ def selectPath():
     path.set(path_)
 ##帮助文档
 def help_info():
-    tkinter.messagebox._show('v0.0.1帮助', 'get-music的gui界面介绍：\n输入下载的歌曲名.单曲搜索结果选中某行后再进行下载,重新搜索记得清空列表\n支持：\n歌手搜索\n歌词搜索，模糊搜索')
+    tkinter.messagebox._show('get-music GUI帮助', 'get-music的gui界面介绍：\n输入下载的歌曲名.单曲搜索结果选中某行后再进行下载,重新搜索记得清空列表\n支持：\n歌曲搜索\n歌手搜索\n歌词搜索\n模糊搜索')
 ##清除text的内容
 def cleartxt():
     text.delete(0,END)
@@ -183,10 +183,8 @@ def download():
                     return 
                 song=song_url[song_index]
                 fname=song_name[song_index]+'-'+singer_name[song_index]+"."+song.split('.')[-1]
-                response = requests.get(song,timeout=3)
-                with open(path+"/"+fname,'wb') as f:
-                    f.write(response.content)
-                tkinter.messagebox._show('警告信息',fname+"下载完成啦！")
+                fname=fname.replace(':','_').replace('?','_').replace('|','_').replace('"','_').replace('<','_').replace('>','_')
+                create(song,path+"/"+fname)
             else:
                 # 需要另外解析音乐下载地址的接口
                 path=entry_path.get()
@@ -196,19 +194,56 @@ def download():
                     tkinter.messagebox._show('警告信息',"您未选择歌曲！")
                     return 
                 song=api.get_music_url(song_url[song_index])
-                fname=song_name[song_index]+'-'+singer_name[song_index]+"."+song.split('.')[-1]
-                response = requests.get(song,timeout=3)
-                with open(path+"/"+fname,'wb') as f:
-                    f.write(response.content)
-                tkinter.messagebox._show('警告信息',fname+"下载完成啦！")
+                fname=song_name[song_index]+'-'+singer_name[song_index]+"."+song.split('.')[-1].split('?')[0]
+                fname=fname.replace(':','_').replace('?','_').replace('|','_').replace('"','_').replace('<','_').replace('>','_')
+                create(song,path+"/"+fname)
     except:
         tkinter.messagebox._show('警告信息',"无法返回数据或接口失效,或者您的网络未连接,当然也有因为因为路径的问题导致的无法下载，如果还未解决可联系维护者邮箱：3101978435@qq.com")
         return
 
 
+def create(url,filepath):
+    top = Toplevel()
+    top.geometry('300x50+{}+{}'.format(int((sw-770)/2),int((sh-460)/2)))
+    top.title('下载进度')
+    pb = ttk.Progressbar(top, length=200, mode="determinate", orient=HORIZONTAL)
+    pb.pack(padx=10, pady=20)
+    pb["maximum"] = 100
+    pb["value"] = 0  
+    start = time.time()  # 下载开始时间
+    try:
+        response = requests.get(url, stream=True,timeout=1)  # stream=True必须写上
+        size = 0  # 初始化已下载大小
+        chunk_size = 1024  # 每次下载的数据大小
+        content_size = int(response.headers['content-length'])  # 下载文件总大小
+        try:
+            if response.status_code == 200:  # 判断是否响应成功
+                name=filepath
+                print('开始下载'+name+','+'[文件格式]:'+filepath.split('.')[-1]+',[文件大小]:{size:.2f} MB,'.format(
+                    size=content_size / chunk_size / 1024))  # 开始下载，显示下载文件大小
+                with open(filepath, 'wb') as file:  # 显示进度条
+                    for data in response.iter_content(chunk_size=chunk_size):
+                        file.write(data)
+                        size += len(data)
+                        s=float(size / content_size * 100)
+                        vlue=int(size * 100 / content_size)
+                        pb["value"] = vlue      
+                        root.update()            # 更新画面                    
+            end = time.time()  # 下载结束时间
+            print('完成！用时: %.2f秒' % (end - start))  # 输出下载用时时间
+        except:
+            top.destroy()
+            pass
+    except:
+        tkinter.messagebox._show('警告信息',"无法返回数据或接口失效,或者您的网络未连接,当然也有因为因为路径的问题导致的无法下载，如果还未解决可联系维护者邮箱：3101978435@qq.com")
+        top.destroy()
+    top.destroy()
+
 
 
 root = Tk()
+##禁止拉伸窗体
+root.resizable(False,False)
 ##调整窗口的透明度
 root.attributes('-alpha', 0.9)
 path = StringVar()
@@ -218,7 +253,7 @@ sw=root.winfo_screenwidth()
 sh=root.winfo_screenheight()
 root.geometry('770x460+{}+{}'.format(int((sw-770)/2),int((sh-460)/2)))
 
-root.title("get-music v0.0.1")
+root.title("get-music GUI")
 
 
 ##下拉列表控件
@@ -232,10 +267,9 @@ comboExample = ttk.Combobox(root,
                                     "千千静听",
                                     "一听音乐",
                                     "5sing原唱",
-                                    "5sing翻唱"],font=("Consolas", 15))
+                                    "5sing翻唱"],font=("Consolas", 15),state="readonly")
 comboExample.grid(row=0, column=0)
 comboExample.current(0)
-##print(comboExample.current(), comboExample.get())
 
  
 
@@ -255,6 +289,7 @@ Button(root, text="选择路径", relief = 'ridge',font=("Consolas", 15), comman
  
 text = Listbox(root,selectmode = BROWSE,font=("Consolas", 15), width=45, height=10)
 text.grid(row=3, columnspan=2)
+
 
 
 Button(root, text="清空列表", relief = 'ridge',font=("Consolas", 15), command=cleartxt).grid(row=3, column=2,sticky=S)

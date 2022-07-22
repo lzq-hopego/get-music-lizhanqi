@@ -1,5 +1,6 @@
 import requests
-import json
+import json,re,sys,html
+import urllib.parse
 from get_music import download
 # import download
 
@@ -104,15 +105,23 @@ class qq:
              'referer' : 'https://m.y.qq.com'}
             url='https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric.fcg?songmid={}&format=json&nobase64=1&songtype=0&callback=c'.format(self.song_url[num])
             html=requests.get(url,headers=headers)
-            d=json.loads(html.text[2:-1])['lyric']
-            with open(name,'w') as f:
+            html.encoding='utf-8'
+            d = unescape(html.text).split('"lyric":"')[-1][:-3]
+            name=name.replace(':','_').replace('?','_').replace('|','_').replace('"','_').replace('<','_').replace('>','_')
+            with open(name,'w',encoding='utf-8') as f:
                 f.write(d)
             print("\n\n歌词已下载完成,文件名称为:"+name+"\n")
         except:
             print("未找到该歌曲的歌词！")
+def unescape(string):
+    string = urllib.parse.unquote(string)
+    quoted = html.unescape(string).encode(sys.getfilesystemencoding()).decode('utf-8')
+    #转成中文
+    return re.sub(r'%u([a-fA-F0-9]{4}|[a-fA-F0-9]{2})', lambda m: chr(int(m.group(1), 16)), quoted)
 
 ##测试代码
-##a=qq(p=True,l=True)
+##a=qq(l=True)
 ##a.search('11')
+##a.get_music_lrc(1)
 ##a.prints()
 ##input()

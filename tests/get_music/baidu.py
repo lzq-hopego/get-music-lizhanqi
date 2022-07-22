@@ -95,6 +95,7 @@ class baidu:
     def get_music_lrc(self,num):
         try:
             name=self.sings[num]+"-"+self.song_name[num]+'-'+"歌词.lrc"
+            name=name.replace(':','_').replace('?','_').replace('|','_').replace('"','_').replace('<','_').replace('>','_')
             download.download(self.lrc,name)
             print("\n\n歌词已下载完成,文件名称为:"+name+"\n")
         except:

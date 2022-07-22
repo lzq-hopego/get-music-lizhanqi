@@ -94,6 +94,7 @@ class netease:
             r.encoding = r.apparent_encoding
             json_obj = json.loads(r.text)
             name=self.song_name[num]+"-"+self.songer_name[num]+'-'+"歌词.txt"
+            name=name.replace(':','_').replace('?','_').replace('|','_').replace('"','_').replace('<','_').replace('>','_')
             with open(name,'w') as f:
                 f.write(json_obj["lrc"]["lyric"])
             print("\n\n歌词已下载完成,文件名称为:"+name+"\n")

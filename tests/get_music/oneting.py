@@ -6,15 +6,13 @@ class oneting:
     def __init__(self,p=False,l=False):
         self.headers={'user-agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
                    'referer':'https://h5.1ting.com/'}
-        if l==True:
-            print("该接口不支持下载歌词谢谢！搜索继续进行中...")
-        
-        self.p=p
+        self.l = l
+        self.p = p
     def search(self,songname,page=1):
-        self.songname=songname
-        self.page=page
-        url='https://so.1ting.com/song/json?q={}&page={}&size=20'.format(self.songname,self.page)
-        req=requests.get(url,headers=self.headers)
+        self.songname = songname
+        self.page = page
+        url = 'https://so.1ting.com/song/json?q={}&page={}&size=20'.format(self.songname,self.page)
+        req = requests.get(url,headers=self.headers)
         d=req.json()
         self.song_name=[]
         self.singer_name=[]
@@ -29,6 +27,8 @@ class oneting:
             self.song_url.append(songurl+i['song_filepath'].replace('.wma','.mp3'))
         return self.song_name,self.singer_name,self.song_url
     def prints(self):
+        if self.l==True:
+            print("该接口不支持下载歌词谢谢！搜索继续进行中...")
         name=self.song_name
         singer=self.singer_name
         song_url=self.song_url

@@ -4,6 +4,8 @@ import requests,time,sys
 
 
 def download(url, filepath='./必须加上扩展名',ouput=False):
+    ##去除特殊字符，有时可能会因为文件的特殊字符导致无法保存或丢失扩展名
+    filepath=filepath.replace(':','_').replace('?','_').replace('|','_').replace('"','_').replace('<','_').replace('>','_')
     if ouput==True:
         print()
     start = time.time()  # 下载开始时间

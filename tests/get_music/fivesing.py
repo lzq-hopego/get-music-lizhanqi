@@ -87,6 +87,7 @@ class fivesing:
             req=requests.get(url,timeout=3)
             txt=req.json()['txt']
             name=self.song_name[num]+"-"+self.singer_name[num]+'-'+"歌词.txt"
+            name=name.replace(':','_').replace('?','_').replace('|','_').replace('"','_').replace('<','_').replace('>','_')
             with open(name,'w') as f:
                 f.write(txt)
             print("\n\n歌词已下载完成,文件名称为:"+name+"\n")

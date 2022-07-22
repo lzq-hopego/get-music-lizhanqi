@@ -26,8 +26,8 @@ def zhuti(songname='',p=False,l=False):
        5:migu.migu(p,l),
        6:baidu.baidu(p,l),
        7:oneting.oneting(p,l),
-       8:fivesing.fivesing('yc'),
-       9:fivesing.fivesing('fc')}
+       8:fivesing.fivesing('yc',p,l),
+       9:fivesing.fivesing('fc',p,l)}
     try:
         api=d[fs]
     except:
