@@ -1,9 +1,7 @@
 # get-music-lizhanqi ：Listen to what you want
 多合一音乐下载，搜索，python，支持酷狗，网易，百度，一听，5sing原创及翻唱,酷我，咪咕和qq音乐平台的音乐下载，有些支持下载封面和歌词有些则不支持，requests和json占主要
 
-<p align="center">
-  <a><img src="https://img.shields.io/pypi/pyversions/get-music-lizhanqi"></a>
-</p>
+
 
 **[get-music-lizhanqi](https://github.com/lzq-hopego/get-music-lizhanqi)** is a command line tool which helps you search and download music from multiple sources.
 
@@ -170,6 +168,11 @@ $get-music -v
 ```
 $get-music -help
 ```
+##get-music -hot
+你可以查看qq，酷狗，网易云的热歌榜单的前六个。
+```
+$
+```
 
 ## 说明
 - 在linux平台上尽量使用root用户进行pip安装，然后用root用户启动该程序，由于作者知识浅薄尚不能够对linux平台进行全平台适配，敬请理解！
@@ -191,7 +194,7 @@ $get-music -help
 | QQ音乐     | qq      | <https://y.qq.com/>       | ✓    | -    | -    | ✓     | ✓    |  ✓   |
 | 酷狗音乐   | kugou   | <http://www.kugou.com/>   | ✓    | -    | -    | ✓     | ✓    | ✓    |
 | 网易云音乐 | netease | <https://music.163.com/>  | ✓    | -    | ✓    | ✓     | ✓    |   ✓  |
-| 咪咕音乐   | migu    | <http://www.migu.cn/>     | ✓    |  ✓   |  -   |  ✓    |  ✓   |  ✓   |
+| 咪咕音乐   | migu    | <http://www.migu.cn/>     | ✓    | -    |  -   |  ✓    |  ✓   |  ✓   |
 | 百度音乐   | baidu   | <http://music.baidu.com/> | ✓    | -    | ✓    | ✓    | ✓     | ✓    |
 | 酷我音乐   | kuwo   | <http://www.kuwo.cn/>      | ✓    | -    |  -   |  ✓   |  ✓    | ✓    |
 | 1听   | 1ting   | <https://www.1ting.com/>       | ✓    | -    |  -   |  ✓   |  ✕    |  ✓   |
@@ -205,6 +208,7 @@ $get-music -help
 
 
 ## 更新记录
+- 2022-8-15 完成v1.0.2版，修复qq音乐，更改在命令行的输出颜色和格式，以列表的方式打印在控制台，get-music -t的gui无任何影响，并支持get-music -hot查看qq音乐、酷狗音乐、网易云音乐的热歌榜单中的前六首，并支持直接下载试听，可能下载到的数据不太准确，后续会发布新版进行维护。
 - 2022-06-11 完成v0.0.64版，修复酷狗音乐下载部分音乐时的错误
 - 2022-06-11 完成v0.0.63版，开发权限开放！支持您在代码中调用该模块import get_music具体可以用多少个接口主要看dir(get_music)有什么，比如有kugou，那么可以这样用kugou=get_music.kugou()创建名为kugou的对象，然后dir(kugou)可以查看对象能进行的操作，kugou.search(songname),这是搜索，需要传递一个songname也就是歌曲名字，会返回三个列表类型的数据，包括歌曲名，歌手名，及歌曲在该平台的id号（url），如果是id号的话需要配合kugou.get_music_url(id)用这个方法会解析到真实的歌曲下载地址
 - 2022-06-02 完成v0.0.62版，命令行支持向上翻页键入-1查看前一页的歌曲
@@ -254,8 +258,6 @@ $get-music -help
 - 项目维护者：李先生
 - 维护者邮箱：3101978435@qq.com
 
-## 用爱发电
-- 维护不易，欢迎扫描投币二维码:<http://img.lizhanqi.xyz/wepay.jpg>
 
 ## LICENSE
 
