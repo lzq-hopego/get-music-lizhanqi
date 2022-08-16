@@ -182,7 +182,7 @@ def download():
                     tkinter.messagebox._show('警告信息',"您未选择歌曲！")
                     return 
                 song=song_url[song_index]
-                fname=song_name[song_index]+'-'+singer_name[song_index]+"."+song.split('.')[-1]
+                fname=song_name[song_index]+'-'+singer_name[song_index]+".mp3"
                 fname=fname.replace(':','_').replace('?','_').replace('|','_').replace('"','_').replace('<','_').replace('>','_')
                 create(song,path+"/"+fname)
             else:
@@ -194,7 +194,7 @@ def download():
                     tkinter.messagebox._show('警告信息',"您未选择歌曲！")
                     return 
                 song=api.get_music_url(song_url[song_index])
-                fname=song_name[song_index]+'-'+singer_name[song_index]+"."+song.split('.')[-1].split('?')[0]
+                fname=song_name[song_index]+'-'+singer_name[song_index]+".mp3"
                 fname=fname.replace(':','_').replace('?','_').replace('|','_').replace('"','_').replace('<','_').replace('>','_')
                 create(song,path+"/"+fname)
     except:

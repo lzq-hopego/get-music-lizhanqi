@@ -1,6 +1,9 @@
 import requests,re
 from get_music import download
+from rich.console import Console
+from rich.table import Table
 # import download
+console=Console()
 
 class fivesing:
     def __init__(self,songtype,p=False,l=False):
@@ -9,6 +12,10 @@ class fivesing:
          "Accept" : "application/json, text/javascript, */*; q=0.01"}
         self.l=l
         self.p=p
+        if songtype=='yc':
+            self.api='51原唱'
+        else:
+            self.api='51翻唱'
     def search(self,songname,page=1):
         self.page=page
         self.songname=songname
@@ -33,11 +40,17 @@ class fivesing:
         name=self.song_name
         singer=self.singer_name
         song_url=self.song_id
+        table = Table(style='purple',title='[b green]get-music-lizhanqi')
+        table.add_column('[red]序号',justify='center')
+        table.add_column('[yellow]歌曲名',justify='center',overflow=True)
+        table.add_column('[blue]歌手',justify='center',overflow=True)
+        table.add_column('[green]平台',justify='center',overflow=True)
         for i in range(0,len(name)):
-            print("序号{}\t\t{}————{}".format(i+1,name[i],singer[i]))
-        songs=input('请选择您要下载哪一首歌，直接输入序号就行\n如需下载多个请用逗号分割即可，例如1,2\n输入0可以继续搜索下一页\n输入-1可以继续搜索上一页\n如果不需要下载多个，请直接输入序号就行：')
+            table.add_row('[b red]'+str(i+1),'[yellow]'+name[i],'[blue]'+singer[i],'[b green]'+self.api,end_section=True)
+        console.print(table)
+        songs=console.input('[b green]请选择您要下载哪一首歌，直接输入[b red]序号[/]就行\n如需下载多个请用[b red]英文逗号[/]分割即可，[b blue]例如1,2[/]\n输入[b red]0[/]可以继续搜索[b red]下一页[/]\n输入[b red]-1[/]可以继续搜索[b red]上一页[/]\n如果不需要下载多个，请直接输入序号就行:')
         if songs=='':
-            print('\n\n\n——您未做出选择！程序即将自动退出！！！')
+            console.print('[b red]\n\n\n——您未做出选择！程序即将自动退出！！！')
             return
         elif songs=='0':
             self.search(self.songname,page=self.page+1)
@@ -45,7 +58,7 @@ class fivesing:
             return
         elif songs=='-1':
             if self.page-1==0:
-                print("\n已经是第一页啦！")
+                console.print("[b red]\n已经是第一页啦！")
                 return 
             self.search(self.songname,page=self.page-1)
             self.prints()
@@ -55,7 +68,7 @@ class fivesing:
             try:
                 i=int(i)-1
             except ValueError:
-                print("您输入的序号有问题，请用英文逗号分割谢谢！")
+                console.print("[b red]您输入的序号有问题，请用英文逗号分割谢谢！")
                 return
             try:
                 fname=name[i]+"-"+singer[i]+".mp3"
@@ -66,12 +79,13 @@ class fivesing:
                 if self.p==True:
                     self.get_music_pic(num=i)
                 download.download(songurl,fname,ouput=True)
-                print(singer[i]+'唱的'+name[i]+'下载完成啦！')
-                print("已保存至当前目录下")
+                console.print('[b red]'+singer[i]+'唱的'+name[i]+'下载完成啦！')
+                console.print("[b red]已保存至当前目录下")
             except IndexError:
-                print("您输入的序号不在程序给出的序号范围！")
+                console.print("[b red]您输入的序号不在程序给出的序号范围！")
                 return
-        print('\n≧∀≦\t感谢您对本程序的使用，祝您生活愉快！')
+        console.print('[b green]\n≧∀≦\t感谢您对本程序的使用，祝您生活愉快！')
+
 
     def get_music_url(self,songid):
         url2='http://service.5sing.kugou.com/song/getsongurl?songid={}&songtype={}'.format(songid,self.songtype)
@@ -84,23 +98,23 @@ class fivesing:
     def get_music_lrc(self,num):
         try:
             url='http://5sing.kugou.com/fm/m/json/lrc?songId={}&songType={}'.format(self.song_id[num],self.songtype)
-            req=requests.get(url,timeout=3)
+            req=requests.get(url,timeout=1)
             txt=req.json()['txt']
             name=self.song_name[num]+"-"+self.singer_name[num]+'-'+"歌词.txt"
             name=name.replace(':','_').replace('?','_').replace('|','_').replace('"','_').replace('<','_').replace('>','_')
             with open(name,'w') as f:
                 f.write(txt)
-            print("\n\n歌词已下载完成,文件名称为:"+name+"\n")
+            console.print("[b red]\n\n歌词已下载完成,文件名称为:"+name+"\n")
         except:
-            print("未找到该歌曲的歌词！")
+            console.print("[b red]未找到该歌曲的歌词！")
     def get_music_pic(self,num):
         try:
             url=self.pic
             name=self.song_name[num]+"-"+self.singer_name[num]+'-'+"封面.jpg"
             download.download(url,name)
-            print("\n歌曲封面下载完成，文件名称为:"+name)
+            console.print("[b red]\n歌曲封面下载完成，文件名称为:"+name)
         except:
-            print("未找到该歌曲的封面！")
+            console.print("[b red]未找到该歌曲的封面！")
 ##测试代码
 ##a=fivesing('fc',l=True,p=True)
 ##a.search("11")
