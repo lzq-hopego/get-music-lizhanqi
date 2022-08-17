@@ -168,10 +168,10 @@ $get-music -v
 ```
 $get-music -help
 ```
-##get-music -hot
+## get-music -hot
 你可以查看qq，酷狗，网易云的热歌榜单的前六个。
 ```
-$
+$get-music -hot
 ```
 
 ## 说明
