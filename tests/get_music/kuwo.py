@@ -6,22 +6,19 @@ from rich.table import Table
 console=Console()
 class kuwo:
     def __init__(self,p=False,l=False):
-        self.headers = {
-                "Cookie": "_ga=GA1.2.2021007609.1602479334; Hm_lvt_cdb524f42f0ce19b169a8071123a4797=1602479334,1602673632; _gid=GA1.2.168402150.1602673633; Hm_lpvt_cdb524f42f0ce19b169a8071123a4797=1602673824; kw_token=5LER5W4ZD1C",
-                "csrf": "5LER5W4ZD1C",
-                "Referer": "{}",
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36",
-            }
         self.l=l
         self.p=p
         self.api='酷我音乐'
     def search(self,songname,page=1):
         self.page=page
         self.songname=songname
-        referer='https://www.kuwo.cn/search/list?key={}'.format(songname)
-        self.headers['Referer']="{}".format(referer)
-        url='https://www.kuwo.cn/api/www/search/searchMusicBykeyWord?key={}&pn={}&rn=20&httpsStatus=1'.format(songname,str(self.page))
-        response=requests.get(url=url,headers=self.headers)
+        head={'Cookie': 'gid=75fc1b5f-eb95-4729-b003-720c762f08b7; Hm_lvt_cdb524f42f0ce19b169a8071123a4797=1660743549; _ga=GA1.2.1866439872.1660743590; _gid=GA1.2.1454874071.1660743590; _gat=1; Hm_lpvt_cdb524f42f0ce19b169a8071123a4797=1660745907; kw_token=DHJNKLIK778',
+        'csrf': 'DHJNKLIK778',
+        'Host': 'www.kuwo.cn',
+        'Referer': 'http://www.kuwo.cn/search/list?key=test',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.81 Safari/537.36 Edg/104.0.1293.54'}
+        url='http://www.kuwo.cn/api/www/search/searchMusicBykeyWord?key={}&pn={}&rn=20&httpsStatus=1&reqId=8be68b90-1e37-11ed-9b24-a14423fc8744'.format(songname,str(self.page))
+        response=requests.get(url=url,headers=head)
         dict2=json.loads(response.text)
         misicInfo=dict2['data']['list']  # 歌曲信息的列表
         self.musicNames=list()   # 歌曲名称的列表

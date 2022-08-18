@@ -6,6 +6,7 @@ def download(url,name,ouput=False):
     import requests,time,sys
     from rich.progress import Progress
     import rich
+    
     response = requests.get(url, stream = True,timeout = 1)  # stream=True必须写上
     size = 0  # 初始化已下载大小
     chunk_size = 1024  # 每次下载的数据大小

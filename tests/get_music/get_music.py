@@ -58,8 +58,9 @@ def main_help():
     \t\t1.5,“[b red]get-music -t[/]”打开本脚本的GUI界面，相比命令行对小白更友好\n
     \t\t1.6，“[b red]get-music -help[/]”查看帮助文档\n
     \t\t1.7，“[b red]get-music -hot[/]”查看热歌榜单\n
-    \t\t1.8，“[b red]get-music -r[/]”批量下载,
-    (注意该功能可能会不稳定，但是不会给您的计算机照成危害)在创建名为get_music.txt的文件，\n
+    \t\t1.8，“[b red]get-music -r[/]”批量下载\n
+    \t\t1.9，“[b red]get-music -ip[/]”查找本程序的最新版本，并返回当前网络的公网地址\n
+    get-music -r [b green]批量下载[/](注意该功能可能会不稳定，但是不会给您的计算机照成危害)在创建名为get_music.txt的文件，\n
     文件内容的格式为“歌曲名,下载序号,下载渠道”歌曲名的地方也可以是歌手，
     \n\t\t下载序号其实是下载几首歌3的话就会下载3个不同版本的，
     \n\t\t下载渠道目前全支持，他们的缩写为：kg，kw,wy,qq,migu,bd,1ting,fc,yc\n文件内容示范:
@@ -83,12 +84,15 @@ def main():
                     main_help()
                 elif sys.argv[1] in ['-version','-v','-V']:
                     from get_music import ver
-                    ver.ver()
+                    ver.ver(ip=False)
                     
                 elif sys.argv[1] in ['-read','-r','-R']:
                     pass
                     from get_music import downloads
                     downloads.downloads()
+                elif sys.argv[1]=='-ip':
+                    from get_music import ver
+                    ver.ver()
                 elif sys.argv[1] =='-l':
                     zhuti(l=True)
                 elif sys.argv[1] =='-p':

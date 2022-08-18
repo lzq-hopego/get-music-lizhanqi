@@ -2,7 +2,7 @@ import requests,re
 from rich.console import Console
 def ver(ip=True):
     console=Console()
-    version = '1.0.2'
+    version = '1.0.3'
     console.print("[green]当前版本:"+"v"+version)
     url = 'https://pypi.org/project/get-music-lizhanqi/#history'
     try:
@@ -30,7 +30,7 @@ def ver(ip=True):
         if ip==True:
             try:
                 url = 'http://api.ip33.com/ip/search?s='                     
-                d = requests.get(url).json()                                                       
+                d = requests.get(url,timeout=1).json()                                                       
                 console.print('\n[b green]本机外网ip地址为:[b red]{}[/]，归属:[b red]{}[/]'.format(d['ip'],d['area']))
             except:
                 pass
