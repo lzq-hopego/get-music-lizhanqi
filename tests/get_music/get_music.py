@@ -106,6 +106,12 @@ def main():
                         from get_music import gui
                     except:
                         console.print('[b red]您的设备暂不支持该命令！')
+                elif sys.argv[1] in ['-s','-S']:
+                    try:
+                        from get_music.zhidao import search
+                        search()
+                    except:
+                        console.print('[b red]很抱歉运行失败，您可以尝试升级新版本！')
                 else:
                     main_help()
             elif sys.argv[1]=="help":

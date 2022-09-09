@@ -2,7 +2,7 @@ import requests,re
 from rich.console import Console
 def ver(ip=True):
     console=Console()
-    version = '1.0.3'
+    version = '1.0.4'
     console.print("[green]当前版本:"+"v"+version)
     url = 'https://pypi.org/project/get-music-lizhanqi/#history'
     try:
