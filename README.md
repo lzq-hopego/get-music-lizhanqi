@@ -173,10 +173,10 @@ $get-music -help
 ```
 $get-music -hot
 ```
-##get-muisc -s
+## get-muisc -s
 用于查看网络中关于该歌曲的网盘信息，如果有则返回网盘链接和提取码
 ```
-$
+$get-muisc -s
 ```
 
 ## 说明
