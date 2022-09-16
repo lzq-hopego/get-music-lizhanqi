@@ -59,7 +59,8 @@ def main_help():
     \t\t1.6，“[b red]get-music -help[/]”查看帮助文档\n
     \t\t1.7，“[b red]get-music -hot[/]”查看热歌榜单\n
     \t\t1.8，“[b red]get-music -r[/]”批量下载\n
-    \t\t1.9，“[b red]get-music -ip[/]”查找本程序的最新版本，并返回当前网络的公网地址\n
+    \t\t1.9，“[b red]get-music -s[/]”在网络中查找歌曲的网盘链接\n
+    \t\t1.10“[b red]get-music -ip[/]”查找本程序的最新版本，并返回当前网络的公网地址\n
     get-music -r [b green]批量下载[/](注意该功能可能会不稳定，但是不会给您的计算机照成危害)在创建名为get_music.txt的文件，\n
     文件内容的格式为“歌曲名,下载序号,下载渠道”歌曲名的地方也可以是歌手，
     \n\t\t下载序号其实是下载几首歌3的话就会下载3个不同版本的，
