@@ -2,12 +2,12 @@ import requests,re
 from rich.console import Console
 def ver(ip=True):
     console=Console()
-    version = '1.0.5'
+    version = '1.0.6'
     console.print("[green]当前版本:"+"v"+version)
     url = 'https://pypi.org/project/get-music-lizhanqi/#history'
     try:
         with console.status("[b green]检查最新版中..."):
-            html = requests.get(url,timeout = 5)
+            html = requests.get(url,timeout = 1)
             txt = html.text
             crad = re.findall(r' <a class="card release__card" href="/project/get-music-lizhanqi/(.*?)/">',txt,re.S)
             ver = crad[0]
