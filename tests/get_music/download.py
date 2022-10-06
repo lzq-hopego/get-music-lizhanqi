@@ -10,6 +10,8 @@ def download(url,name,ouput=False):
     console=Console()
     if ouput==True:
         print()
+    if url=='':
+        console.print('[b red]下载链接为空！')
     rstr = r"[\/\\\:\*\?\"\<\>\|]"  # '/ \ : * ? " < > |'
     name = re.sub(rstr, "_", name)  # 替换为下划线
     if os.path.exists(r"./"+name):
@@ -20,13 +22,14 @@ def download(url,name,ouput=False):
     size = 0  # 初始化已下载大小
     chunk_size = 1024  # 每次下载的数据大小
     content_size = int(response.headers['content-length'])  # 下载文件总大小
-
+    c_size="[b green]文件总大小:[b red]{:.2f}MB[/]".format(content_size/1024/1024)
 
     with Progress(rich.progress.TextColumn("[progress.description]{task.description}")
                   ,rich.progress.BarColumn()
+                  ,c_size
                   ,rich.progress.TaskProgressColumn()
                   ,rich.progress.TimeRemainingColumn()
-                  ,rich.progress.TotalFileSizeColumn()
+                  ,rich.progress.TransferSpeedColumn()
                   ) as progress:
         task1 = progress.add_task("[b red]正在下载:" + name, total=100)
         while not progress.finished:

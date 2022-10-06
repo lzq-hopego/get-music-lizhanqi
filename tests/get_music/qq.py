@@ -18,74 +18,23 @@ class qq:
         self.api='QQ音乐'
     def search(self,songname,page=1):
         self.page = page
-        self.songname = songname
-        url='https://shc6.y.qq.com/soso/fcgi-bin/search_for_qq_cp?w={}&p={}&n=10&format=json'.format(self.songname,self.page)
+        self.song_name = songname
+        url='https://shc6.y.qq.com/soso/fcgi-bin/search_for_qq_cp?w={}&p={}&n=10&format=json'.format(self.song_name,self.page)
         d=requests.get(url,headers=self.headers,timeout=1).json()
         ls=d['data']['song']['list']
-        self.song_name=[]
-        self.singer_name=[]
-        self.song_url=[]
+        self.songname=[]
+        self.singername=[]
+        self.songs_url=[]
         self.mid=[]
         for i in ls:
             self.mid.append(i['albummid'])
-            self.song_name.append(i['songname'])
-            self.singer_name.append(','.join([i['name'] for i in i['singer']]))
-            self.song_url.append(i['songmid'])
-        return self.song_name,self.singer_name,self.song_url
+            self.songname.append(i['songname'])
+            self.singername.append(','.join([i['name'] for i in i['singer']]))
+            self.songs_url.append(i['songmid'])
+        return self.songname,self.singername,self.songs_url
     def prints(self):
-        name=self.song_name
-        singer=self.singer_name
-        song_url=self.song_url
-        table = Table(style='purple',title='[b green]get-music-lizhanqi')
-        table.add_column('[red]序号',justify='center')
-        table.add_column('[yellow]歌曲名',justify='center',overflow=True)
-        table.add_column('[blue]歌手',justify='center',overflow=True)
-        table.add_column('[green]平台',justify='center',overflow=True)
-        
-        for i in range(0,len(name)):
-            table.add_row('[b red]'+str(i+1),'[yellow]'+name[i],'[blue]'+singer[i],'[b green]'+self.api,end_section=True)
-        console.print(table)
-        songs=console.input('[b green]请选择您要下载哪一首歌，直接输入[b red]序号[/]就行\n如需下载多个请用[b red]英文逗号[/]分割即可，[b blue]例如1,2[/]\n输入[b red]0[/]可以继续搜索[b red]下一页[/]\n输入[b red]-1[/]可以继续搜索[b red]上一页[/]\n如果不需要下载多个，请直接输入序号就行:')
-        if songs=='':
-            console.print('[b red]\n\n\n——您未做出选择！程序即将自动退出！！！')
-            return
-        elif songs=='0':
-            self.search(self.songname,page=self.page+1)
-            self.prints()
-            return
-        elif songs=='-1':
-            if self.page-1==0:
-                console.print("[b red]\n已经是第一页啦！")
-                return 
-            self.search(self.songname,page=self.page-1)
-            self.prints()
-            return
-        song_list=songs.split(",")
-        for i in song_list:
-            try:
-                i=int(i)-1
-            except ValueError:
-                console.print("[b red]您输入的序号有问题，请用英文逗号分割谢谢！")
-                return
-            try:
-                fname=name[i]+"-"+singer[i]+".mp3"
-                songid=song_url[i]
-                songurl=self.get_music_url(songid)
-##                print(get_music_url)
-                if songurl==None:
-                    console.print("[b red]很抱歉由于某种原因无法为您下载"+singer[i]+'唱的'+name[i]+'的歌')
-                    return
-                if self.l==True:
-                    self.get_music_lrc(num=i)
-                if self.p==True:
-                    self.get_music_pic(num=i)
-                download.download(songurl,fname,ouput=True)
-                console.print('[b red]'+singer[i]+'唱的'+name[i]+'下载完成啦！')
-                console.print("[b red]已保存至当前目录下")
-            except IndexError:
-                console.print("[b red]您输入的序号不在程序给出的序号范围！")
-                return
-        console.print('[b green]\n≧∀≦\t感谢您对本程序的使用，祝您生活愉快！')
+        pass
+
     def get_music_url(self,songid):
         url_part = "https://u.y.qq.com/cgi-bin/musicu.fcg?format=json&data=%7B%22req_0%22%3A%7B%22module%22%3A%22vkey.GetVkeyServer%22%2C%22method%22%3A%22CgiGetVkey%22%2C%22param%22%3A%7B%22guid%22%3A%22358840384%22%2C%22songmid%22%3A%5B%22{}%22%5D%2C%22songtype%22%3A%5B0%5D%2C%22uin%22%3A%221443481947%22%2C%22loginflag%22%3A1%2C%22platform%22%3A%2220%22%7D%7D%2C%22comm%22%3A%7B%22uin%22%3A%2218585073516%22%2C%22format%22%3A%22json%22%2C%22ct%22%3A24%2C%22cv%22%3A0%7D%7D".format(songid)
         music_document_html_json = requests.get(url_part,timeout=1).text
@@ -97,14 +46,14 @@ class qq:
     def get_music_pic(self,num):
         try:
             url='https://y.gtimg.cn/music/photo_new/T002R300x300M000'+self.mid[num]+'.jpg'
-            name=self.song_name[num]+"-"+self.singer_name[num]+'-'+"封面.jpg"
+            name=self.songname[num]+"-"+self.singername[num]+'-'+"封面.jpg"
             download.download(url,name)
             console.print("[b red]\n歌曲封面下载完成，文件名称为:"+name)
         except:
             console.print("[b red]未找到该歌曲的封面！")
     def get_music_lrc(self,num):
         try:
-            name=self.song_name[num]+"-"+self.singer_name[num]+'-'+"歌词.txt"
+            name=self.songname[num]+"-"+self.singername[num]+'-'+"歌词.txt"
             headers={'user-agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
              'referer' : 'https://m.y.qq.com'}
             url='https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric.fcg?songmid={}&format=json&nobase64=1&songtype=0&callback=c'.format(self.song_url[num])
