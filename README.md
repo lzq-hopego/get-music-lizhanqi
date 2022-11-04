@@ -93,21 +93,34 @@ get_music.download.download(url,filename)  #第一个参数是下载链接，第
 >>>get_music.download.download('https://webfs.ali.kugou.com/202206161239/72f11276df52e9182ace289d71092e83/KGTX/CLTX001/a2b996fc632a8f47a133ab6dc170c3d2.mp3','wake.mp3')
 ```
 
-二、'netease','migu','oneting'属于一次性即可返回音乐的下载链接，不需要二次解析
+二、以"netease"接口为例，获取歌曲链接、封面链接、歌词链接
 
 ```
->>>netease=get_music.netease.netease().search(songname)    #search(songname)中的songname是你要搜索的歌曲名字，然后程序会返回三个列表，第一个列表是歌曲名字，第二个列表是歌手，第三个列表是下载链接
->>>migu=get_music.migu.migu().search(songname)
->>>oneting=get_music.oneting.oneting().search(songname)
+>>>netease=get_music.netease()   #创建网易云音乐对象
+>>>netease_list=netease.search(songname)    #search(songname)中的songname是你要搜索的歌曲名字，然后程序会返回三个列表，第一个列表是歌曲名字，第二个列表是歌手，第三个列表是歌曲的id，或者歌曲下载链接，，如果有为空的那就是没有搜索结果
+>>>url=netease.get_music_url(num,return_url=True)   #获取歌曲的下载链接，这个num就是搜索结果的第几首歌曲，比如你下载第一个那么num=0，以列表的索引来的,第二个是可选参数return_url的值为True时返回歌曲链接为False时，直接在当前文件夹中下载
+>>>pic=netease.get_music_pic(num,return_url=True)   #获取歌曲的封面链接，参数的作用与获取歌曲下载链接的一样
+>>>lrc=netease.get_music_pic(num,return_url=True)   #获取歌曲的歌词下载链接，注意有的接口会直接返回歌曲而不是歌曲链接，所以当你做批量获取歌词时需要加上判断，判断是不是链接，然后在处理
 ```
 
-三、剩下的模块均需要二次数据解析
-
-拿kugou举例，其余接口返回数据的方式都与kugou一致
+三、拿kugou举例，实操下载一首歌
 ```
 >>>kugou=get_music.kugou.kugou()
 >>>song_name,song_singers,song_id=kugou.search(songname)    #songname同样是歌名,search()会返回三个列表，歌曲名，歌手，歌曲id，分别赋值给前面的三个变量
->>>url=kugou.get_music_url(songid)   #songid,就是上一行代码的song_id里面的数据，通过get_music_url()可以获得真实的歌曲下载地址
+>>>kugou.get_music_url(num)   #num为你需要下载歌曲的索引，search他们的索引的结果返回的数据都是一一对应的，因此不用担心下载不到自己想要的索引的歌曲
+>>>kugou.get_music_pic(num)   #num依旧是下载歌曲时的索引
+>>>kugou.get_music_lrc(num)   #num依旧是下载歌曲时的索引
+#以上步骤下载的歌曲都会保存在当前文件夹内，如果你想保存到其他位置那么，你需要自己执行下载操作，下面示范
+>>>kugou=get_music.kugou.kugou()
+>>>song_name,song_singers,song_id=kugou.search(songname)    #songname同样是歌名,search()会返回三个列表，歌曲名，歌手，歌曲id，分别赋值给前面的三个变量
+>>>url=kugou.get_music_url(num,return=True)   #num仍然是你需要下载歌曲的索引,而我们在这里多加了一个return=True参数，这参数起到的目的就是返回下载链接，我们用url变量接收它
+>>>download=get_music.download.download()   #我们在get-music中封装了一个可以展示下载进度的下载器，我们把它初始化一下，赋值给了download变量
+>>>download(url,filename)    #注意url的链接为kugou.get_music_url(num,return=True)解析出来的链接，filename参数是一个字符串，用来记录需要存储的文件名和路径，比如我们要存到当前文件夹中的music文件夹那么你可以这样写filename="./music/musicname.mp3"musicname是歌曲名字,.mp3是文件类型这个必须要有，歌曲你想用搜索结果的歌曲名可以用search时返回的song_name列表获取歌曲名，filename="./music/"+song_list[num]+"-"+song_singers[num]+".mp3",其[]中num就是下载的索引
+
+##如果你不想用get_music中自带的下载模块下载你可以自定义下载，或者参照下面代码
+>>>data=requests.get(url)   #接下来你需要使用requests，获取到mp3文件的整体，如果你想用其他的下载进度条，可以在requests中设置参数，可以参考dwonload模块中的内容，这里不多说
+>>>with open("测试-测试.mp3","wb")as f:     #名字可以随意改但是不要把文件扩展名忘了
+      f.write(data.content)                 #data.content存储
 ```
 
 四、fivesing，这个模块比较特殊，因为它封装了"原唱"和"翻唱"
