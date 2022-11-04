@@ -49,11 +49,13 @@ class fivesing:
         d=req.json()
         self.pic=d['data']['user']['I']
         return d['data']['lqurl']
-    def get_music_lrc(self,num):
+    def get_music_lrc(self,num,return_url=False):
         try:
             url='http://5sing.kugou.com/fm/m/json/lrc?songId={}&songType={}'.format(self.song_id[num],self.songtype)
             req=requests.get(url,timeout=1)
             txt=req.json()['txt']
+            if return_url:
+                return txt
             name=self.songname[num]+"-"+self.singername[num]+'-'+"歌词.txt"
             name=name.replace(':','_').replace('?','_').replace('|','_').replace('"','_').replace('<','_').replace('>','_')
             with open(name,'w') as f:
@@ -61,10 +63,12 @@ class fivesing:
             console.print("[b red]\n\n歌词已下载完成,文件名称为:"+name+"\n")
         except:
             console.print("[b red]未找到该歌曲的歌词！")
-    def get_music_pic(self,num):
+    def get_music_pic(self,num,return_url=False):
         try:
             url=self.pic
             name=self.songname[num]+"-"+self.singername[num]+'-'+"封面.jpg"
+            if return_url:
+                return url
             download.download(url,name)
             console.print("[b red]\n歌曲封面下载完成，文件名称为:"+name)
         except:

@@ -43,15 +43,17 @@ class qq:
         if music_url_part != '':
             return music_document_html_dict['req_0']['data']['sip'][0]+music_url_part
 
-    def get_music_pic(self,num):
+    def get_music_pic(self,num,return_url=False):
         try:
             url='https://y.gtimg.cn/music/photo_new/T002R300x300M000'+self.mid[num]+'.jpg'
+            if return_url:
+                return url
             name=self.songname[num]+"-"+self.singername[num]+'-'+"封面.jpg"
             download.download(url,name)
             console.print("[b red]\n歌曲封面下载完成，文件名称为:"+name)
         except:
             console.print("[b red]未找到该歌曲的封面！")
-    def get_music_lrc(self,num):
+    def get_music_lrc(self,num,return_url=False):
         try:
             name=self.songname[num]+"-"+self.singername[num]+'-'+"歌词.txt"
             headers={'user-agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
@@ -60,6 +62,8 @@ class qq:
             html=requests.get(url,headers=headers,timeout=1)
             html.encoding='utf-8'
             d = unescape(html.text).split('"lyric":"')[-1][:-3]
+            if return_url:
+                return d
             name=name.replace(':','_').replace('?','_').replace('|','_').replace('"','_').replace('<','_').replace('>','_')
             with open(name,'w',encoding='utf-8') as f:
                 f.write(d)

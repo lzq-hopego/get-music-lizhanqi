@@ -6,18 +6,19 @@ from rich.console import Console
 import os
 
 
-def download(url,name,ouput=False):
+def download(url,name,ouput=False,or_re=True):
     console=Console()
     if ouput==True:
         print()
     if url=='':
         console.print('[b red]下载链接为空！')
-    rstr = r"[\/\\\:\*\?\"\<\>\|]"  # '/ \ : * ? " < > |'
-    name = re.sub(rstr, "_", name)  # 替换为下划线
-    if os.path.exists(r"./"+name):
-        yorn=console.input('[b green]“[b red]{}[/]”已下载是否重新下载(Y/N):'.format(name))
-        if yorn not in ['y','Y','是']:
-            return
+    if or_re:
+        rstr = r"[\/\\\:\*\?\"\<\>\|]"  # '/ \ : * ? " < > |'
+        name = re.sub(rstr, "_", name)  # 替换为下划线
+        if os.path.exists(r"./"+name):
+            yorn=console.input('[b green]“[b red]{}[/]”已下载是否重新下载(Y/N):'.format(name))
+            if yorn not in ['y','Y','是']:
+                return
     response = requests.get(url, stream = True,timeout = 1)  # stream=True必须写上
     size = 0  # 初始化已下载大小
     chunk_size = 1024  # 每次下载的数据大小

@@ -48,13 +48,15 @@ class kugou:
                 sys.exit()
             else:
                 return d["data"]["play_url"]
-    def get_music_lrc(self,num):
+    def get_music_lrc(self,num,return_url=False):
         try:
             url='http://m.kugou.com/app/i/krc.php?cmd=100&timelength=999999&hash='+self.songs_url[num][0]
             name=self.songname[num]+'-'+self.singername[num]+'-'+'歌词.txt'
             html=requests.get(url)
             html.encoding='utf-8'
             txt=html.text
+            if return_url:
+                return txt
             name=name.replace(':','_').replace('?','_').replace('|','_').replace('"','_').replace('<','_').replace('>','_')
             with open(name,'w',encoding='utf-8') as f:
                 f.write(txt)
@@ -63,7 +65,8 @@ class kugou:
             try:
                 text=self.d['data']['lyrics']
                 name=self.songname[num]+'-'+self.singername[num]+'-'+'歌词.txt'
-                
+                if return_url:
+                    return text
                 with open(name,'w',encoding='utf-8') as f:
                     f.write(text)
                 console.print("[b red]\n\n歌词已下载完成,文件名称为:"+name+"\n")
@@ -71,15 +74,19 @@ class kugou:
                 console.print("[b red]未找到该歌曲的歌词！")
         
             
-    def get_music_pic(self,num):
+    def get_music_pic(self,num,return_url=False):
         try:
             img=self.d['album_img'].replace('{size}','150')
             name=self.songname[num]+'-'+self.singername[num]+'-'+'封面.jpg'
+            if return_url:
+                return img
             download.download(img,name)
             console.print("[b green]\n歌曲封面下载完成，文件名称为:"+name)
         except:
             try:
                 img=self.d['data']['img']
+                if return_url:
+                    return img
                 name=self.songname[num]+'-'+self.singername[num]+'-'+'封面.jpg'
                 download.download(img,name)
                 console.print("[b red]\n歌曲封面下载完成，文件名称为:"+name)

@@ -38,7 +38,7 @@ class migu:
 ##        pass
     def get_music_url(self,url):
         return url
-    def get_music_lrc(self,num):
+    def get_music_lrc(self,num,return_url=False):
         try:
             headers={'user-agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
              'accept' :"application/json, text/plain, */*",
@@ -46,6 +46,8 @@ class migu:
              }
             url='https://music.migu.cn/v3/api/music/audioPlayer/getLyric?copyrightId='+str(self.id[num])
             html=requests.get(url,headers=headers).json()['lyric']
+            if return_url:
+                return html
             name=self.songname[num]+"-"+self.singername[num]+'-'+"歌词.txt"
             with open(name,'w') as f:
                 f.write(html)
@@ -53,9 +55,11 @@ class migu:
         except:
             console.print("[b red]未找到该歌曲的歌词！")
         
-    def get_music_pic(self,num):
+    def get_music_pic(self,num,return_url=False):
         try:
             url=self.pic[num]
+            if return_url:
+                return url
             name=self.songname[num]+"-"+self.singername[num]+'-'+"封面.jpg"
             download.download(url,name)
             console.print("[b red]\n歌曲封面下载完成，文件名称为:"+name)

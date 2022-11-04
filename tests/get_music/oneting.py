@@ -32,11 +32,15 @@ class oneting:
         pass
     def get_music_url(self,url):
         return url
-    def get_music_lrc(self,num):
+    def get_music_lrc(self,num,return_url=False):
+        if return_url:
+                return "找不到歌词"
         console.print("[b green]该接口不支持下载歌词谢谢！搜索继续进行中...")
-    def get_music_pic(self,num):
+    def get_music_pic(self,num,return_url=False):
         try:
             url=self.pic[num]
+            if return_url:
+                return url
             name=self.songname[num]+"-"+self.singername[num]+'-'+"封面.jpg"
             download.download(url,name)
             console.print("[b red]\n歌曲封面下载完成，文件名称为:"+name)

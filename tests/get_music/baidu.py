@@ -51,17 +51,21 @@ class baidu:
         self.lrc=song_info['lyric']
         self.pic=song_info['pic']
         return song_info['path']  # 音频地址
-    def get_music_lrc(self,num):
+    def get_music_lrc(self,num,return_url=False):
         try:
             name=self.songname[num]+"-"+self.singername[num]+'-'+"歌词.lrc"
             name=name.replace(':','_').replace('?','_').replace('|','_').replace('"','_').replace('<','_').replace('>','_')
+            if return_url:
+                return self.lrc
             download.download(self.lrc,name)
             console.print("[b red]\n\n歌词已下载完成,文件名称为:"+name+"\n")
         except:
             console.print("[b red]未找到该歌曲的歌词！")
-    def get_music_pic(self,num):
+    def get_music_pic(self,num,return_url=False):
         try:
             name=self.songname[num]+"-"+self.singername[num]+'-'+"封面.jpg"
+            if return_url:
+                return self.pic
             download.download(self.pic,name)
             console.print("[b red]\n歌曲封面下载完成，文件名称为:"+name)
         except:

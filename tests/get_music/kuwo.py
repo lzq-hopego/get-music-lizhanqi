@@ -45,9 +45,11 @@ class kuwo:
         except:
             return ''
         return url
-    def get_music_pic(self,num):
+    def get_music_pic(self,num,return_url=False):
         try:
             url=self.pic[num]
+            if return_url:
+                return url
             name=self.songname[num]+"-"+self.singername[num]+'-'+"封面.jpg"
             req=requests.get(url,timeout=1)
             with open(name,'wb') as f:
@@ -55,7 +57,7 @@ class kuwo:
             console.print("[b red]\n歌曲封面下载完成，文件名称为:"+name)
         except:
             console.print("[b red]未找到该歌曲的封面！")
-    def get_music_lrc(self,num):
+    def get_music_lrc(self,num,return_url=False):
         try:
             url='http://m.kuwo.cn/newh5/singles/songinfoandlrc?musicId='+str(self.songs_url[num])
             html=requests.get(url,timeout=1)
@@ -63,6 +65,8 @@ class kuwo:
             s=''
             for i in text:
                 s+='['+i['time']+']'+'    '+i['lineLyric']+'\n'
+            if return_url:
+                return s
             name=self.songname[num]+"-"+self.singername[num]+'-'+".歌词.txt"
             name=name.replace(':','_').replace('?','_').replace('|','_').replace('"','_').replace('<','_').replace('>','_')
             with open(name,'w') as f:
