@@ -107,13 +107,13 @@ get_music.download.download(url,filename)  #第一个参数是下载链接，第
 ```
 >>>kugou=get_music.kugou.kugou()
 >>>song_name,song_singers,song_id=kugou.search(songname)    #songname同样是歌名,search()会返回三个列表，歌曲名，歌手，歌曲id，分别赋值给前面的三个变量
->>>kugou.get_music_url(num)   #num为你需要下载歌曲的索引，search他们的索引的结果返回的数据都是一一对应的，因此不用担心下载不到自己想要的索引的歌曲
->>>kugou.get_music_pic(num)   #num依旧是下载歌曲时的索引
->>>kugou.get_music_lrc(num)   #num依旧是下载歌曲时的索引
+>>>kugou.get_music_url(song_id(num))   #num为你需要下载歌曲的索引，search他们的索引的结果返回的数据都是一一对应的，因此不用担心下载不到自己想要的索引的歌曲
+>>>kugou.get_music_pic(song_id(num))   #num依旧是下载歌曲时的索引
+>>>kugou.get_music_lrc(song_id(num))   #num依旧是下载歌曲时的索引
 #以上步骤下载的歌曲都会保存在当前文件夹内，如果你想保存到其他位置那么，你需要自己执行下载操作，下面示范
 >>>kugou=get_music.kugou.kugou()
 >>>song_name,song_singers,song_id=kugou.search(songname)    #songname同样是歌名,search()会返回三个列表，歌曲名，歌手，歌曲id，分别赋值给前面的三个变量
->>>url=kugou.get_music_url(num,return=True)   #num仍然是你需要下载歌曲的索引,而我们在这里多加了一个return=True参数，这参数起到的目的就是返回下载链接，我们用url变量接收它
+>>>url=kugou.get_music_url(song_id(num),return=True)   #num仍然是你需要下载歌曲的索引,而我们在这里多加了一个return=True参数，这参数起到的目的就是返回下载链接，我们用url变量接收它
 >>>download=get_music.download.download()   #我们在get-music中封装了一个可以展示下载进度的下载器，我们把它初始化一下，赋值给了download变量
 >>>download(url,filename)    #注意url的链接为kugou.get_music_url(num,return=True)解析出来的链接，filename参数是一个字符串，用来记录需要存储的文件名和路径，比如我们要存到当前文件夹中的music文件夹那么你可以这样写filename="./music/musicname.mp3"musicname是歌曲名字,.mp3是文件类型这个必须要有，歌曲你想用搜索结果的歌曲名可以用search时返回的song_name列表获取歌曲名，filename="./music/"+song_list[num]+"-"+song_singers[num]+".mp3",其[]中num就是下载的索引
 
