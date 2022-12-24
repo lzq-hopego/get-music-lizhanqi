@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="get-music-lizhanqi",
-    version="1.0.9",
+    version="1.0.10",
     author="Li Zhan Qi",
     author_email="3101978435@qq.com",
     description="可以下载音乐的包哦",
@@ -22,7 +22,7 @@ setuptools.setup(
     package_dir={"": "tests"},
     packages=setuptools.find_packages(where="tests"),
     python_requires=">=3.7",
-    install_requires=["requests",'rich','lxml'],
+    install_requires=["requests",'rich'],
     entry_points={
         'console_scripts': ["get-music=get_music.get_music:main",
                             "get-music-lizhanqi=get_music.get_music:main"
