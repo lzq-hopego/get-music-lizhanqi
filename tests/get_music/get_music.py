@@ -96,6 +96,7 @@ def main():
                     zhuti(l=True,p=True)
                 elif sys.argv[1] in ['-hot','-hotmusic','-top']:
                     from get_music import top
+                    top.prints()
                 elif sys.argv[1] in ['-t','-T']:
                     try:
                         from get_music import gui
@@ -160,7 +161,7 @@ def prints(self):
                 i=int(i)-1
             except ValueError:
                 console.print("[b red]您输入的序号有问题，请用仔细检查谢谢！")
-                return
+                continue
             try:
                 fname=name[i]+"-"+singer[i]+".mp3"
                 url=song_url[i]
@@ -174,5 +175,5 @@ def prints(self):
                 console.print("[b red]已保存至当前目录下")
             except IndexError:
                 console.print("[b red]您输入的序号不在程序给出的序号范围！")
-                return
+                continue
         console.print('[b green]\n≧∀≦\t感谢您对本程序的使用，祝您生活愉快！')

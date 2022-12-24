@@ -1,5 +1,4 @@
 import requests,re,sys
-from lxml import etree
 from rich import console
 import urllib.parse
 from rich.table import Table
@@ -24,25 +23,18 @@ def search():
 
     html=s.get(url,headers=headers,timeout=5)
     html.encoding='gbk'
-    txt=etree.HTML(html.text)
-    div=txt.xpath('/html/body/div[2]/section/div/div/div/div[2]/div')[0]
-    dl=[]
-    for i in div:
-        if i.tag=='dl':
-            dl.append(i)
+
+    div=re.findall(r'<dd class="dd answer">(.*?)<\/dd>',html.text)
+
     pan_url=[]
     pwd=[]
-    for i in dl:
-        for j in range(1,3):
-            s=''.join(i.xpath('./dd[{}]/text()'.format(j))).strip()
-            if s=='':
-                continue
-            if 'pan.baidu.com' in s:
-                pan_url.append(re.findall('http[s]?:\/\/(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', s)[0])
-                if '提取码:' in s:
-                    pwd.append(s.split('提取码:')[-1].strip()[:4])
-                else:
-                    pwd.append(s.split('提取码：')[-1].strip()[:4])
+    for i in div:
+        if 'pan.baidu.com' in i:
+            pan_url.append(re.findall('http[s]?:\/\/(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+',i)[0])
+            if '提取码:' in i:
+                pwd.append(i.split('提取码:')[-1].strip()[:4])
+            else:
+                pwd.append(i.split('提取码：')[-1].strip()[:4])
     if len(pan_url)==0:
         console.print('[b red] \n很抱歉，我们通过其他渠道仍然无法检索到[b green]{}[/]'.format(songname))
         sys.exit()

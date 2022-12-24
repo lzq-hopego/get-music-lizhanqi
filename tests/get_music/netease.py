@@ -1,7 +1,7 @@
 import requests,json
 from get_music import download
 from rich.console import Console
-##import download
+# import download
 console=Console()
 
 class netease:
@@ -38,6 +38,8 @@ class netease:
                 self.pic.append(i['al']['picUrl'])
         return self.songname,self.singername,self.songs_url
     def get_music_url(self,url):
+        if 'http:' not in url:
+            return 'http://music.163.com/song/media/outer/url?id={}.mp3'.format(url)
         return url
     def get_music_lrc(self,num,return_url=False):
         try:
@@ -49,13 +51,11 @@ class netease:
             }
             if not isinstance(song_id, str):
                 song_id = str(song_id)
-            print(song_id)
             url = f"http://music.163.com/api/song/lyric?id={song_id}+&lv=1&tv=-1"
-            r = requests.get(url, headers=headers)
+            r = requests.get(url, headers=headers,timeout=1)
             r.raise_for_status()
             r.encoding = r.apparent_encoding
             json_obj = json.loads(r.text)
-            self.json=json_obj
             if return_url:
                 return json_obj["lrc"]["lyric"]
             name=self.songname[num]+"-"+self.songername[num]+'-'+"歌词.txt"
@@ -75,9 +75,9 @@ class netease:
             console.print("[b red]\n歌曲封面下载完成，文件名称为:"+name)
         except:
             console.print("[b red]未找到该歌曲的封面！")
+
 ##测试代码
 ##a=netease(l=True,p=True)
-##d=a.search("大田后生仔")
-##a.get_music_lrc(0)
+##d=a.search("11")
 ##a.prints()
 ##input()
