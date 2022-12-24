@@ -228,6 +228,7 @@ $get-music -s
 
 
 ## 更新记录
+- 2022-12-24 更新v1.0.10版本，修复网易云无法解析自定义id的歌曲链接，修复get-music -top排行榜无法显示的bug，修复get-music -s有时无法返回结果的问题，移除lxml库的支持
 - 2022-11-02 [get-music-lizhanqi-gui](https://github.com/lzq-hopego/get-music-lizhanqi-gui)采用get-music-lizhanqi为后端制作的音乐播放下载于一体的pyqt5程序，不建议打包，可能会报错，具体原因可能是opencv的问题，不嫌麻烦的话可以尝试，不建议在python3.11版本及python3.7版本以下版本使用
 - 2022-11-02 完成v1.0.9版，修复网易云音乐无法下载歌词和封面的bug
 - 2022-10-06 完成v1.0.7版，更新一些细节减小空间复杂度，更下载进度条显示总大小和下载速度
