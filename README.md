@@ -64,7 +64,7 @@ $ pip install --upgrade get-music-lizhanqi
 | Kali     | Kali 20.4 x64  |  3.7.0         |   
 | Android  | Android 10 x64 | 3.6.6(qpython) | 
 | Deepin   | Deepin 20 x64 | 3.7.0            | 
-| macos    | mcos13.1 x64  | 3.7             |
+| macos    | macos13.1 x64  | 3.7             |
 
 
 ## 使用方式
