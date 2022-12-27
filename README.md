@@ -54,16 +54,16 @@ $ pip install --upgrade get-music-lizhanqi
 - 说明：不仅限测试环境，关于macos，由于作者还是个学生暂时无法提供macos的测试，不过只要python3.7版本能用，那么脚本也能使用
 
 
-| 系统名称 | 系统版本       | Python版本  | 测试样片                              |
-| -------- | -------------- | ---------- |  ------------------------------------- |
-| Windows  | Windows 7 x64  | 3.7.0      | http://img.lizhanqi.xyz/win7.jpg      |
-| Windows  | Windows 10 x64 | 3.7.0     | http://img.lizhanqi.xyz/win10.jpg     |
-| Windows  | Windows 11 x64 | 3.7.0     | http://img.lizhanqi.xyz/win11.jpg     |
-| Centos   | Centos 7.9 x64 | 3.7.0           | http://img.lizhanqi.xyz/centos.jpg    |
-| Ubuntu   | Ubuntu 22.4 x64 | 3.7.0       | http://img.lizhanqi.xyz/ubuntu.jpg    |
-| Kali     | Kali 20.4 x64  |  3.7.0    |   http://img.lizhanqi.xyz/kali.jpg      |
-| Android  | Android 10 x64 | 3.6.6(qpython) | http://img.lizhanqi.xyz/phone.jpg  |
-| Deepin  | Deepin 20 x64 | 3.7.0 | http://img.lizhanqi.xyz/deepin.jpg  |
+| 系统名称 | 系统版本       | Python版本     |
+| -------- | -------------- | ----------     | 
+| Windows  | Windows 7 x64  | 3.7.0          | 
+| Windows  | Windows 10 x64 | 3.7.0          | 
+| Windows  | Windows 11 x64 | 3.7.0          | 
+| Centos   | Centos 7.9 x64 | 3.7.0          | 
+| Ubuntu   | Ubuntu 22.4 x64 | 3.7.0         | 
+| Kali     | Kali 20.4 x64  |  3.7.0         |   
+| Android  | Android 10 x64 | 3.6.6(qpython) | 
+| Deepin  | Deepin 20 x64 | 3.7.0            | 
 
 
 ## 使用方式
@@ -203,9 +203,7 @@ $get-music -s
 -下载的歌曲的质量以最终保存的文件为准
 
 
-## 示例：
-- 
-<http://img.lizhanqi.xyz/test.jpg>
+
 
 ## 支持的音乐源列表
 
