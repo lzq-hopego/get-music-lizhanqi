@@ -51,7 +51,7 @@ $ pip install --upgrade get-music-lizhanqi
 
 
 在以下环境测试通过：
-- 说明：不仅限测试环境，关于macos，由于作者还是个学生暂时无法提供macos的测试，不过只要python3.7版本能用，那么脚本也能使用
+- 说明：不仅限测试环境
 
 
 | 系统名称 | 系统版本       | Python版本     |
@@ -63,7 +63,8 @@ $ pip install --upgrade get-music-lizhanqi
 | Ubuntu   | Ubuntu 22.4 x64 | 3.7.0         | 
 | Kali     | Kali 20.4 x64  |  3.7.0         |   
 | Android  | Android 10 x64 | 3.6.6(qpython) | 
-| Deepin  | Deepin 20 x64 | 3.7.0            | 
+| Deepin   | Deepin 20 x64 | 3.7.0            | 
+| macos    | mcos13.1 x64  | 3.7             |
 
 
 ## 使用方式
