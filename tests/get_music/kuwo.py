@@ -1,7 +1,7 @@
 import requests,json
 from get_music import download
 from rich.console import Console
-# import download
+##import download
 console=Console()
 class kuwo:
     def __init__(self,p=False,l=False):
@@ -59,7 +59,7 @@ class kuwo:
             console.print("[b red]未找到该歌曲的封面！")
     def get_music_lrc(self,num,return_url=False):
         try:
-            url='http://m.kuwo.cn/newh5/singles/songinfoandlrc?musicId='+str(self.songs_url[num])
+            url='http://kuwo.cn/newh5/singles/songinfoandlrc?musicId='+str(self.songs_url[num])
             html=requests.get(url,timeout=1)
             text=html.json()['data']['lrclist']
             s=''
@@ -75,8 +75,10 @@ class kuwo:
         except:
             console.print("[b red]未找到该歌曲的歌词！")
 ##测试代码
-##a=kuwo(p=True,l=True)
-##a.search('11')
+####a=kuwo(p=True,l=True)
+####a.search('11')
+####a.get_music_pic(0,return_url=True)
+####a.get_music_lrc(0,return_url=True)
 ##a.prints()
 ##input()
 

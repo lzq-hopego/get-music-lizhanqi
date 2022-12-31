@@ -42,13 +42,13 @@ class netease:
             return 'http://music.163.com/song/media/outer/url?id={}.mp3'.format(url)
         return url
     def get_music_lrc(self,num,return_url=False):
-        try:
-            song_id=self.id[num]
-            headers = {
+        headers = {
                 "user-agent" : "Mozilla/5.0",
                 "Referer" : "http://music.163.com",
                 "Host" : "music.163.com"
             }
+        try:
+            song_id=self.id[num]
             if not isinstance(song_id, str):
                 song_id = str(song_id)
             url = f"http://music.163.com/api/song/lyric?id={song_id}+&lv=1&tv=-1"
@@ -64,7 +64,16 @@ class netease:
                 f.write(json_obj["lrc"]["lyric"])
             console.print("[b red]\n\n歌词已下载完成,文件名称为:"+name+"\n")
         except:
-            console.print("[b red]未找到该歌曲的歌词！")
+            if type(num)==str:
+                url = f"http://music.163.com/api/song/lyric?id={num}+&lv=1&tv=-1"
+                r = requests.get(url, headers=headers,timeout=1)
+                r.raise_for_status()
+                r.encoding = r.apparent_encoding
+                json_obj = json.loads(r.text)
+                return json_obj["lrc"]["lyric"]
+
+            else:
+                console.print("[b red]未找到该歌曲的歌词！")
     def get_music_pic(self,num,return_url=False):
         try:
             url=self.pic[num]
@@ -74,6 +83,7 @@ class netease:
             download.download(url,name)
             console.print("[b red]\n歌曲封面下载完成，文件名称为:"+name)
         except:
+
             console.print("[b red]未找到该歌曲的封面！")
 
 ##测试代码

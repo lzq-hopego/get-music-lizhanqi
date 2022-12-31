@@ -36,11 +36,8 @@ def zhuti(songname = '',p = False,l = False):
     except:
         console.print("[b red]无法返回数据或接口失效,或者您的网络未连接，如果还未解决可联系维护者邮箱：3101978435@qq.com")
         return
-##    try:
     prints(api)
-##    except:
-##        console.print("[b red]出现未知错误,有可能是您一直在下载导致的强制断开连接，或接口无返回值，请及时联系维护者3101978435@qq.com")
-##        return
+
 
 def main_help():    
     txt='''
@@ -54,7 +51,8 @@ def main_help():
     \t\t1.7，“[b red]get-music -hot[/]”查看热歌榜单\n
     \t\t1.8，“[b red]get-music -r[/]”批量下载\n
     \t\t1.9，“[b red]get-music -s[/]”在网络中查找歌曲的网盘链接\n
-    \t\t1.10“[b red]get-music -ip[/]”查找本程序的最新版本，并返回当前网络的公网地址\n
+    \t\t1.10, “[b red]get-music -playerlist[/]”下载歌单中的歌曲,只支持,酷狗,网易云,QQ,酷我,四个平台\n
+    \t\t1.11“[b red]get-music -ip[/]”查找本程序的最新版本，并返回当前网络的公网地址\n
     get-music -r [b green]批量下载[/](注意该功能可能会不稳定，但是不会给您的计算机照成危害)在创建名为get_music.txt的文件，\n
     文件内容的格式为“[b red]歌曲名,下载序号/歌手,下载渠道[/]”歌曲名的地方也可以是歌手，
     \n\t\t下载序号其实是下载几首歌3的话就会下载3个不同版本的，如果填写的是歌手则下载含有您输入的歌手相匹配的歌曲
@@ -96,7 +94,16 @@ def main():
                     zhuti(l=True,p=True)
                 elif sys.argv[1] in ['-hot','-hotmusic','-top']:
                     from get_music import top
-                    top.prints()
+                    try:
+                        top.prints()
+                    except:
+                        console.print('[b red]接口无反应您可重试！')
+                elif sys.argv[1] == '-playerlist':
+                    try:
+                        from get_music.playerlist import player_list
+                        player_list(sys.argv[1:].remove('-playerlist'))
+                    except:
+                        console.print('[b red]出现错误！请联系维护者！')
                 elif sys.argv[1] in ['-t','-T']:
                     try:
                         from get_music import gui
@@ -151,7 +158,7 @@ def prints(self):
         if songs=='all':
             song_list=range(len(self.songname))
         elif '-' in songs:
-            song_list=range(int(songs.split('-')[0])-1,int(songs.split('-')[-1]))
+            song_list=range(int(songs.split('-')[0]),int(songs.split('-')[-1])+1)
         else:
             song_list=songs.split(",")
             if len(song_list)==1:
