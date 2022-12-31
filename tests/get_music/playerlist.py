@@ -8,7 +8,6 @@ def player_list(argv):
     url=''
     lrc=False
     pic=False
-    ##print(opts)
     for i in opts:
         if ('-i' in i) and (i[-1] !=''):
             url=i[-1]
@@ -26,7 +25,7 @@ def player_list(argv):
         url=con.input('\n\n[b green]请输入歌单链接或歌单id >>>')
         if url=='':
             con.print("[b green]您未输入歌单链接,程序自动退出")
-            exit()
+            return
     if 'http' in url:
         if 'kugou.com' in url:
             api='kugou'
@@ -38,9 +37,9 @@ def player_list(argv):
             api='kuwo'
     if api=='' or (api not in ['kugou','netease','kuwo','qq']):
         api=con.input('[b green]请输入歌单的平台(kugou,kuwo,netease,qq) >>>')
-        if api=='' and (api in ['kugou','netease','kuwo','qq']):
+        if api=='' or (api in ['kugou','netease','kuwo','qq']):
             con.print("[b green]您未选择歌单平台,程序自动退出")
-            exit()
+            return
 
     if api=='kugou':
         from get_music.kg_playerlist import kg_playerlist
@@ -64,7 +63,7 @@ def y_help():
         con.print('[b green]酷我的分享链接:[yellow]http://m.kuwo.cn/newh5app/playlist_detail/[b red]3432572921[/]?t=plantform&from=ar')
         con.print('[b red]注意如果你使用id的方式进行的，请一定要指定api的名字,下面是示例：')
         con.print('[b red]使用链接则不需要跟api的,使用id下载则必要api,api的取值:kugou,kuwo,netease,qq')
-        con.print('[b green][b yellow]使用分享链接下载歌单的命令:[/]get-music -playlist -i https://y.qq.com/n/ryqq/playlist/7277950710')
-        con.print('[b green][b yellow]使用id下载歌单的命令:[/]get-music -playlist -i 7277950710 --api=qq')
+        con.print('[b green][b yellow]使用分享链接下载歌单的命令:[/]get-music -playerlist -i https://y.qq.com/n/ryqq/playlist/7277950710')
+        con.print('[b green][b yellow]使用id下载歌单的命令:[/]get-music -playerlist -i 7277950710 --api=qq')
         con.print('[b yellow][b red]-playlist[/]是打开下载歌单程序,第一个参数必须是它,[b red]-i[/]后要有一个空格,空格后要输入链接或id，如果是id后面就必须要跟api参数')
         

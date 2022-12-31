@@ -101,8 +101,11 @@ def main():
                 elif sys.argv[1] == '-playerlist':
                     try:
                         from get_music.playerlist import player_list
-                        player_list(sys.argv[1:].remove('-playerlist'))
+                        player_list(sys.argv[2:])
                     except:
+                        console.print('[b red]注意使用规范！')
+                        from get_music.playerlist import y_help
+                        y_help()
                         console.print('[b red]出现错误！请联系维护者！')
                 elif sys.argv[1] in ['-t','-T']:
                     try:
