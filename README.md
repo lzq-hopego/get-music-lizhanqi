@@ -149,7 +149,7 @@ $get-music -s
 $get-music -playerlist
 ```
 
-# 如果你是一个特别喜欢自定义的人，你可以这样做：
+## 如果你是一个特别喜欢自定义的人，你可以这样做：
 ```
 >>>import get_music
 >>>dir(get_music)
@@ -157,7 +157,7 @@ $get-music -playerlist
 ```
 会返回以上内容，这时就得到了可用的模块是'baidu', 'download', 'fivesing', 'kugou', 'kuwo', 'migu', 'netease', 'oneting', 'qq',共九个可供调用的模块,下面我会介绍，每个模块的使用方法：
 
-## 一、'download'模块
+### 一、'download'模块
 
 说明：此模块为下载时展示进度条的模块，是自己封装的，因为tqdm没有适配python3.6（总是安装失败）所以我直接自己写了一个，免得安装时出幺蛾子
 
@@ -166,7 +166,7 @@ get_music.download.download(url,filename)  #第一个参数是下载链接，第
 >>>get_music.download.download('https://webfs.ali.kugou.com/202206161239/72f11276df52e9182ace289d71092e83/KGTX/CLTX001/a2b996fc632a8f47a133ab6dc170c3d2.mp3','wake.mp3')
 ```
 
-## 二、以"netease"接口为例，获取歌曲链接、封面链接、歌词链接
+### 二、以"netease"接口为例，获取歌曲链接、封面链接、歌词链接
 
 ```
 >>>netease=get_music.netease()   #创建网易云音乐对象
@@ -176,7 +176,7 @@ get_music.download.download(url,filename)  #第一个参数是下载链接，第
 >>>lrc=netease.get_music_pic(num,return_url=True)   #获取歌曲的歌词下载链接，注意有的接口会直接返回歌曲而不是歌曲链接，所以当你做批量获取歌词时需要加上判断，判断是不是链接，然后在处理
 ```
 
-## 三、拿kugou举例，实操下载一首歌
+### 三、拿kugou举例，实操下载一首歌
 ```
 >>>kugou=get_music.kugou.kugou()
 >>>song_name,song_singers,song_id=kugou.search(songname)    #songname同样是歌名,search()会返回三个列表，歌曲名，歌手，歌曲id，分别赋值给前面的三个变量
@@ -196,7 +196,7 @@ get_music.download.download(url,filename)  #第一个参数是下载链接，第
       f.write(data.content)                 #data.content存储
 ```
 
-## 四、fivesing，这个模块比较特殊，因为它封装了"原唱"和"翻唱"
+### 四、fivesing，这个模块比较特殊，因为它封装了"原唱"和"翻唱"
 
 其余的搜索、解析真实下载地址的流程就和kugou的一致
 ```
