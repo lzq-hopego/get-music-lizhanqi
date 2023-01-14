@@ -3,7 +3,7 @@
 
 多合一音乐下载，搜索，python，支持酷狗，网易，百度，一听，5sing原创及翻唱,酷我，咪咕和qq音乐平台的音乐下载，有些支持下载封面和歌词有些则不支持，requests和json占主要
 
-> 作者:功能太多有些细微的地方可能维护不到位，经常不经过测试就提交了代码，前阵子更是手贱把源码删了😑，您有意见或建议可提issues，我会即使答复
+> 作者:功能太多有些细微的地方可能维护不到位，经常不经过测试就提交了代码，前阵子更是手贱把源码删了😑，您有意见或建议可提issues，我会及时答复
 
 
 **[get-music-lizhanqi](https://github.com/lzq-hopego/get-music-lizhanqi)** is a command line tool which helps you search and download music from multiple sources.
@@ -238,6 +238,7 @@ get_music.download.download(url,filename)  #第一个参数是下载链接，第
 
 
 ## 更新记录
+- 2023-1-14 完成v1.2.2版本,修复"get-music -r"一直报“请按照规范填写！在get-music -help中查看规范！”的问题
 - 2022-12-31 完成v1.1.2023版本，此次更新添加“get-music -playerlist”下载歌单中的歌曲,支持酷狗，网易云，酷我，qq四个接口
 - 2022-12-24 更新v1.0.10版本，修复网易云无法解析自定义id的歌曲链接，修复get-music -top排行榜无法显示的bug，修复get-music -s有时无法返回结果的问题，移除lxml库的支持
 - 2022-11-02 [get-music-lizhanqi-gui](https://github.com/lzq-hopego/get-music-lizhanqi-gui)采用get-music-lizhanqi为后端制作的音乐播放下载于一体的pyqt5程序，不建议打包，可能会报错，具体原因可能是opencv的问题，不嫌麻烦的话可以尝试，不建议在python3.11版本及python3.7版本以下版本使用
