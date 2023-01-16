@@ -4,6 +4,7 @@ from rich.console import Console
 con = Console()
 def player_list(argv):
     opts=getopt.getopt(argv,"i:-l-p",["api="])[0]
+    print(opts)
     api=''
     url=''
     lrc=False
@@ -37,7 +38,7 @@ def player_list(argv):
             api='kuwo'
     if api=='' or (api not in ['kugou','netease','kuwo','qq']):
         api=con.input('[b green]请输入歌单的平台(kugou,kuwo,netease,qq) >>>')
-        if api=='' or (api in ['kugou','netease','kuwo','qq']):
+        if api=='' or (api not in ['kugou','netease','kuwo','qq']):
             con.print("[b green]您未选择歌单平台,程序自动退出")
             return
 

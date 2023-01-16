@@ -1,11 +1,19 @@
-from get_music import *
+from get_music import kugou
+from get_music import netease
+from get_music import qq
+from get_music import kuwo
+from get_music import migu
+from get_music import baidu
+from get_music import oneting
+from get_music import fivesing
+from get_music import singbz
+from get_music import download
 from rich.console import Console
 from rich.table import Table
 import sys
 
 console = Console()
 def zhuti(songname = '',p = False,l = False):
-    
     d={1:kugou.kugou(p,l),
        2:netease.netease(p,l),
        3:qq.qq(p,l),
@@ -14,15 +22,15 @@ def zhuti(songname = '',p = False,l = False):
        6:baidu.baidu(p,l),
        7:oneting.oneting(p,l),
        8:fivesing.fivesing('yc',p,l),
-       9:fivesing.fivesing('fc',p,l)}
-    
+       9:fivesing.fivesing('fc',p,l),
+       10:singbz.singbz(p,l)}
     if songname == '':
         songname = console.input('[b green]请输入您想听的歌曲，我来帮您下载\n[b red]>[/]')
     if songname == '':
         console.print("[b red]您没有输入歌曲，程序结束！")
         sys.exit()
     try:
-            fs = eval(console.input('[b green]请选择下载渠道\n[b red]1，酷狗音乐\t2，网易云音乐\t3，QQ音乐\t4，酷我音乐\t\n5,咪咕音乐\t6,百度音乐(千千静听)\t7,一听\t8,5sing原唱\n9,5sing翻唱\n[/]输入下载渠道的序号就可以，想在酷狗端口下载就输入“[blue]1[/]”就可以，依次类推\n请输入下载序号\n[b red]>[/]'))
+            fs = eval(console.input('[b green]请选择下载渠道\n[b red]1，酷狗音乐\t2，网易云音乐\t3，QQ音乐\t4，酷我音乐\t\n5,咪咕音乐\t6,百度音乐(千千静听)\t7,一听\t8,5sing原唱\n9,5sing翻唱\t10,5sing伴奏\n[/]输入下载渠道的序号就可以，想在酷狗端口下载就输入“[blue]1[/]”就可以，依次类推\n请输入下载序号\n[b red]>[/]'))
     except:
             console.print("[b red]您输入的接口有误！")
     try:
@@ -56,9 +64,9 @@ def main_help():
     get-music -r [b green]批量下载[/](注意该功能可能会不稳定，但是不会给您的计算机照成危害)在创建名为get_music.txt的文件，\n
     文件内容的格式为“[b red]歌曲名,下载序号/歌手,下载渠道[/]”歌曲名的地方也可以是歌手，
     \n\t\t下载序号其实是下载几首歌3的话就会下载3个不同版本的，如果填写的是歌手则下载含有您输入的歌手相匹配的歌曲
-    \n\t\t下载渠道目前全支持，他们的缩写为：kg，kw,wy,qq,migu,bd,1ting,fc,yc\n文件内容示范:
+    \n\t\t下载渠道目前全支持，他们的缩写为：kg，kw,wy,qq,migu,bd,1ting,fc,yc,bz\n文件内容示范:
     \n\n\t\t[b red]爱人错过，告五人，kg\n\t\t[b red]11，1，kg\n\n
-    每一行为一组歌曲信息，想下载多个歌曲就换行,按照示范的再写一组\n\n
+    每一行为一组歌曲信息，想下载多个歌曲就换行,按照示范的再写一组，其中fc,yc,bz的数据来自5sing接口\n\n
    
 
 '''
@@ -155,7 +163,8 @@ def prints(self):
             if self.api != '网易云音乐' or self.page-1==-1:
                 if self.page-1<=0:
                     console.print("[b red]\n已经是第一页啦！")
-                    return 
+                    return
+            
             self.search(self.song_name,page=self.page-1)
             return prints(self)
         if songs=='all':

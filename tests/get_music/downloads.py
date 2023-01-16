@@ -13,7 +13,8 @@ def downloads():
        'bd':baidu.baidu(),
        '1ting':oneting.oneting(),
        'yc':fivesing.fivesing('yc'),
-       'fc':fivesing.fivesing('fc')}
+       'fc':fivesing.fivesing('fc'),
+       'bz':singbz.singbz()}
     try:
         try:
             fo=open("get_music.txt",'r',encoding='utf-8')
@@ -28,9 +29,6 @@ def downloads():
             ln=i.split(',')
             if len(ln)==1:
                 ln=i.split('，')
-            else:
-                console.print('[b green]请按照规范填写！在[b red]get-music -help[/]中查看规范！')
-                sys.exit()
             ls.append(ln)
 
         console.print("[b green]正在搜索歌曲信息，注意该模式下我们不会返回任何数据进行交互") 
@@ -73,6 +71,6 @@ def downloads():
     except FileNotFoundError:
         console.print("[b green]您未创建“[b red]get_music.txt[/]”文件")
     except:
-        console.print("[b green]未知错误，有可能是没有返回数据导致的，你可以使用get-music命令下载，或者联系维护者邮箱3101978435@qq.com")
+        console.print("[b green]未知错误，有可能是没有返回数据导致的或文本最后有空行，你可以使用get-music命令下载，或者联系维护者邮箱3101978435@qq.com")
 
 
