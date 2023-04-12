@@ -13,6 +13,18 @@ from rich.table import Table
 import sys
 
 console = Console()
+txt='''
+                __                                  __        
+   ____   _____/  |_            _____  __ __  _____|__| ____  
+  / ___\_/ __ \   __\  ______  /     \|  |  \/  ___/  |/ ___\ 
+ / /_/  >  ___/|  |   /_____/ |  Y Y  \  |  /\___ \|  \  \___ 
+ \___  / \___  >__|           |__|_|  /____//____  >__|\___  >
+/_____/      \/                     \/           \/        \/
+
+'''
+console=Console()
+console.print(txt,style='bold green')
+
 def zhuti(songname = '',p = False,l = False):
     d={1:kugou.kugou(p,l),
        2:netease.netease(p,l),
@@ -52,7 +64,7 @@ def main_help():
     关于本脚本的使用：\n
     \t\t1.1,“[b red]get-music -v[/]”查看当前版本，同时程序也会检查一下新版本的版本号是否更新看您个人\n
     \t\t1.2,“[b red]get-music -l[/]”下载歌曲的同时也下载歌曲的歌词，直接敲就行了后面的搜索步骤和“get-music”的操作基本一致\n
-    \t\t1.3,“[b red]get-music -p[/]”下载歌曲的同时也下载歌曲的封面，这九个接口中只有“1ting”不支持下载歌词，其他的功能都能正常使用\n
+    \t\t1.3,“[b red]get-music -p[/]”下载歌曲的同时也下载歌曲的封面，这十个接口中只有“1ting”不支持下载歌词，其他的功能都能正常使用\n
     \t\t1.4,“[b red]get-music -lp[/]”或者“get-music -pl”它俩都是同一个意思，下载歌曲的同时也下载封面和歌词\n
     \t\t1.5,“[b red]get-music -t[/]”打开本脚本的GUI界面，相比命令行对小白更友好\n
     \t\t1.6，“[b red]get-music -help[/]”查看帮助文档\n
@@ -111,10 +123,7 @@ def main():
                         from get_music.playerlist import player_list
                         player_list(sys.argv[2:])
                     except:
-                        console.print('[b red]注意使用规范！')
-                        from get_music.playerlist import y_help
-                        y_help()
-                        console.print('[b red]出现错误！请联系维护者！')
+                        sys.exit()
                 elif sys.argv[1] in ['-t','-T']:
                     try:
                         from get_music import gui

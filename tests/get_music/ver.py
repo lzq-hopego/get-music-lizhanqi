@@ -2,12 +2,28 @@ import requests,re
 from rich.console import Console
 def ver(ip=True):
     console=Console()
-    version = '1.2.4'
+    
+    if ip==True:
+            try:
+                txt=requests.get('http://ip.tool.lu',timeout=1).text.split()
+                ip=txt[1]
+                area=' '.join(txt[3:])
+                console.print('\n[b green]信息一:本机外网ip地址为:[b red]{}[/]，归属:[b red]{}[/]'.format(ip,area))
+
+                url = 'http://api.ip33.com/ip/search?s='                     
+                d = requests.get(url,timeout=1).json()                                                       
+                console.print('\n[b green]信息二:本机外网ip地址为:[b red]{}[/]，归属:[b red]{}[/]'.format(d['ip'],d['area']))
+                return
+            except:
+                console.print("\n[b red]ip地址查询失败！")
+                return
+    
+    version = '1.2.5'
     console.print("[green]当前版本:"+"v"+version)
     url = 'https://pypi.org/project/get-music-lizhanqi/#history'
     try:
         with console.status("[b green]检查最新版中..."):
-            html = requests.get(url,timeout = 1)
+            html = requests.get(url,timeout = 5)
             txt = html.text
             crad = re.findall(r' <a class="card release__card" href="/project/get-music-lizhanqi/(.*?)/">',txt,re.S)
             ver = crad[0]
@@ -27,13 +43,7 @@ def ver(ip=True):
             console.print('[b red]最新版本是:v'+ver+',你可以用"pip install --upgrade get-music-lizhanqi"命令进行更新')
         else:
            console.print('[b red]最新版本是:v'+ver+',您已是最新版本')
-        if ip==True:
-            try:
-                url = 'http://api.ip33.com/ip/search?s='                     
-                d = requests.get(url,timeout=1).json()                                                       
-                console.print('\n[b green]本机外网ip地址为:[b red]{}[/]，归属:[b red]{}[/]'.format(d['ip'],d['area']))
-            except:
-                pass
+        
     except:
         console.print("[b red]获取最新版本信息失败！请检查是否是网络的问题！")
 

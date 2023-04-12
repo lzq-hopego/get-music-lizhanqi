@@ -42,9 +42,9 @@ def wy_playerlist(url,pic=False,lrc=False):
         print('\n\n\n——您未做出选择！程序即将自动退出！！！')
         return
     if songs=='all':
-        song_list=range(len(song_name))
+        song_list=[x+1 for x in range(len(song_name))]
     elif '-' in songs:
-        song_list=range(int(songs.split('-')[0]),int(songs.split('-')[-1])+1)
+        song_list=[x+1 for x in range(int(songs.split('-')[0]),int(songs.split('-')[-1])+1)]
     else:
         song_list=songs.split(",")
         if len(song_list)==1:

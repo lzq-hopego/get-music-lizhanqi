@@ -13,6 +13,7 @@ from get_music import kuwo
 from get_music import oneting
 from get_music import baidu
 from get_music import migu
+from get_music import singbz
 
  
 
@@ -48,7 +49,8 @@ def enter(self):
        6:baidu.baidu(),
        7:oneting.oneting(),
        8:fivesing.fivesing('yc'),
-       9:fivesing.fivesing('fc')}
+       9:fivesing.fivesing('fc'),
+       10:singbz.singbz()}
     global api
     api=d[comboExample.current()+1]
     try:
@@ -80,7 +82,8 @@ def show():
        6:baidu.baidu(),
        7:oneting.oneting(),
        8:fivesing.fivesing('yc'),
-       9:fivesing.fivesing('fc')}
+       9:fivesing.fivesing('fc'),
+       10:singbz.singbz()}
     global api
     api=d[comboExample.current()+1]
     try:
@@ -112,7 +115,8 @@ def nexit():
        6:baidu.baidu(),
        7:oneting.oneting(),
        8:fivesing.fivesing('yc'),
-       9:fivesing.fivesing('fc')}
+       9:fivesing.fivesing('fc'),
+       10:singbz.singbz()}
     global api
     global page
     page=page+1
@@ -144,7 +148,8 @@ def updata():
        6:baidu.baidu(),
        7:oneting.oneting(),
        8:fivesing.fivesing('yc'),
-       9:fivesing.fivesing('fc')}
+       9:fivesing.fivesing('fc'),
+       10:singbz.singbz()}
     global api
     global page
     if page==1:
@@ -267,7 +272,8 @@ comboExample = ttk.Combobox(root,
                                     "千千静听",
                                     "一听音乐",
                                     "5sing原唱",
-                                    "5sing翻唱"],font=("Consolas", 15),state="readonly")
+                                    "5sing翻唱",
+                                    "5sing伴奏"],font=("Consolas", 15),state="readonly")
 comboExample.grid(row=0, column=0)
 comboExample.current(0)
 

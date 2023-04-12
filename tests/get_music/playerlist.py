@@ -4,7 +4,7 @@ from rich.console import Console
 con = Console()
 def player_list(argv):
     opts=getopt.getopt(argv,"i:-l-p",["api="])[0]
-    print(opts)
+##    print(opts)
     api=''
     url=''
     lrc=False
