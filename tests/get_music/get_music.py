@@ -191,7 +191,10 @@ def prints(self):
                 console.print("[b red]您输入的序号有问题，请用仔细检查谢谢！")
                 continue
             try:
-                fname=name[i]+"-"+singer[i]+".mp3"
+                singername=singer[i]
+                if self.api=='5Sing伴奏':
+                    singername=singer[i].split('-')[0]
+                fname=name[i]+"-"+singername+".mp3"
                 url=song_url[i]
                 songurl=self.get_music_url(url)
                 if self.l==True:

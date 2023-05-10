@@ -26,7 +26,7 @@ class singbz:
         for i in d['list']:
                     self.songs_url.append(i['songId'])
                     self.singername.append(i['originSinger']+'-'+i['nickName'])
-                    self.songname.append(re.findall('<em class="keyword">(.*?)</em>',i['songName'])[0])
+                    self.songname.append(i['songName'].replace('<em class="keyword">','').replace('</em>',''))
 
         return self.songname,self.singername,self.songs_url
     

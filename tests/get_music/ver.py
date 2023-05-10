@@ -9,16 +9,19 @@ def ver(ip=True):
                 ip=txt[1]
                 area=' '.join(txt[3:])
                 console.print('\n[b green]信息一:本机外网ip地址为:[b red]{}[/]，归属:[b red]{}[/]'.format(ip,area))
+                
+            except:
+                console.print("\n[b red]ip地址信息一查询失败！")
 
+            try:
                 url = 'http://api.ip33.com/ip/search?s='                     
                 d = requests.get(url,timeout=1).json()                                                       
                 console.print('\n[b green]信息二:本机外网ip地址为:[b red]{}[/]，归属:[b red]{}[/]'.format(d['ip'],d['area']))
-                return
             except:
-                console.print("\n[b red]ip地址查询失败！")
-                return
+                console.print("\n[b red]ip地址信息查二询失败！")
+            return
     
-    version = '1.2.5'
+    version = '1.2.6'
     console.print("[green]当前版本:"+"v"+version)
     url = 'https://pypi.org/project/get-music-lizhanqi/#history'
     try:
