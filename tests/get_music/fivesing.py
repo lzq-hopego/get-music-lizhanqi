@@ -1,6 +1,7 @@
 import requests,re
 from get_music import download
 from rich.console import Console
+import urllib.parse
 # import download
 console=Console()
 
@@ -23,9 +24,9 @@ class fivesing:
             typename='1'
         else:
             typename='2'
-        self.headers['referer']=self.headers.get('referer')+self.song_name
+        self.headers['referer']=self.headers.get('referer')+urllib.parse.quote(self.song_name)
         url='http://search.5sing.kugou.com/home/json?keyword={}&sort=1&filter={}&page={}'.format(self.song_name,typename,self.page)
-        req=requests.get(url,headers=self.headers,timeout=1)
+        req=requests.get(url,headers=self.headers,timeout=3)
         d=req.json()
         self.songs_url=[]
         self.songname=[]
@@ -33,7 +34,10 @@ class fivesing:
         for i in d['list']:
             self.songs_url.append(i['songId'])
             self.singername.append(i['nickName'])
-            self.songname.append(re.findall('<em class="keyword">(.*?)</em>',i['songName'])[0])
+            try:
+                self.songname.append(re.findall('<em class="keyword">(.*?)</em>',i["songName"])[0])
+            except:
+                self.songname.append(i['songName'])
         return self.songname,self.singername,self.songs_url
     def prints(self):
         name=self.songname
@@ -74,6 +78,6 @@ class fivesing:
         except:
             console.print("[b red]未找到该歌曲的封面！")
 ##测试代码
-##a=fivesing('fc',l=True,p=True)
-##a.search("11")
+##a=fivesing('yc',l=True,p=True)
+##a.search("剑伤")
 ##a.prints()
