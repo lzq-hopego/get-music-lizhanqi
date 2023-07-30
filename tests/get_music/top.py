@@ -41,13 +41,12 @@ def kw():
            }
     head={'Accept': 'application/json, text/plain, */*',
       'Referer': 'http://www.kuwo.cn/rankList',
-      'csrf': '4M57QR4C1S8',
+      'Secret':'6d0d0d09bef3a951f058a52dd08faea944c789c5e7a765d932253fa2e6f2544c033bf066',
       'Host': 'www.kuwo.cn',
-          'Connection': 'keep-alive',
-      'Cookie': '_ga=GA1.2.1158784231.1649567141; Hm_lvt_cdb524f42f0ce19b169a8071123a4797=1671888291; Hm_lpvt_cdb524f42f0ce19b169a8071123a4797=1671888291; kw_token=4M57QR4C1S8; _gid=GA1.2.368264343.1671888291; _gat=1',
+      'Cookie': '_ga=GA1.2.438975400.1690625730; _gid=GA1.2.265176886.1690625730; Hm_lvt_cdb524f42f0ce19b169a8071123a4797=1690625730,1690678334; Hm_lpvt_cdb524f42f0ce19b169a8071123a4797=1690678334; _gat=1; _ga_ETPBRPM9ML=GS1.2.1690678334.2.0.1690678334.60.0.0; Hm_Iuvt_cdb524f42f0ce19b169b8072123a4727=3QweDwDXNcHmti7TyrpMZJYRJY3sBKCw',
       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.81 Safari/537.36 Edg/104.0.1293.54'}
-    s.get('http://www.kuwo.cn/rankList',headers=head1)
-    html=s.get('http://www.kuwo.cn/api/www/bang/bang/musicList?bangId=16&pn=1&rn=30&httpsStatus=1&reqId=c5f29300-8373-11ed-bc47-1dc98d5c838f',headers=head).json()
+    
+    html=s.get('http://www.kuwo.cn/api/www/bang/bang/musicList?bangId=93&pn=1&rn=20&httpsStatus=1&reqId=5e0e5b60-2e73-11ee-9fdb-b195a0885957&plat=web_www&from=',headers=head).json()
 
     songname=[]
     singer=[]

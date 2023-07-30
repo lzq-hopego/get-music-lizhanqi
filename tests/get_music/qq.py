@@ -36,12 +36,18 @@ class qq:
         pass
 
     def get_music_url(self,songid):
+        head={
+        'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
+        'Host':'u.y.qq.com'
+            }
         url_part = "https://u.y.qq.com/cgi-bin/musicu.fcg?format=json&data=%7B%22req_0%22%3A%7B%22module%22%3A%22vkey.GetVkeyServer%22%2C%22method%22%3A%22CgiGetVkey%22%2C%22param%22%3A%7B%22guid%22%3A%22358840384%22%2C%22songmid%22%3A%5B%22{}%22%5D%2C%22songtype%22%3A%5B0%5D%2C%22uin%22%3A%221443481947%22%2C%22loginflag%22%3A1%2C%22platform%22%3A%2220%22%7D%7D%2C%22comm%22%3A%7B%22uin%22%3A%2218585073516%22%2C%22format%22%3A%22json%22%2C%22ct%22%3A24%2C%22cv%22%3A0%7D%7D".format(songid)
-        music_document_html_json = requests.get(url_part,timeout=1).text
+        music_document_html_json = requests.get(url_part,timeout=1,headers=head).text
         music_document_html_dict = json.loads(music_document_html_json)  #将文件从json格式转化为字典格式
         music_url_part = music_document_html_dict["req_0"]["data"]["midurlinfo"][0]["purl"]
         if music_url_part != '':
             return music_document_html_dict['req_0']['data']['sip'][0]+music_url_part
+        else:
+            return ''
 
     def get_music_pic(self,num,return_url=False):
         try:
@@ -58,11 +64,12 @@ class qq:
             name=self.songname[num]+"-"+self.singername[num]+'-'+"歌词.txt"
             headers={'user-agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1',
              'referer' : 'https://m.y.qq.com'}
-            url='https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric.fcg?songmid={}&format=json&nobase64=1&songtype=0&callback=c'.format(self.song_url[num])
+            url='https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric.fcg?songmid={}&format=json&nobase64=1&songtype=0&callback=c'.format(self.songs_url[num])
             html=requests.get(url,headers=headers,timeout=1)
             html.encoding='utf-8'
             d = unescape(html.text).split('"lyric":"')[-1][:-3]
             if return_url:
+                
                 return d
             name=name.replace(':','_').replace('?','_').replace('|','_').replace('"','_').replace('<','_').replace('>','_')
             with open(name,'w',encoding='utf-8') as f:
@@ -78,7 +85,7 @@ def unescape(string):
 
 ##测试代码
 ##a=qq(l=True)
-##a.search('11')
-##a.get_music_lrc(1)
+##a.search('微微')
+##a.get_music_lrc(0)
 ##a.prints()
 ##input()

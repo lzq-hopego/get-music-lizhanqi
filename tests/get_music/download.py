@@ -7,6 +7,7 @@ import os
 
 
 def download(url,name,ouput=False,or_re=True):
+    url=str(url).strip('"')
     console=Console()
     if ouput==True:
         print()
@@ -19,12 +20,11 @@ def download(url,name,ouput=False,or_re=True):
             yorn=console.input('[b green]“[b red]{}[/]”已下载是否重新下载(Y/N):'.format(name))
             if yorn not in ['y','Y','是']:
                 return
-    response = requests.get(url, stream = True,timeout = 0.8)  # stream=True必须写上
+    response = requests.get(url, stream = True,timeout = 3)  # stream=True必须写上
     size = 0  # 初始化已下载大小
     chunk_size = 1024  # 每次下载的数据大小
     content_size = int(response.headers['content-length'])  # 下载文件总大小
     c_size="[b green]文件总大小:[b red]{:.2f}MB[/]".format(content_size/1024/1024)
-
     with Progress(rich.progress.TextColumn("[progress.description]{task.description}")
                   ,rich.progress.BarColumn()
                   ,c_size

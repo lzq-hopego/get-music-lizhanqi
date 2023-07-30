@@ -21,7 +21,7 @@ def ver(ip=True):
                 console.print("\n[b red]ip地址信息查二询失败！")
             return
     
-    version = '1.2.8'
+    version = '1.2.9'
     console.print("[green]当前版本:"+"v"+version)
     url = 'https://pypi.org/project/get-music-lizhanqi/#history'
     try:
