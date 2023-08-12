@@ -50,7 +50,7 @@ api=music_api['wy']
 songname,singername,songurl=api.search('大田后生仔')
 print(songname,singername,songurl)
 #search返回的三个列表，代表，歌曲名，歌手，歌曲id
-#值得注意的是，这个歌曲id不管是不是下载链接，都不要直接使用需要，get_music_url解析一下
+#值得注意的是，这个歌曲id不管是不是下载链接，都不要直接使用，需要get_music_url解析一下
 #songname ['大田後生仔', '大田後生仔',.....]
 #singername ['林啟得', '丫蛋蛋',.....]
 #songurl ['"http://m10.music.126.net/20230812095833/0a48dad120bf750982e5334fb6584d55/ymusic/0f0b/070b/020c/8a4dcf424e0a27fb4e085f58b242f2d2.mp3"',........]
