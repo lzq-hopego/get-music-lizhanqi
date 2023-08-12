@@ -65,7 +65,7 @@ $ pip install --upgrade get-music-lizhanqi
 | Centos   | Centos 7.9 x64 | 3.7.0          | 
 | Ubuntu   | Ubuntu 22.4 x64 | 3.7.0         | 
 | Kali     | Kali 20.4 x64  |  3.7.0         |   
-| Android  | Android 10 x64 | 3.6.6(qpython) | 
+| Android  | Android 13 x64 | 3.11.0(qpython) | 
 | Deepin   | Deepin 20 x64 | 3.7.0            | 
 | macos    | macos13.1 x64  | 3.7             |
 
