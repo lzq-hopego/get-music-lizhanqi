@@ -41,9 +41,9 @@ def kw():
            }
     head={'Accept': 'application/json, text/plain, */*',
       'Referer': 'http://www.kuwo.cn/rankList',
-      'Secret':'6d0d0d09bef3a951f058a52dd08faea944c789c5e7a765d932253fa2e6f2544c033bf066',
+      'Secret':'52d346ae938963071ec6981291df61ce2dd35a68751e4422ad0276e94cc0015b0440ce75',
       'Host': 'www.kuwo.cn',
-      'Cookie': '_ga=GA1.2.438975400.1690625730; _gid=GA1.2.265176886.1690625730; Hm_lvt_cdb524f42f0ce19b169a8071123a4797=1690625730,1690678334; Hm_lpvt_cdb524f42f0ce19b169a8071123a4797=1690678334; _gat=1; _ga_ETPBRPM9ML=GS1.2.1690678334.2.0.1690678334.60.0.0; Hm_Iuvt_cdb524f42f0ce19b169b8072123a4727=3QweDwDXNcHmti7TyrpMZJYRJY3sBKCw',
+      'Cookie': '_ga=GA1.2.438975400.1690625730; Hm_Iuvt_cdb524f42f0ce19b169b8072123a4727=nTy7rPZKMYnKrHHzH4GcH2A8YWYs7e3A; Hm_lvt_cdb524f42f0ce19b169a8071123a4797=1690625730,1690678334,1691939193; Hm_lpvt_cdb524f42f0ce19b169a8071123a4797=1691939193; _gid=GA1.2.1330368075.1691939193; _gat=1; _ga_ETPBRPM9ML=GS1.2.1691939193.3.1.1691939195.58.0.0; Hm_Iuvt_cdb524f42f0cer9b268e4v7y734w5esq24=rjYejrGme6JBxFne72fwBy5nnGyzf6i4',
       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.81 Safari/537.36 Edg/104.0.1293.54'}
     
     html=s.get('http://www.kuwo.cn/api/www/bang/bang/musicList?bangId=93&pn=1&rn=20&httpsStatus=1&reqId=5e0e5b60-2e73-11ee-9fdb-b195a0885957&plat=web_www&from=',headers=head).json()
@@ -105,7 +105,23 @@ def prints():
     song=[]
     api=['QQ音乐','酷狗音乐','网易云音乐','酷我音乐']
     with console.status("[b green]飞速获取资料中..."):
-        ls=[qq(),kg(),wy(),kw()]
+        ls=[]
+        try:
+            ls.append(qq())
+        except:
+            console.print("[b red]qq接口失效！")
+        try:
+            ls.append(kg())
+        except:
+            console.print("[b red]kg接口失效！")
+        try:
+            ls.append(wy())
+        except:
+            console.print("[b red]wy接口失效！")
+        try:
+            ls.append(kw())
+        except:
+            console.print("[b red]kw接口失效！")
         d={'QQ音乐':qqmusic.qq(),'酷狗音乐':kugou.kugou(),'网易云音乐':netease.netease(),'酷我音乐':kuwo.kuwo()}
 
     for i in ls:
@@ -127,7 +143,7 @@ def prints():
         if i=='':
             console.print('[b red]\n\n\n——您未做出选择！程序即将自动退出！！！')
             continue 
-        elif i<1 or i>24:
+        elif i<1 or i>len(song):
             console.print('[b red]\n\n\n——输入的序号错误！！！')
             continue
         try:

@@ -10,13 +10,18 @@ import requests
 from Crypto.Cipher import AES
 console=Console()
 
+
+
 class netease:
     def __init__(self,p=False,l=False):
         
         self.l=l
         self.p=p
         self.api='网易云音乐'
+        self.s=requests.session()
+        self.random_param = get_random()
     def search(self,songname,page=0):
+        
         headers = {
         'authority': 'music.163.com',
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.135 Safari/537.36',
@@ -33,13 +38,12 @@ class netease:
         d = {"hlpretag": "<span class=\"s-fc7\">", "hlposttag": "</span>", "s": songname, "type": "1", "offset": str(page),
          "total": "true", "limit": "20", "csrf_token": ""}
         d = json.dumps(d)
-        random_param = get_random()
-        param = get_final_param(d, random_param)
+        param = get_final_param(d, self.random_param)
         data='params=' + parse.quote(param['params']) + '&encSecKey=' + parse.quote(param['encSecKey'])
         
         self.page=page
         self.song_name=songname
-        req=requests.post(url,headers=headers,data=data,timeout=1)
+        req=self.s.post(url,headers=headers,data=data,timeout=1)
         d=json.loads(req.text)
 
         
@@ -48,33 +52,60 @@ class netease:
         self.songs_url=[]
         self.singername=[]
 
-        self.id=[]
         self.pic=[]
         self.songs=songs
         for i in songs:
                 self.songname.append(i["name"])
                 self.singername.append(i['ar'][0]["name"])
-                self.id.append(i['id'])
+                self.songs_url.append(i['id'])
                 self.pic.append(i['al']['picUrl'])
-                d = {"ids": "[" + str(i['id'])+ "]", "level": "standard", "encodeType": "",
-                 "csrf_token": ""}
-                d = json.dumps(d)
-                param = get_final_param(d, random_param)
-                song_info = get_reply(param['params'], param['encSecKey'])
-                if len(song_info) > 0:
-                    song_info = json.loads(song_info)
-                    song_url = json.dumps(song_info['data'][0]['url'], ensure_ascii=False)
-                    if song_url=='null':
-                        self.songs_url.append("")
-                    else:
-                        self.songs_url.append(song_url)
-                else:
-                    self.songs_url.append("")
+##                d = {"ids": "[" + str(i['id'])+ "]", "level": "standard", "encodeType": "",
+##                 "csrf_token": ""}
+##                d = json.dumps(d)
+##                param = get_final_param(d, random_param)
+##                song_info = get_reply(param['params'], param['encSecKey'])
+##                if len(song_info) > 0:
+##                    song_info = json.loads(song_info)
+##                    song_url = json.dumps(song_info['data'][0]['url'], ensure_ascii=False)
+##                    if song_url=='null':
+##                        self.songs_url.append("")
+##                    else:
+##                        self.songs_url.append(song_url)
+##                else:
+##                    self.songs_url.append("")
         return self.songname,self.singername,self.songs_url
     def prints(self):
         pass
     def get_music_url(self,url):
-        return url
+        headers = {
+        'authority': 'music.163.com',
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.135 Safari/537.36',
+        'content-type': 'application/x-www-form-urlencoded',
+        'accept': '*/*',
+        'origin': 'https://music.163.com',
+        'sec-fetch-site': 'same-origin',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-dest': 'empty',
+        'referer': 'https://music.163.com/search/',
+        'accept-language': 'zh-CN,zh;q=0.9',
+    }
+        d = {"ids": "[" + str(url)+ "]", "level": "standard", "encodeType": "",
+                 "csrf_token": ""}
+        d = json.dumps(d)
+        param = get_final_param(d, self.random_param)
+        url = "https://music.163.com/weapi/song/enhance/player/url/v1?csrf_token="
+        data='params=' + parse.quote(param['params']) + '&encSecKey=' + parse.quote(param['encSecKey'])
+        
+        req=self.s.post(url,headers=headers,data=data,timeout=1)
+        if req.status_code==200:
+            song_info = json.loads(req.text)
+            song_url = json.dumps(song_info['data'][0]['url'], ensure_ascii=False)
+            if song_url=='null':
+                return ''
+            else:
+                return song_url
+        else:
+            return ''
         
     def get_music_lrc(self,num,return_url=False):
         headers = {
@@ -83,7 +114,7 @@ class netease:
                 "Host" : "music.163.com"
             }
         try:
-            song_id=self.id[num]
+            song_id=self.songs_url[num]
             if not isinstance(song_id, str):
                 song_id = str(song_id)
             url = "http://music.163.com/api/song/lyric?id={}+&lv=1".format(song_id)
@@ -168,31 +199,8 @@ def get_final_param(text, str):
     encSecKey = c(str)
     return {'params': params, 'encSecKey': encSecKey}
 
-
-
-
-
-# 通过歌曲的id获取播放链接
-def get_reply(params, encSecKey):
-    url = "https://music.163.com/weapi/song/enhance/player/url/v1?csrf_token="
-    payload = 'params=' + parse.quote(params) + '&encSecKey=' + parse.quote(encSecKey)
-    headers = {
-        'authority': 'music.163.com',
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.135 Safari/537.36',
-        'content-type': 'application/x-www-form-urlencoded',
-        'accept': '*/*',
-        'origin': 'https://music.163.com',
-        'sec-fetch-site': 'same-origin',
-        'sec-fetch-mode': 'cors',
-        'sec-fetch-dest': 'empty',
-        'referer': 'https://music.163.com/',
-        'accept-language': 'zh-CN,zh;q=0.9'
-    }
-    response = requests.request("POST", url, headers=headers, data=payload)
-    return response.text
-
 ##测试代码
 ##a=netease(l=True,p=True)
-##d=a.search("微微")
-##a.get_music_url(a.songs_url[0])
+##d=a.search("大田后生仔")
+##a.get_music_url(a.songs_url[1])
 ##input()
