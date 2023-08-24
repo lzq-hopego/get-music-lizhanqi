@@ -6,7 +6,7 @@
 
 > 2023-08-24 13:14 Japan disregards the opposition of neighboring countries to the discharge of nuclear sewage. Today, I have thoroughly witnessed Japan's scoundrels, and I will never forget today and the Nanjing Massacre in the history of the Chinese nation
 
-> 2023-08-24 13:14 Несмотря на то, что соседние страны выступают против сброса ядерных сточных вод, Япония сегодня полностью показала мне японских негодяев, и я никогда не забуду сегодняшний день и Нанкинскую резню в истории нашей китайской нации
+> 2023-08-24 13:14 Несмотря на то, что соседние страны выступают против сброса ядерных сточных вод, Япония сегодня полностью показала мне японских негодяев, и я никогда не забуду резню в Нанкине сегодня и в истории нашей китайской нации
 
 
 # get-music-lizhanqi ：Listen to what you want
