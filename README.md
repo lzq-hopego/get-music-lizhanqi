@@ -1,14 +1,3 @@
-### 核污水排海
-
-> 2023-08-24 13:14 日本不顾周边国家反对排放核污水，今天彻底让我见识到了日本的无赖，我永远不会忘记今天和我中华民族历史上的南京大屠杀，山川异域，不共戴天
-
-> 2023-08-24 13:14 日本は周辺国の反対を押し切って汚染水を排出して、今日徹底的に私に日本のならず者を見させて、私は永遠に今日と私の中華民族の歴史の上の南京大虐殺を忘れることはできません
-
-> 2023-08-24 13:14 Japan disregards the opposition of neighboring countries to the discharge of nuclear sewage. Today, I have thoroughly witnessed Japan's scoundrels, and I will never forget today and the Nanjing Massacre in the history of the Chinese nation
-
-> 2023-08-24 13:14 Несмотря на то, что соседние страны выступают против сброса ядерных сточных вод, Япония сегодня полностью показала мне японских негодяев, и я никогда не забуду резню в Нанкине сегодня и в истории нашей китайской нации
-
-
 # get-music-lizhanqi ：Listen to what you want
 
 多合一音乐下载，搜索，python，支持酷狗，网易，百度，一听，5sing原创及翻唱,酷我，咪咕和qq音乐平台的音乐下载，有些支持下载封面和歌词有些则不支持，requests和json占主要
