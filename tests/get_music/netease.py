@@ -34,7 +34,7 @@ class netease:
         'referer': 'https://music.163.com/search/',
         'accept-language': 'zh-CN,zh;q=0.9',
     }
-        url='https://music.163.com/weapi/cloudsearch/get/web?csrf_token='
+
         d = {"hlpretag": "<span class=\"s-fc7\">", "hlposttag": "</span>", "s": songname, "type": "1", "offset": str(page),
          "total": "true", "limit": "20", "csrf_token": ""}
         d = json.dumps(d)
@@ -43,10 +43,9 @@ class netease:
         
         self.page=page
         self.song_name=songname
-        req=self.s.post(url,headers=headers,data=data,timeout=1)
+        req=self.s.post("https://interface.music.163.com/weapi/search/get",headers=headers,data=data,timeout=1)
         d=json.loads(req.text)
 
-        
         songs=d["result"]['songs']
         self.songname=[]
         self.songs_url=[]
@@ -56,23 +55,9 @@ class netease:
         self.songs=songs
         for i in songs:
                 self.songname.append(i["name"])
-                self.singername.append(i['ar'][0]["name"])
+                self.singername.append(i['artists'][0]["name"])
                 self.songs_url.append(i['id'])
-                self.pic.append(i['al']['picUrl'])
-##                d = {"ids": "[" + str(i['id'])+ "]", "level": "standard", "encodeType": "",
-##                 "csrf_token": ""}
-##                d = json.dumps(d)
-##                param = get_final_param(d, random_param)
-##                song_info = get_reply(param['params'], param['encSecKey'])
-##                if len(song_info) > 0:
-##                    song_info = json.loads(song_info)
-##                    song_url = json.dumps(song_info['data'][0]['url'], ensure_ascii=False)
-##                    if song_url=='null':
-##                        self.songs_url.append("")
-##                    else:
-##                        self.songs_url.append(song_url)
-##                else:
-##                    self.songs_url.append("")
+                self.pic.append(i["album"]['picId'])
         return self.songname,self.singername,self.songs_url
     def prints(self):
         pass
@@ -142,11 +127,18 @@ class netease:
                 console.print("[b red]未找到该歌曲的歌词！")
     def get_music_pic(self,num,return_url=False):
         try:
-            url=self.pic[num]
+            url="https://p1.music.126.net/dMUS79TnNOnzd4p6MV_CGw==/{}.jpg?imageView&thumbnail=360y360&quality=75&tostatic=0".format(self.pic[num])
             if return_url:
                 return url
             name=self.songname[num]+"-"+self.singername[num]+'-'+"封面.jpg"
-            download.download(url,name)
+
+            headers = {
+                "user-agent" : "Mozilla/5.0",
+                "Referer" : "https://music.163.com",
+            }
+            html=requests.get(url,headers=headers)
+            with open(name,'wb') as f:
+                f.write(html.content)
             console.print("[b red]\n歌曲封面下载完成，文件名称为:"+name)
         except:
 

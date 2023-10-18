@@ -33,7 +33,7 @@ def ver(ip=True):
             except:
                 console.print("\n[b red]ip地址信息查三询失败！")
             return
-    version = '1.2.11'
+    version = '1.2.12'
     console.print("[b red]当前版本:[b green]"+"v"+version)
     url = 'https://pypi.org/project/get-music-lizhanqi/#history'
     try:
